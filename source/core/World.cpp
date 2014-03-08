@@ -13,7 +13,7 @@ World::World(Ogre::SceneManager *sceneManager, InputHandler *inputHandler) {
 }
 
 void World::setup() {
-	//createGround();
+	createGround();
 	createHumanPlayer();
 	createBoundaryWalls();
 }
@@ -78,6 +78,6 @@ void World::destroyBoundaryWalls() {
 
 World::~World() {
 	destroyBoundaryWalls();
-	//delete mGround;
+	delete mGround;
 	delete mHumanPlayer;
 }

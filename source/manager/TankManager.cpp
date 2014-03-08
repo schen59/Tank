@@ -24,7 +24,7 @@ void TankManager::setup() {
 	setupResourceGroup();
 	setupInputHandler();
 	setupWorld();
-	setupPhysicsWorld();
+	//setupPhysicsWorld();
 	setupLight();
 	setupCamera();
 	setupViewPort();
