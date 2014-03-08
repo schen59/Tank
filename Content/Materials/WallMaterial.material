@@ -1,0 +1,21 @@
+// WallMaterial genrated by blender2ogre 0.6.0
+
+material WallMaterial 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass WallMaterial
+        {
+            
+            texture_unit 
+            {
+                texture wall.jpg
+                //tex_address_mode wrap
+                scale 0.2 0.05
+                //colour_op modulate
+            }
+        }
+    }
+}
