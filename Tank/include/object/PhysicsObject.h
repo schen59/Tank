@@ -1,45 +1,31 @@
 #ifndef __PhysicsObject_h_
 #define __PhysicsObject_h_
 
-#include "include\core\PhysicsWorld.h"
-
 #include "btBulletDynamicsCommon.h"
-#include "OgreSceneNode.h"
-#include "OgreEntity.h"
-
-namespace Ogre {
-	class SceneNode;
-	class Entity;
-}
-
-class PhysicsWorld;
 
 class PhysicsObject {
 public:
-	PhysicsObject(btQuaternion &orientation, btVector3 &position, btScalar mass);
-	void addToWorld(PhysicsWorld *physicsWorld);
+	PhysicsObject(btScalar mass, btVector3 &size);
 	btRigidBody* getRigidBody() const { return mRigidBody; }
-	Ogre::SceneNode* getSceneNode() { return mSceneNode; }
+	btQuaternion getOrientation() const;
+	void setOrientation(btQuaternion &orientation);
+	btVector3 getPosition() const;
+	void setPosition(btVector3 &position);
+	btVector3 getSize() const { return mSize; }
+	btScalar getMass() const { return mMass; }
 	~PhysicsObject();
 
 protected:
-	void setEntity(Ogre::Entity *entity) { mEntity = entity; }
 	virtual void createCollisionShape() = 0;
+	void createRigidBody(btQuaternion &orientation, btVector3 &position);
 
 	btCollisionShape *mCollisionShape;
 
 private:
-	void addToScene(Ogre::SceneManager *sceneManager);
-	virtual void load(Ogre::SceneManager *sceneManager) = 0;
-	void createRigidBody();
-
+	
 	btScalar mMass;
-	btQuaternion mOrientation;
-	btVector3 mPosition;
+	btVector3 mSize;
 	btRigidBody *mRigidBody;
-
-	Ogre::SceneNode *mSceneNode;
-	Ogre::Entity *mEntity;
 };
 
 #endif

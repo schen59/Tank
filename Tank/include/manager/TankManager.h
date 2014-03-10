@@ -1,11 +1,6 @@
 #ifndef __TankManager_h_
 #define __TankManager_h_
 
-#include "include\core\World.h"
-#include "include\core\TankCamera.h"
-#include "include\handler\InputHandler.h"
-#include "include\core\PhysicsWorld.h"
-
 #include "Ogre.h"
 #include "OgreFrameListener.h"
 
@@ -14,13 +9,13 @@ namespace Ogre {
 	class Root;
 	class RenderWindow;
 	class SceneManager;
+	class FrameEvent;
 	class OverlaySystem;
 }
 
 class World;
 class TankCamera;
 class InputHandler;
-class PhysicsWorld;
 
 class TankManager : public Ogre::FrameListener {
 public:
@@ -39,10 +34,8 @@ private:
 	void setupViewPort();
 	void setupWorld();
 	void setupInputHandler();
-	void setupPhysicsWorld();
-
+	
 	World *mWorld;
-	PhysicsWorld *mPhysicsWorld;
 	TankCamera *mTankCamera;
 	InputHandler *mInputHandler;
 	Ogre::Root *mRoot;

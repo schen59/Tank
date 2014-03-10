@@ -1,5 +1,9 @@
 #include "include\manager\TankManager.h"
 #include "include\core\PhysicsWorld.h"
+#include "include\object\PhysicsObject.h"
+#include "include\core\TankCamera.h"
+#include "include\core\World.h"
+#include "include\handler\InputHandler.h"
 
 #include "btBulletDynamicsCommon.h"
 #include "OgreSceneManager.h"
@@ -7,6 +11,8 @@
 #include "OgreOverlaySystem.h"
 #include "OgreFontManager.h"
 #include "Ogre.h"
+#include "OgreFrameListener.h"
+
 
 TankManager::TankManager(Ogre::Root *root, Ogre::RenderWindow *mainWindow) :mRoot(root), mWindow(mainWindow) {
 	mKeepGoing = true;
@@ -24,15 +30,9 @@ void TankManager::setup() {
 	setupResourceGroup();
 	setupInputHandler();
 	setupWorld();
-	//setupPhysicsWorld();
 	setupLight();
 	setupCamera();
 	setupViewPort();
-}
-
-void TankManager::setupPhysicsWorld() {
-	mPhysicsWorld = new PhysicsWorld(mSceneManager, mInputHandler);
-	mPhysicsWorld->setup();
 }
 
 void TankManager::setupInputHandler() {
@@ -40,8 +40,8 @@ void TankManager::setupInputHandler() {
 }
 
 void TankManager::setupWorld() {
-	mWorld = new World(mSceneManager, mInputHandler);
-	mWorld->setup();
+	mWorld = new World(mInputHandler);
+	mWorld->setup(mSceneManager, btVector3(0, -10, 0));
 }
 
 void TankManager::setupLight() {

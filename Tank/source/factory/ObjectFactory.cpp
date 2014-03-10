@@ -1,23 +1,32 @@
 #include "include\factory\ObjectFactory.h"
+#include "include\tank\Tank.h"
+#include "include\ground\Ground.h"
+#include "include\wall\Wall.h"
+#include "include\projectile\Projectile.h"
 
 #include "OgreSceneManager.h"
+#include "OgreMeshManager.h"
+#include "OgreEntity.h"
+#include "btBulletDynamicsCommon.h"
 
-Ground* ObjectFactory::createGround(Ogre::SceneManager *sceneManager) {
-	Ground *ground = new Ground(sceneManager);
-	ground->load();
+Tank* ObjectFactory::createTank(btScalar mass, btVector3 &size) {
+	Tank *tank = new Tank(mass, size);
+	return tank;
+}
+
+Ground* ObjectFactory::createGround(btScalar mass, btVector3 &size) {
+	Ground *ground = new Ground(mass, size);
 	return ground;
 }
 
-Wall* ObjectFactory::createWall(Ogre::SceneManager *sceneManager) {
-	Wall *wall = new Wall(sceneManager);
-	wall->load();
+Wall* ObjectFactory::createWall(btScalar mass, btVector3 &size) {
+	Wall *wall = new Wall(mass, size);
 	return wall;
 }
 
-Tank* ObjectFactory::createTank(Ogre::SceneManager *sceneManager) {
-	Tank *tank = new Tank(sceneManager);
-	tank->load();
-	return tank;
+Projectile* ObjectFactory::createProjectile(btScalar mass, btVector3 &size) {
+	Projectile *projectile = new Projectile(mass, size);
+	return projectile;
 }
 
 Ogre::Entity* ObjectFactory::createWallEntity(Ogre::SceneManager *sceneManager) {
@@ -35,5 +44,15 @@ Ogre::Entity* ObjectFactory::createGroundEntity(Ogre::SceneManager *sceneManager
         plane, 200, 200, 20, 20, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
     Ogre::Entity* entity = sceneManager->createEntity("ground");
 	entity->setMaterialName("Rockwall");
+	return entity;
+}
+
+Ogre::Entity* ObjectFactory::createTankEntity(Ogre::SceneManager *sceneManager) {
+	Ogre::Entity *entity = sceneManager->createEntity("Sphere.mesh");
+	return entity;
+}
+
+Ogre::Entity* ObjectFactory::createProjectileEntity(Ogre::SceneManager *sceneManager) {
+	Ogre::Entity *entity = sceneManager->createEntity("Sphere.mesh");
 	return entity;
 }

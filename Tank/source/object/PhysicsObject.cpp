@@ -2,24 +2,31 @@
 
 #include "btBulletDynamicsCommon.h"
 
-PhysicsObject::PhysicsObject(btQuaternion &orientation, btVector3 &position, btScalar mass) {
-	mOrientation = orientation;
-	mPosition = position;
+PhysicsObject::PhysicsObject(btScalar mass, btVector3 &size) {
 	mMass = mass;
+	mSize = size;
 }
 
-void PhysicsObject::addToWorld(PhysicsWorld *physicsWorld) {
-	load(physicsWorld->getSceneManager());
-	addToScene(physicsWorld->getSceneManager());
-	createCollisionShape();
-	createRigidBody();
-	physicsWorld->addObject(this);
+btQuaternion PhysicsObject::getOrientation() const {
+	return mRigidBody->getWorldTransform().getRotation();
 }
 
-void PhysicsObject::createRigidBody() {
+btVector3 PhysicsObject::getPosition() const {
+	return mRigidBody->getWorldTransform().getOrigin();
+}
+
+void PhysicsObject::setOrientation(btQuaternion &orientation) {
+	mRigidBody->getWorldTransform().setRotation(orientation);
+}
+
+void PhysicsObject::setPosition(btVector3 &position) {
+	mRigidBody->getWorldTransform().setOrigin(position);
+}
+
+void PhysicsObject::createRigidBody(btQuaternion &orientation, btVector3 &position) {
 	btTransform transform;
 	transform.setIdentity();
-	transform.setOrigin(mPosition);
+	transform.setOrigin(position);
 	bool isDynamic = (mMass != 0.f);
 
 	btVector3 localInertia(0,0,0);
@@ -31,17 +38,10 @@ void PhysicsObject::createRigidBody() {
 	mRigidBody = new btRigidBody(rbInfo);
 }
 
-void PhysicsObject::addToScene(Ogre::SceneManager *sceneManager) {
-	mSceneNode = sceneManager->getRootSceneNode()->createChildSceneNode();
-	mSceneNode->attachObject(mEntity);
-	mSceneNode->setPosition(mPosition.getX(), mPosition.getY(), mPosition.getZ());
-	mSceneNode->setOrientation(Ogre::Quaternion(mOrientation.getW(), mOrientation.getX(), mOrientation.getY(),
-		mOrientation.getZ()));
-}
-
 PhysicsObject::~PhysicsObject() {
 	if (mRigidBody && mRigidBody->getMotionState()) {
 			delete mRigidBody->getMotionState();
 			delete mRigidBody;
 	}
+	delete mCollisionShape;
 }

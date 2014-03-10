@@ -1,31 +1,32 @@
-#ifndef __AbstractObject_h_
-#define __AbstractObject_h_
+#ifndef __OgreObject_h_
+#define __OgreObject_h_
 
 #include "Ogre.h"
 
 namespace Ogre {
 	class SceneNode;
+	class SceneManager;
 	class Entity;
 	class Vector3;
 }
 
-class AbstractObject {
+class OgreObject {
 public:
-	AbstractObject();
-	~AbstractObject();
-	virtual void addToScene(Ogre::SceneNode *parentSceneNode);
-	virtual void load() = 0;
+	OgreObject();
+	~OgreObject();
+    void addToScene(Ogre::SceneManager *sceneManager, Ogre::Quaternion orientation, Ogre::Vector3 position);
+	virtual void load(Ogre::SceneManager *sceneManager) = 0;
 	void setScale(Ogre::Vector3 scale);
 	void setPosition(Ogre::Vector3 position);
 	Ogre::SceneNode* getSceneNode() const { return mSceneNode; }
 	Ogre::Vector3 getDirection() const;
 	void setOrientation(Ogre::Real w, Ogre::Real x, Ogre::Real y, Ogre::Real z) { mSceneNode->setOrientation(w, x, y, z); }
+	Ogre::Quaternion getOrientation() const;
 
 protected:
 	void setEntity(Ogre::Entity *entity) { mEntity = entity; }
 
-private:
-	Ogre::Quaternion getOrientation() const; 
+private: 
 
 	Ogre::SceneNode *mSceneNode;
 	Ogre::Entity *mEntity;

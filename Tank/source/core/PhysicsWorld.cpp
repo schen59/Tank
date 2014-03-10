@@ -1,18 +1,15 @@
 #include "include\core\PhysicsWorld.h"
-#include "include\object\PhysicsGround.h"
+#include "include\object\PhysicsObject.h"
 
 #include <vector>
 #include "btBulletDynamicsCommon.h"
 
-PhysicsWorld::PhysicsWorld(Ogre::SceneManager *sceneManager, InputHandler *inputHandler) {
-	mSceneManager = sceneManager;
-	mInputHandler = inputHandler;
+PhysicsWorld::PhysicsWorld(btVector3 &gravity) {
+	mGravity = gravity;
 }
 
 void PhysicsWorld::setup() {
 	setupDynamicsWorld();
-	PhysicsGround *ground = new PhysicsGround(btQuaternion(0, 0, 0, 1), btVector3(0, -10, 0), btScalar(0.));
-	ground->addToWorld(this);
 }
 
 void PhysicsWorld::setupDynamicsWorld() {
@@ -22,6 +19,7 @@ void PhysicsWorld::setupDynamicsWorld() {
 	mBroadphaseInterface = new btDbvtBroadphase();
 	mDynamicsWorld = new btDiscreteDynamicsWorld(mCollisionDispatcher, mBroadphaseInterface,
 		mConstraintSolver, mDefaultCollisionConfiguration);
+	mDynamicsWorld->setGravity(mGravity);
 }
 
 PhysicsWorld::~PhysicsWorld() {
@@ -44,4 +42,8 @@ void PhysicsWorld::destroyObjects() {
 void PhysicsWorld::addObject(PhysicsObject *object) {
 	mDynamicsWorld->addRigidBody(object->getRigidBody());
 	mObjects.push_back(object);
+}
+
+void PhysicsWorld::think(float time) {
+	mDynamicsWorld->stepSimulation(time);
 }
