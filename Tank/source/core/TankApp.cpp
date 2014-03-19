@@ -8,8 +8,12 @@ TankApp::TankApp() {
 }
 
 TankApp::~TankApp() {
-	delete mTankManager;
-	delete mRoot;
+	if (mTankManager != NULL) {
+		delete mTankManager;
+	}
+	if (mRoot != NULL) {
+		delete mRoot;
+	}
 }
 
 void TankApp::go() {

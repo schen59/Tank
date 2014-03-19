@@ -50,7 +50,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OGRE_HOME)/boost/lib;$(OGRE_HOME)/lib/$(configuration);$(BULLET_HOME)/lib;$(BULLET_HOME)/Glut;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;glew32s.lib;glut32.lib;BulletDynamics_vs2010.lib;BulletCollision_vs2010.lib;BulletDynamics_vs2010_debug.lib;BulletCollision_vs2010_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;glew32s.lib;glut32.lib;BulletDynamics_vs2010_debug.lib;BulletCollision_vs2010_debug.lib;LinearMath_vs2010_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(OGRE_HOME)\bin\$(Configuration)\OgreMain_d.dll" "$(OutDir)"
@@ -99,35 +99,64 @@ copy resources.cfg "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\common\Properties.h" />
+    <ClInclude Include="include\core\OgreWorld.h" />
     <ClInclude Include="include\core\PhysicsWorld.h" />
     <ClInclude Include="include\core\TankApp.h" />
     <ClInclude Include="include\core\TankCamera.h" />
     <ClInclude Include="include\core\World.h" />
     <ClInclude Include="include\factory\ObjectFactory.h" />
     <ClInclude Include="include\handler\InputHandler.h" />
+    <ClInclude Include="include\manager\AIManager.h" />
     <ClInclude Include="include\manager\TankManager.h" />
     <ClInclude Include="include\object\AbstractObject.h" />
-    <ClInclude Include="include\object\Ground.h" />
-    <ClInclude Include="include\object\PhysicsGround.h" />
+    <ClInclude Include="include\object\box\Box.h" />
+    <ClInclude Include="include\object\box\OgreBox.h" />
+    <ClInclude Include="include\object\box\PhysicsBox.h" />
+    <ClInclude Include="include\object\ground\Ground.h" />
+    <ClInclude Include="include\object\ground\OgreGround.h" />
+    <ClInclude Include="include\object\ground\PhysicsGround.h" />
+    <ClInclude Include="include\object\OgreObject.h" />
     <ClInclude Include="include\object\PhysicsObject.h" />
-    <ClInclude Include="include\object\Tank.h" />
-    <ClInclude Include="include\object\Wall.h" />
+    <ClInclude Include="include\object\projectile\OgreProjectile.h" />
+    <ClInclude Include="include\object\projectile\PhysicsProjectile.h" />
+    <ClInclude Include="include\object\projectile\Projectile.h" />
+    <ClInclude Include="include\object\tank\OgreTank.h" />
+    <ClInclude Include="include\object\tank\PhysicsTank.h" />
+    <ClInclude Include="include\object\tank\Tank.h" />
+    <ClInclude Include="include\object\wall\OgreWall.h" />
+    <ClInclude Include="include\object\wall\PhysicsWall.h" />
+    <ClInclude Include="include\object\wall\Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\core\main.cpp" />
+    <ClCompile Include="source\core\OgreWorld.cpp" />
     <ClCompile Include="source\core\PhysicsWorld.cpp" />
     <ClCompile Include="source\core\TankApp.cpp" />
     <ClCompile Include="source\core\TankCamera.cpp" />
     <ClCompile Include="source\core\World.cpp" />
     <ClCompile Include="source\factory\ObjectFactory.cpp" />
     <ClCompile Include="source\handler\InputHandler.cpp" />
+    <ClCompile Include="source\manager\AIManager.cpp" />
     <ClCompile Include="source\manager\TankManager.cpp" />
     <ClCompile Include="source\object\AbstractObject.cpp" />
-    <ClCompile Include="source\object\Ground.cpp" />
-    <ClCompile Include="source\object\PhysicsGround.cpp" />
+    <ClCompile Include="source\object\box\Box.cpp" />
+    <ClCompile Include="source\object\box\OgreBox.cpp" />
+    <ClCompile Include="source\object\box\PhysicsBox.cpp" />
+    <ClCompile Include="source\object\ground\Ground.cpp" />
+    <ClCompile Include="source\object\ground\OgreGround.cpp" />
+    <ClCompile Include="source\object\ground\PhysicsGround.cpp" />
+    <ClCompile Include="source\object\OgreObject.cpp" />
     <ClCompile Include="source\object\PhysicsObject.cpp" />
-    <ClCompile Include="source\object\Tank.cpp" />
-    <ClCompile Include="source\object\Wall.cpp" />
+    <ClCompile Include="source\object\projectile\OgreProjectile.cpp" />
+    <ClCompile Include="source\object\projectile\PhysicsProjectile.cpp" />
+    <ClCompile Include="source\object\projectile\Projectile.cpp" />
+    <ClCompile Include="source\object\tank\OgreTank.cpp" />
+    <ClCompile Include="source\object\tank\PhysicsTank.cpp" />
+    <ClCompile Include="source\object\tank\Tank.cpp" />
+    <ClCompile Include="source\object\wall\OgreWall.cpp" />
+    <ClCompile Include="source\object\wall\PhysicsWall.cpp" />
+    <ClCompile Include="source\object\wall\Wall.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,13 +1,17 @@
 #include "include\core\World.h"
-#include "include\tank\Tank.h"
-#include "include\wall\Wall.h"
-#include "include\ground\Ground.h"
+#include "include\object\tank\Tank.h"
+#include "include\object\wall\Wall.h"
+#include "include\object\ground\Ground.h"
+#include "include\object\box\Box.h"
 #include "include\handler\InputHandler.h"
 #include "include\core\OgreWorld.h"
 #include "include\core\PhysicsWorld.h"
 #include "include\factory\ObjectFactory.h"
-#include "include\projectile\Projectile.h"
-#include "include\tank\OgreTank.h"
+#include "include\object\projectile\Projectile.h"
+#include "include\object\tank\OgreTank.h"
+#include "include\object\projectile\PhysicsProjectile.h"
+#include "include\object\AbstractObject.h"
+#include "include\manager\AIManager.h"
 
 #include "OgreSceneManager.h"
 #include "btBulletDynamicsCommon.h"
@@ -21,10 +25,13 @@ World::World(InputHandler *inputHandler) {
 void World::setup(Ogre::SceneManager *sceneManager, btVector3 &gravity) {
 	mOgreWorld = new OgreWorld(sceneManager);
 	mPhysicsWorld = new PhysicsWorld(gravity);
+	mAIManager = new AIManager(this);
 	mPhysicsWorld->setup();
 	createHumanPlayer();
 	createGround();
 	createBoundaryWalls();
+	createObstacles();
+	createAIPlayers();
 }
 
 void World::createBoundaryWalls() {
@@ -36,28 +43,43 @@ void World::createBoundaryWalls() {
 	topWall->addToWorld(this, btQuaternion(0, -sqrt(0.5), 0, sqrt(0.5)), btVector3(0, 0, -100));
 	Wall *bottomWall = ObjectFactory::createWall(0, btVector3(200, 20, 2));
 	bottomWall->addToWorld(this, btQuaternion(0, sqrt(0.5), 0, sqrt(0.5)), btVector3(0, 0, 100));
-	mWalls.push_back(topWall);
-	mWalls.push_back(bottomWall);
+}
+
+void World::createAIPlayers() {
+	for (int i=0; i<5; i++) {
+		int x = -100 + rand() % 200;
+		int y = 10;
+		int z = -100 + rand() % 200;
+		Tank *tank = ObjectFactory::createTank(5, btVector3(2.0, 1.0, 2.0));
+		tank->addToWorld(this, btQuaternion(0, 0, 0, 1), btVector3(x, y, z));
+		mAIPlayers.insert(tank);
+	}
+}
+
+void World::createObstacles() {
+	for (int i=0; i<10; i++) {
+		int x = -100 + rand() % 200;
+		int y = rand() % 10;
+		int z = -100 + rand() % 200;
+		Box *box = ObjectFactory::createBox(0.1, btVector3(4.0, 2.0, 4.0));
+	    box->addToWorld(this, btQuaternion(0, 0, 0, 1), btVector3(x, y, z));
+		mObstacles.insert(box);
+	}
 }
 
 void World::createHumanPlayer() {
-	mHumanPlayer = ObjectFactory::createTank(0.5, btVector3(1.0, 1.0, 1.0));
-	mHumanPlayer->addToWorld(this, btQuaternion(0, 0, 0, 1), btVector3(0, 10, 0));
+	mHumanPlayer = ObjectFactory::createTank(5, btVector3(2.0, 1.0, 2.0));
+	mHumanPlayer->addToWorld(this, btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0));
 }
 
 void World::createGround() {
-	mGround = ObjectFactory::createGround(0, btVector3(200, 2, 200));
-	mGround->addToWorld(this, btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0));
-	mGround->setFriction(1.5);
+	Ground *ground = ObjectFactory::createGround(0, btVector3(200, 2, 200));
+	ground->addToWorld(this, btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0));
+	ground->setFriction(1.5);
 }
 
-void World::think(float time) {
-	mPhysicsWorld->think(time);
+void World::updateHumanPlayer(float time) {
 	mHumanPlayer->update();
-	for (std::vector<Projectile*>::iterator it=mProjectiles.begin(); it!=mProjectiles.end(); it++) {
-		Projectile *projectile = *it;
-		projectile->update();
-	}
 	if (mInputHandler->isKeyDown(OIS::KC_W)) {
 		mHumanPlayer->move(time);
 	}
@@ -70,24 +92,63 @@ void World::think(float time) {
 	if (mInputHandler->isKeyDown(OIS::KC_D)) {
 		mHumanPlayer->yaw(-time);
 	}
-	if (mInputHandler->isKeyDown(OIS::KC_J) && !mInputHandler->wasKeyDown(OIS::KC_J)) {
-		Projectile *projectile = mHumanPlayer->fire(this);
-		mProjectiles.push_back(projectile);
-	}
 	if (mInputHandler->isKeyDown(OIS::KC_R)) {
 		mHumanPlayer->reset();
 	}
-	
-}
-
-void World::destroyBoundaryWalls() {
-	for (std::vector<Wall*>::iterator it=mWalls.begin(); it!=mWalls.end(); it++) {
-		Wall *wall = *it;
-		delete wall;
+	if (mInputHandler->isKeyDown(OIS::KC_J) && !mInputHandler->wasKeyDown(OIS::KC_J)) {
+		if (mHumanPlayer->isEnabled()) {
+		    addProjectile(mHumanPlayer->fire(this));
+		}
 	}
 }
 
+void World::addProjectile(Projectile *projectile) {
+	mProjectiles.insert(projectile);
+}
+
+void World::updateProjectiles(float time) {
+	std::set<Projectile*>::iterator it=mProjectiles.begin(); 
+	while (it != mProjectiles.end()) {
+		Projectile *projectile = *it;
+		if (projectile->isCollided()) {
+			projectile->explode(this);
+		}
+		projectile->update();
+		if (!projectile->isActive()) {
+			//projectile->explode(this);
+			//mPhysicsWorld->removeObject(projectile->getPhysicsObject());
+			//mOgreWorld->removeObject(projectile->getOgreObject());
+			//delete projectile;
+			it = mProjectiles.erase(it);
+			removeObject(projectile);
+		} else {
+			it++;
+		}
+	}
+}
+
+void World::removeObject(AbstractObject *object) {
+	mPhysicsWorld->removeObject(object->getPhysicsObject());
+	mOgreWorld->removeObject(object->getOgreObject());
+	delete object;
+}
+
+void World::think(float time) {
+	mPhysicsWorld->think(time);
+	mAIManager->think(time);
+	for (std::set<AbstractObject*>::iterator it=mObstacles.begin(); it!=mObstacles.end(); it++) {
+		AbstractObject *object = *it;
+		object->update();
+	}
+	updateHumanPlayer(time);
+	updateProjectiles(time);
+}
+
 World::~World() {
-	destroyBoundaryWalls();
+	//destroyBoundaryWalls();
+	delete mOgreWorld;
+	delete mPhysicsWorld;
+	delete mAIManager;
 	delete mHumanPlayer;
+	//delete mHumanPlayer;
 }

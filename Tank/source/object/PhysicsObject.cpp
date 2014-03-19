@@ -5,10 +5,16 @@
 PhysicsObject::PhysicsObject(btScalar mass, btVector3 &size) {
 	mMass = mass;
 	mSize = size;
+	mIsCollided = false;
 }
 
 btQuaternion PhysicsObject::getOrientation() const {
 	return mRigidBody->getWorldTransform().getRotation();
+}
+
+btVector3 PhysicsObject::getDirection() const {
+	btVector3 NEGTIVE_Z = btVector3(0, 0, -1);
+	return NEGTIVE_Z.rotate(btVector3(0, 1, 0), getOrientation().getAngle());
 }
 
 btVector3 PhysicsObject::getPosition() const {
@@ -36,12 +42,20 @@ void PhysicsObject::createRigidBody(btQuaternion &orientation, btVector3 &positi
 	btDefaultMotionState* motionState = new btDefaultMotionState(transform);
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mMass, motionState, mCollisionShape, localInertia);
 	mRigidBody = new btRigidBody(rbInfo);
+	mRigidBody->setUserPointer(this);
 }
 
 PhysicsObject::~PhysicsObject() {
-	if (mRigidBody && mRigidBody->getMotionState()) {
-			delete mRigidBody->getMotionState();
-			delete mRigidBody;
-	}
-	delete mCollisionShape;
+}
+
+void PhysicsObject::setIsCollided(bool isCollided) {
+	mIsCollided = isCollided;
+}
+
+bool PhysicsObject::isCollided() const {
+	return mIsCollided;
+}
+
+bool PhysicsObject::isCollidedWith(PhysicsObject *object) const {
+	return mRigidBody->checkCollideWith(object->getRigidBody());
 }

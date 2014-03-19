@@ -4,6 +4,7 @@
 #include "include\core\TankCamera.h"
 #include "include\core\World.h"
 #include "include\handler\InputHandler.h"
+#include "include\object\tank\Tank.h"
 
 #include "btBulletDynamicsCommon.h"
 #include "OgreSceneManager.h"
@@ -81,6 +82,7 @@ TankManager::~TankManager() {
 	delete mTankCamera;
 	mSceneManager->destroyCamera("TankCamera");
 	mSceneManager->destroyAllEntities();
+	mSceneManager->getRootSceneNode()->removeAndDestroyAllChildren();
 	mRoot->destroySceneManager(mSceneManager);
 	delete mWorld;
 }

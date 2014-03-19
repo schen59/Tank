@@ -1,7 +1,8 @@
 #include "include\core\PhysicsWorld.h"
 #include "include\object\PhysicsObject.h"
+#include "include\common\Properties.h"
 
-#include <vector>
+#include <set>
 #include "btBulletDynamicsCommon.h"
 
 PhysicsWorld::PhysicsWorld(btVector3 &gravity) {
@@ -22,8 +23,23 @@ void PhysicsWorld::setupDynamicsWorld() {
 	mDynamicsWorld->setGravity(mGravity);
 }
 
+void PhysicsWorld::desctroyDynamicsWorld() {
+	for (int i=mDynamicsWorld->getNumCollisionObjects()-1; i>=0 ;i--)
+	{
+		btCollisionObject* obj = mDynamicsWorld->getCollisionObjectArray()[i];
+		btRigidBody* body = btRigidBody::upcast(obj);
+		if (body && body->getMotionState())
+		{
+			delete body->getMotionState();
+		}
+		mDynamicsWorld->removeCollisionObject( obj );
+		delete obj;
+	}
+}
+
 PhysicsWorld::~PhysicsWorld() {
 	destroyObjects();
+	desctroyDynamicsWorld();
 	delete mDynamicsWorld;
 	delete mConstraintSolver;
 	delete mBroadphaseInterface;
@@ -32,18 +48,58 @@ PhysicsWorld::~PhysicsWorld() {
 }
 
 void PhysicsWorld::destroyObjects() {
-	for (std::vector<PhysicsObject*>::iterator it=mObjects.begin(); it!=mObjects.end(); it++) {
+	std::set<PhysicsObject*>::iterator it=mObjects.begin();
+	while (it != mObjects.end()) {
 		PhysicsObject *object = *it;
+		it++;
+		removeObject(object);
 		delete object;
 	}
 	mObjects.clear();
 }
 
+void PhysicsWorld::removeObject(PhysicsObject *object) {
+	btRigidBody *rigidBody = object->getRigidBody();
+	btCollisionShape *collisionShape = rigidBody->getCollisionShape();
+	if (rigidBody && rigidBody->getMotionState()) {
+		delete rigidBody->getMotionState();
+		mDynamicsWorld->removeRigidBody(rigidBody);
+	    delete collisionShape;
+	}
+	mObjects.erase(mObjects.find(object));
+}
+
 void PhysicsWorld::addObject(PhysicsObject *object) {
 	mDynamicsWorld->addRigidBody(object->getRigidBody());
-	mObjects.push_back(object);
+	mObjects.insert(object);
 }
 
 void PhysicsWorld::think(float time) {
 	mDynamicsWorld->stepSimulation(time);
+	detectCollision();
+}
+
+void PhysicsWorld::detectCollision() {
+	int numManifolds = mDynamicsWorld->getDispatcher()->getNumManifolds();
+	for (int i=0;i<numManifolds;i++)
+	{
+		btPersistentManifold* contactManifold =  mDynamicsWorld->getDispatcher()->getManifoldByIndexInternal(i);
+		const btCollisionObject* obA = contactManifold->getBody0();
+		const btCollisionObject* obB = contactManifold->getBody1();
+		PhysicsObject *objectA = static_cast<PhysicsObject*>(obA->getUserPointer());
+		PhysicsObject *objectB = static_cast<PhysicsObject*>(obB->getUserPointer());
+		objectA->setIsCollided(false);
+		objectB->setIsCollided(false);
+		int numContacts = contactManifold->getNumContacts();
+		for (int j=0;j<numContacts;j++)
+		{
+			btManifoldPoint& pt = contactManifold->getContactPoint(j);
+			if (pt.getDistance()<0.f && (objectA->getType()==Properties::PROJECTILE || objectB->getType()==Properties::PROJECTILE) &&
+				!(objectA->isCollided() && objectB->isCollided()))
+			{
+				objectA->setIsCollided(true);
+				objectB->setIsCollided(true);
+			}
+		}
+	}
 }

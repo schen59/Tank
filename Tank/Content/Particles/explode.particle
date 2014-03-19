@@ -1,0 +1,69 @@
+particle_system Explosion
+{
+	material        	Smoke  
+	particle_width  	5                
+	particle_height 	5                 
+	cull_each       	true
+	quota           	10
+	billboard_type  	point
+	sorted			true
+ 
+	emitter Point
+	{
+	   angle           180
+	   duration	   3    
+    	   emission_rate   100    
+    	   time_to_live    3   	
+	}
+
+      affector ColourImage
+	{
+		image smokecolors.png
+	}
+ 
+
+   	affector ColourFader
+   	{
+   		alpha -2        
+   	}
+      affector Scaler
+   	{
+       	rate 5
+   	}
+
+}
+
+particle_system Explosion/Tank
+{
+	material        	Smoke  
+	particle_width  	10                
+	particle_height 	10                 
+	cull_each       	true
+	quota           	10
+	billboard_type  	point
+	sorted			true
+ 
+	emitter Point
+	{
+	   angle           180
+	   duration	   5   
+    	   emission_rate   100    
+    	   time_to_live    0.5   	
+	}
+
+      affector ColourImage
+	{
+		image smokecolors.png
+	}
+ 
+
+   	affector ColourFader
+   	{
+   		alpha -2        
+   	}
+      affector Scaler
+   	{
+       	rate 8
+   	}
+
+}

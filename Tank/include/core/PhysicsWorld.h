@@ -1,7 +1,7 @@
 #ifndef __PhysicsWorld_h_
 #define __PhysicsWorld_h_
 
-#include <vector>
+#include <set>
 #include "btBulletDynamicsCommon.h"
 
 class PhysicsObject;
@@ -11,6 +11,7 @@ public:
 	PhysicsWorld(btVector3 &gravity);
 	~PhysicsWorld();
 	void addObject(PhysicsObject *object);
+	void removeObject(PhysicsObject *object);
 
 	void setup();
 
@@ -19,6 +20,8 @@ public:
 private:
 	void destroyObjects();
 	void setupDynamicsWorld();
+	void desctroyDynamicsWorld();
+	void detectCollision();
 
 	btVector3 mGravity;
 	btDynamicsWorld *mDynamicsWorld;
@@ -26,7 +29,7 @@ private:
 	btConstraintSolver *mConstraintSolver;
 	btCollisionDispatcher *mCollisionDispatcher;
 	btBroadphaseInterface *mBroadphaseInterface;
-	std::vector<PhysicsObject*> mObjects;
+	std::set<PhysicsObject*> mObjects;
 };
 
 #endif

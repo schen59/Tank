@@ -1,6 +1,8 @@
 #ifndef __World_h_
 #define __World_h_
 
+#include "include\object\AbstractObject.h"
+
 #include "Ogre.h"
 #include <vector>
 #include "btBulletDynamicsCommon.h"
@@ -16,6 +18,8 @@ class OgreWorld;
 class PhysicsWorld;
 class Wall;
 class Projectile;
+class AbstractObject;
+class AIManager;
 
 class World {
 public:
@@ -26,19 +30,26 @@ public:
 	OgreWorld* getOgreWorld() const { return mOgreWorld; }
 	PhysicsWorld* getPhysicsWorld() const { return mPhysicsWorld; }
 	void think(float time);
+    std::set<Tank*>& getAIPlayers() { return mAIPlayers; }
+	void createAIPlayers();
+	void addProjectile(Projectile *projectile);
+	void removeObject(AbstractObject *object);
 
 private:
 	void createHumanPlayer();
 	void createGround();
 	void createBoundaryWalls();
-	void destroyBoundaryWalls();
+	void createObstacles();
+	void updateHumanPlayer(float time);
+	void updateProjectiles(float time);
 
 	OgreWorld *mOgreWorld;
 	PhysicsWorld *mPhysicsWorld;
 	Tank *mHumanPlayer;
-	Ground *mGround;
-	std::vector<Wall*> mWalls;
-	std::vector<Projectile*> mProjectiles;
+	std::set<AbstractObject*> mObstacles;
+	std::set<Projectile*> mProjectiles;
+	std::set<Tank*> mAIPlayers;
+	AIManager *mAIManager;
 	InputHandler *mInputHandler;
 };
 

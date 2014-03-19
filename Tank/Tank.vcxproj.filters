@@ -49,29 +49,35 @@
     <Filter Include="Source Files\Factory">
       <UniqueIdentifier>{1faa917a-c997-444e-9a42-b4b33562084e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Tank">
-      <UniqueIdentifier>{d69a1784-f100-40a0-a9bc-9e810e65a480}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Tank">
-      <UniqueIdentifier>{cc45cf80-ab96-4e5e-b707-80be8167a271}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Ground">
+    <Filter Include="Header Files\Object\Ground">
       <UniqueIdentifier>{45242dab-6d3d-46a5-b33a-b55dfa1e2d42}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Ground">
-      <UniqueIdentifier>{23373455-8a69-4dba-ad64-c7f735de9513}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Wall">
-      <UniqueIdentifier>{46081da4-00b7-4c1f-8d57-c7269bd69237}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Wall">
-      <UniqueIdentifier>{e8829f1b-1f03-43e8-928c-6b4c5b174e8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Projectile">
+    <Filter Include="Header Files\Object\Projectile">
       <UniqueIdentifier>{3d72f582-78db-4be6-8e17-70be4bddc8c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Projectile">
+    <Filter Include="Header Files\Object\Tank">
+      <UniqueIdentifier>{d69a1784-f100-40a0-a9bc-9e810e65a480}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object\Wall">
+      <UniqueIdentifier>{46081da4-00b7-4c1f-8d57-c7269bd69237}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object\Ground">
+      <UniqueIdentifier>{23373455-8a69-4dba-ad64-c7f735de9513}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object\Projectile">
       <UniqueIdentifier>{31402773-9093-4f07-9e98-f23b73c3f67e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object\Tank">
+      <UniqueIdentifier>{cc45cf80-ab96-4e5e-b707-80be8167a271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object\Wall">
+      <UniqueIdentifier>{e8829f1b-1f03-43e8-928c-6b4c5b174e8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object\Box">
+      <UniqueIdentifier>{3a38e6bb-5008-4e5f-89f9-ea73807db495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object\Box">
+      <UniqueIdentifier>{10d56d89-3bc7-41ba-a65c-efaf64b08a32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -105,41 +111,59 @@
     <ClInclude Include="include\core\OgreWorld.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="include\tank\OgreTank.h">
-      <Filter>Header Files\Tank</Filter>
+    <ClInclude Include="include\object\AbstractObject.h">
+      <Filter>Header Files\Object</Filter>
     </ClInclude>
-    <ClInclude Include="include\tank\PhysicsTank.h">
-      <Filter>Header Files\Tank</Filter>
+    <ClInclude Include="include\object\tank\OgreTank.h">
+      <Filter>Header Files\Object\Tank</Filter>
     </ClInclude>
-    <ClInclude Include="include\tank\Tank.h">
-      <Filter>Header Files\Tank</Filter>
+    <ClInclude Include="include\object\tank\PhysicsTank.h">
+      <Filter>Header Files\Object\Tank</Filter>
     </ClInclude>
-    <ClInclude Include="include\ground\OgreGround.h">
-      <Filter>Header Files\Ground</Filter>
+    <ClInclude Include="include\object\wall\OgreWall.h">
+      <Filter>Header Files\Object\Wall</Filter>
     </ClInclude>
-    <ClInclude Include="include\ground\PhysicsGround.h">
-      <Filter>Header Files\Ground</Filter>
+    <ClInclude Include="include\object\wall\PhysicsWall.h">
+      <Filter>Header Files\Object\Wall</Filter>
     </ClInclude>
-    <ClInclude Include="include\ground\Ground.h">
-      <Filter>Header Files\Ground</Filter>
+    <ClInclude Include="include\object\wall\Wall.h">
+      <Filter>Header Files\Object\Wall</Filter>
     </ClInclude>
-    <ClInclude Include="include\wall\Wall.h">
-      <Filter>Header Files\Wall</Filter>
+    <ClInclude Include="include\object\tank\Tank.h">
+      <Filter>Header Files\Object\Tank</Filter>
     </ClInclude>
-    <ClInclude Include="include\wall\OgreWall.h">
-      <Filter>Header Files\Wall</Filter>
+    <ClInclude Include="include\object\projectile\OgreProjectile.h">
+      <Filter>Header Files\Object\Projectile</Filter>
     </ClInclude>
-    <ClInclude Include="include\wall\PhysicsWall.h">
-      <Filter>Header Files\Wall</Filter>
+    <ClInclude Include="include\object\projectile\PhysicsProjectile.h">
+      <Filter>Header Files\Object\Projectile</Filter>
     </ClInclude>
-    <ClInclude Include="include\projectile\OgreProjectile.h">
-      <Filter>Header Files\Projectile</Filter>
+    <ClInclude Include="include\object\projectile\Projectile.h">
+      <Filter>Header Files\Object\Projectile</Filter>
     </ClInclude>
-    <ClInclude Include="include\projectile\PhysicsProjectile.h">
-      <Filter>Header Files\Projectile</Filter>
+    <ClInclude Include="include\object\ground\Ground.h">
+      <Filter>Header Files\Object\Ground</Filter>
     </ClInclude>
-    <ClInclude Include="include\projectile\Projectile.h">
-      <Filter>Header Files\Projectile</Filter>
+    <ClInclude Include="include\object\ground\OgreGround.h">
+      <Filter>Header Files\Object\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="include\object\ground\PhysicsGround.h">
+      <Filter>Header Files\Object\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="include\object\box\Box.h">
+      <Filter>Header Files\Object\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="include\object\box\OgreBox.h">
+      <Filter>Header Files\Object\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="include\object\box\PhysicsBox.h">
+      <Filter>Header Files\Object\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="include\manager\AIManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\Properties.h">
+      <Filter>Header Files\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -176,41 +200,56 @@
     <ClCompile Include="source\core\OgreWorld.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="source\tank\OgreTank.cpp">
-      <Filter>Source Files\Tank</Filter>
+    <ClCompile Include="source\object\AbstractObject.cpp">
+      <Filter>Source Files\Object</Filter>
     </ClCompile>
-    <ClCompile Include="source\tank\PhysicsTank.cpp">
-      <Filter>Source Files\Tank</Filter>
+    <ClCompile Include="source\object\ground\Ground.cpp">
+      <Filter>Source Files\Object\Ground</Filter>
     </ClCompile>
-    <ClCompile Include="source\tank\Tank.cpp">
-      <Filter>Source Files\Tank</Filter>
+    <ClCompile Include="source\object\ground\OgreGround.cpp">
+      <Filter>Source Files\Object\Ground</Filter>
     </ClCompile>
-    <ClCompile Include="source\ground\OgreGround.cpp">
-      <Filter>Source Files\Ground</Filter>
+    <ClCompile Include="source\object\ground\PhysicsGround.cpp">
+      <Filter>Source Files\Object\Ground</Filter>
     </ClCompile>
-    <ClCompile Include="source\ground\PhysicsGround.cpp">
-      <Filter>Source Files\Ground</Filter>
+    <ClCompile Include="source\object\projectile\OgreProjectile.cpp">
+      <Filter>Source Files\Object\Projectile</Filter>
     </ClCompile>
-    <ClCompile Include="source\ground\Ground.cpp">
-      <Filter>Source Files\Ground</Filter>
+    <ClCompile Include="source\object\projectile\PhysicsProjectile.cpp">
+      <Filter>Source Files\Object\Projectile</Filter>
     </ClCompile>
-    <ClCompile Include="source\wall\OgreWall.cpp">
-      <Filter>Source Files\Wall</Filter>
+    <ClCompile Include="source\object\projectile\Projectile.cpp">
+      <Filter>Source Files\Object\Projectile</Filter>
     </ClCompile>
-    <ClCompile Include="source\wall\PhysicsWall.cpp">
-      <Filter>Source Files\Wall</Filter>
+    <ClCompile Include="source\object\tank\OgreTank.cpp">
+      <Filter>Source Files\Object\Tank</Filter>
     </ClCompile>
-    <ClCompile Include="source\wall\Wall.cpp">
-      <Filter>Source Files\Wall</Filter>
+    <ClCompile Include="source\object\tank\PhysicsTank.cpp">
+      <Filter>Source Files\Object\Tank</Filter>
     </ClCompile>
-    <ClCompile Include="source\projectile\OgreProjectile.cpp">
-      <Filter>Source Files\Projectile</Filter>
+    <ClCompile Include="source\object\tank\Tank.cpp">
+      <Filter>Source Files\Object\Tank</Filter>
     </ClCompile>
-    <ClCompile Include="source\projectile\PhysicsProjectile.cpp">
-      <Filter>Source Files\Projectile</Filter>
+    <ClCompile Include="source\object\wall\OgreWall.cpp">
+      <Filter>Source Files\Object\Wall</Filter>
     </ClCompile>
-    <ClCompile Include="source\projectile\Projectile.cpp">
-      <Filter>Source Files\Projectile</Filter>
+    <ClCompile Include="source\object\wall\PhysicsWall.cpp">
+      <Filter>Source Files\Object\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\wall\Wall.cpp">
+      <Filter>Source Files\Object\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\box\OgreBox.cpp">
+      <Filter>Source Files\Object\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\box\PhysicsBox.cpp">
+      <Filter>Source Files\Object\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\box\Box.cpp">
+      <Filter>Source Files\Object\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="source\manager\AIManager.cpp">
+      <Filter>Source Files\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

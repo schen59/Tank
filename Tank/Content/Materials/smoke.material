@@ -1,4 +1,4 @@
-material Examples/Smoke
+material Smoke
 {
 	technique
 	{

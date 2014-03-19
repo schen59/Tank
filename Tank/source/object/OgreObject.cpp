@@ -9,15 +9,20 @@ OgreObject::OgreObject() {
 }
 
 void OgreObject::addToScene(Ogre::SceneManager *sceneManager, Ogre::Quaternion orientation, Ogre::Vector3 position) {
-	load(sceneManager);
 	mSceneNode = sceneManager->getRootSceneNode()->createChildSceneNode();
-	mSceneNode->attachObject(mEntity);
+	load(sceneManager);
+	mSceneNode->createChildSceneNode()->attachObject(mEntity);
+	//mSceneNode->attachObject(mEntity);
 	mSceneNode->setOrientation(orientation);
 	mSceneNode->setPosition(position);
 }
 
 void OgreObject::setScale(Ogre::Vector3 scale) {
 	mSceneNode->setScale(scale);
+}
+
+Ogre::Vector3 OgreObject::getPosition() const {
+	return mSceneNode->getPosition();
 }
 
 void OgreObject::setPosition(Ogre::Vector3 position) {

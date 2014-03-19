@@ -5,13 +5,13 @@ namespace Ogre {
 	class Camera;
 }
 
-class Tank;
+class AbstractObject;
 
 class TankCamera {
 public:
 	TankCamera(Ogre::Camera *camera);
 	~TankCamera();
-	void follow(Tank *tank);
+	void follow(AbstractObject *object);
 	Ogre::Camera* getCamera() const { return mCamera; }
 
 private:

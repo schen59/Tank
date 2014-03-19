@@ -1,13 +1,12 @@
-// Example particle systems
 
 // smoke
-particle_system Examples/Smoke
+particle_system Smoke
 {
-	material        	Examples/Smoke
-	particle_width  	5
-	particle_height 	5
+	material        	Smoke
+	particle_width  	1
+	particle_height 	1
 	cull_each       	true
-	quota           	1500
+	quota                50
 	billboard_type  	point
 	sorted				true
     
@@ -15,12 +14,13 @@ particle_system Examples/Smoke
 	emitter Point
 	{
 		position 0 0 0
-		angle 15
-		emission_rate 15
-		time_to_live 4
+		angle 30
+		emission_rate 30
+		time_to_live 1
 		direction 0 1 0
-		velocity_min 20
-		velocity_max 50    	
+           velocity 2
+		//velocity_min 20
+		//velocity_max 50    	
 	}
 
 	affector ColourImage
@@ -38,7 +38,7 @@ particle_system Examples/Smoke
 
    	affector Scaler
    	{
-       	rate 50
+       	rate 1
    	}
 
 }
