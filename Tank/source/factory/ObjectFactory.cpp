@@ -65,7 +65,7 @@ Ogre::Entity* ObjectFactory::createGroundEntity(Ogre::SceneManager *sceneManager
 
 Ogre::Entity* ObjectFactory::createTankEntity(Ogre::SceneManager *sceneManager) {
 	Ogre::String name = createUniqueObjectName("tank");
-	Ogre::Entity *entity = sceneManager->createEntity(name, "Sphere.mesh");
+	Ogre::Entity *entity = sceneManager->createEntity(name, "Tank.mesh");
 	return entity;
 }
 

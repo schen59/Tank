@@ -55,6 +55,7 @@ Projectile* Tank::fire(World *world) {
 	Projectile *projectile = ObjectFactory::createProjectile(0.5, btVector3(1, 1, 1));
 	btVector3 position = mPhysicsObject->getPosition();
 	Ogre::Vector3 direction = mOgreObject->getOrientation() * Ogre::Vector3(0, 0.05, -1);
+	//Ogre::Vector3 direction = mOgreObject->getDirection();
 	direction.normalise();
 	projectile->addToWorld(world, btQuaternion(0, 0, 0, 1), position + btVector3(direction.x*3, direction.y*3, direction.z*3));
 	//projectile->addToWorld(world, btQuaternion(0, 0, 0, 1), btVector3(0, 10, -10));

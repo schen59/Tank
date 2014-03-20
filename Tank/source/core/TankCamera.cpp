@@ -11,6 +11,7 @@ TankCamera::TankCamera(Ogre::Camera *camera) {
 void TankCamera::follow(AbstractObject *object) {
 	Ogre::SceneNode *parentSceneNode = object->getOgreObject()->getSceneNode();
 	Ogre::SceneNode *sceneNode = parentSceneNode->createChildSceneNode();
+	sceneNode->setOrientation(object->getOgreObject()->getOrientation());
 	sceneNode->attachObject(mCamera);
 }
 
