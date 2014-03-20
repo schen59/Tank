@@ -68,7 +68,7 @@ void World::createObstacles() {
 }
 
 void World::createHumanPlayer() {
-	mHumanPlayer = ObjectFactory::createTank(5, btVector3(2.0, 1.0, 2.0));
+	mHumanPlayer = ObjectFactory::createTank(5, btVector3(4.0, 2.0, 4.0));
 	mHumanPlayer->addToWorld(this, btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0));
 }
 
