@@ -45,24 +45,25 @@ void World::createBoundaryWalls() {
 	bottomWall->addToWorld(this, btQuaternion(0, sqrt(0.5), 0, sqrt(0.5)), btVector3(0, 0, 100));
 }
 
+btVector3 World::getRandomPoint() {
+	int x = -100 + rand() % 200;
+	int y = rand() % 50;
+	int z = -100 + rand() % 200;
+	return btVector3(x, y, z);
+}
+
 void World::createAIPlayers() {
 	for (int i=0; i<5; i++) {
-		int x = -100 + rand() % 200;
-		int y = 10;
-		int z = -100 + rand() % 200;
 		Tank *tank = ObjectFactory::createTank(5, btVector3(2.0, 1.0, 2.0));
-		tank->addToWorld(this, btQuaternion(0, 0, 0, 1), btVector3(x, y, z));
+		tank->addToWorld(this, btQuaternion(0, 0, 0, 1), getRandomPoint());
 		mAIPlayers.insert(tank);
 	}
 }
 
 void World::createObstacles() {
 	for (int i=0; i<10; i++) {
-		int x = -100 + rand() % 200;
-		int y = rand() % 10;
-		int z = -100 + rand() % 200;
 		Box *box = ObjectFactory::createBox(0.1, btVector3(4.0, 2.0, 4.0));
-	    box->addToWorld(this, btQuaternion(0, 0, 0, 1), btVector3(x, y, z));
+		box->addToWorld(this, btQuaternion(0, 0, 0, 1), getRandomPoint());
 		mObstacles.insert(box);
 	}
 }
@@ -115,10 +116,6 @@ void World::updateProjectiles(float time) {
 		}
 		projectile->update();
 		if (!projectile->isActive()) {
-			//projectile->explode(this);
-			//mPhysicsWorld->removeObject(projectile->getPhysicsObject());
-			//mOgreWorld->removeObject(projectile->getOgreObject());
-			//delete projectile;
 			it = mProjectiles.erase(it);
 			removeObject(projectile);
 		} else {
@@ -136,12 +133,38 @@ void World::removeObject(AbstractObject *object) {
 void World::think(float time) {
 	mPhysicsWorld->think(time);
 	mAIManager->think(time);
+	updateObstacles();
+	updateAIPlayers(time);
+	updateHumanPlayer(time);
+	updateProjectiles(time);
+}
+
+void World::updateObstacles() {
 	for (std::set<AbstractObject*>::iterator it=mObstacles.begin(); it!=mObstacles.end(); it++) {
 		AbstractObject *object = *it;
 		object->update();
 	}
-	updateHumanPlayer(time);
-	updateProjectiles(time);
+}
+
+void World::updateAIPlayers(float time) {
+	if (mAIPlayers.size() == 0) {
+		createAIPlayers();
+	}
+	std::set<Tank*>::iterator it = mAIPlayers.begin();
+	while (it != mAIPlayers.end()) {
+		Tank *tank = *it;
+		if (tank->isCollided()) {
+			tank->attacked();
+		}
+		if (tank->isAlive()) {
+			tank->update();
+			it++;
+		} else {
+			tank->explode(this);
+			it = mAIPlayers.erase(it);
+			removeObject(tank);
+		}
+	}
 }
 
 World::~World() {

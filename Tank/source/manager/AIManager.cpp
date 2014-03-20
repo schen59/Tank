@@ -18,24 +18,14 @@ AIManager::~AIManager() {
 void AIManager::think(float time) {
 	std::set<Tank*>& aiPlayers = mWorld->getAIPlayers();
 	std::set<Tank*>::iterator it = aiPlayers.begin();
-	while (it != aiPlayers.end()) {
+	while (it != aiPlayers.end()) {	
 		Tank *tank = *it;
-		if (tank->isCollided()) {
-			tank->attacked();
-		}
-		if (tank->isAlive()) {
-		    move(tank, time);
-			it++;
-		} else {
-			tank->explode(mWorld);
-			it = aiPlayers.erase(it);
-			mWorld->removeObject(tank);
-		}
+		move(tank, time);
+		it++;
 	}
 }
 
 void AIManager::move(Tank *tank, float time) {
-	
 	Tank* humanPlayer = mWorld->getHumanPlayer();
 	btVector3 humanPlayerPos = humanPlayer->getPhysicsObject()->getPosition();
 	btVector3 aiPlayerPos = tank->getPhysicsObject()->getPosition();

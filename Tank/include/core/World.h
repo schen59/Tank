@@ -42,6 +42,9 @@ private:
 	void createObstacles();
 	void updateHumanPlayer(float time);
 	void updateProjectiles(float time);
+	btVector3 getRandomPoint();
+	void updateObstacles();
+	void updateAIPlayers(float time);
 
 	OgreWorld *mOgreWorld;
 	PhysicsWorld *mPhysicsWorld;
