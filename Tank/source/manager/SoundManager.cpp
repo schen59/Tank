@@ -18,11 +18,14 @@ void SoundManager::createExplosionSound() {
 }
 
 void SoundManager::playFireSound() {
+	mOggSoundManager->getSound("fire")->stop();
 	mOggSoundManager->getSound("fire")->play();
 }
 
 void SoundManager::playExplosionSound() {
-	mOggSoundManager->getSound("explosion")->play();
+	if (!mOggSoundManager->getSound("explosion")->isPlaying()) {
+	    mOggSoundManager->getSound("explosion")->play();
+	}
 }
 
 SoundManager::~SoundManager() {
