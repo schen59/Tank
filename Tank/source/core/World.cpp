@@ -118,6 +118,7 @@ void World::addProjectile(Projectile *projectile) {
 
 void World::addMissile(Missile *missile) {
 	mMissiles.insert(missile);
+	mSoundManager->playExplosionSound();
 }
 
 void World::updateProjectiles(float time) {
@@ -144,6 +145,7 @@ void World::updateMissiles(float time) {
 		Missile *missile = *it;
 		if (missile->isCollided()) {
 			missile->explode(this);
+			mSoundManager->playExplosionSound();
 		}
 		missile->update();
 		if (!missile->isActive()) {
