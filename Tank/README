@@ -1,1 +1,21 @@
-Tank game using Ogre3D game engine and C++.
+Tank game using Ogre3D game engine and Bullet physics engine.
+
+Team member: Shaofeng Chen, Kang-Chi Kuo.
+
+Configuration:
+1. OgreSDK.
+2. Bullet physics engine.
+   Add $(BULLET_HOME)/src into include path.
+   Add $(BULLET_HOME)/lib and $(BULLET_HOME)/Glut into additional library path.
+   Add BulletDynamics_vs2010_debug.lib, 
+BulletCollision_vs2010_debug.lib,
+LinearMath_vs2010_debug.lib into addtional dependencies.
+
+3. OgreOggSound.
+   Add $(OGRE_OGG_SOUND_HOME)/include into include path. OGRE_OGG_SOUND_HOME is the home directory of OgreOggSound libaray.
+   Add $(OGRE_OGG_SOUND_HOME)/lib.
+4. OpenAL.
+   Add $(OPENAL_SDK)/include into include path.
+   Add $(OPENAL_SDK)/lib into addtional library path.
+
+
