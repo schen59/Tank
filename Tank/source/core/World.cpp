@@ -8,6 +8,7 @@
 #include "include\core\PhysicsWorld.h"
 #include "include\factory\ObjectFactory.h"
 #include "include\object\projectile\Projectile.h"
+#include "include\object\projectile\Missile.h"
 #include "include\object\tank\OgreTank.h"
 #include "include\object\projectile\PhysicsProjectile.h"
 #include "include\object\AbstractObject.h"
@@ -103,11 +104,20 @@ void World::updateHumanPlayer(float time) {
 		    addProjectile(mHumanPlayer->fire(this));
 		}
 	}
+	if (mInputHandler->isKeyDown(OIS::KC_K) && !mInputHandler->wasKeyDown(OIS::KC_K)) {
+		if (mHumanPlayer->isEnabled_missile()) {
+		    addMissile(mHumanPlayer->fire_missile(this));
+		}
+	}
 }
 
 void World::addProjectile(Projectile *projectile) {
 	mProjectiles.insert(projectile);
 	mSoundManager->playFireSound();
+}
+
+void World::addMissile(Missile *missile) {
+	mMissiles.insert(missile);
 }
 
 void World::updateProjectiles(float time) {
@@ -128,6 +138,23 @@ void World::updateProjectiles(float time) {
 	}
 }
 
+void World::updateMissiles(float time) {
+	std::set<Missile*>::iterator it=mMissiles.begin(); 
+	while (it != mMissiles.end()) {
+		Missile *missile = *it;
+		if (missile->isCollided()) {
+			missile->explode(this);
+		}
+		missile->update();
+		if (!missile->isActive()) {
+			it = mMissiles.erase(it);
+			removeObject(missile);
+		} else {
+			it++;
+		}
+	}
+}
+
 void World::removeObject(AbstractObject *object) {
 	mPhysicsWorld->removeObject(object->getPhysicsObject());
 	mOgreWorld->removeObject(object->getOgreObject());
@@ -141,6 +168,7 @@ void World::think(float time) {
 	updateAIPlayers(time);
 	updateHumanPlayer(time);
 	updateProjectiles(time);
+	updateMissiles(time);
 }
 
 void World::updateObstacles() {

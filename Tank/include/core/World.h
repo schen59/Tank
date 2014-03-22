@@ -18,6 +18,7 @@ class OgreWorld;
 class PhysicsWorld;
 class Wall;
 class Projectile;
+class Missile;
 class AbstractObject;
 class AIManager;
 class SoundManager;
@@ -34,6 +35,7 @@ public:
     std::set<Tank*>& getAIPlayers() { return mAIPlayers; }
 	void createAIPlayers();
 	void addProjectile(Projectile *projectile);
+	void addMissile(Missile *missile);
 	void removeObject(AbstractObject *object);
 
 private:
@@ -43,6 +45,7 @@ private:
 	void createObstacles();
 	void updateHumanPlayer(float time);
 	void updateProjectiles(float time);
+	void updateMissiles(float time);
 	btVector3 getRandomPoint();
 	void updateObstacles();
 	void updateAIPlayers(float time);
@@ -52,6 +55,7 @@ private:
 	Tank *mHumanPlayer;
 	std::set<AbstractObject*> mObstacles;
 	std::set<Projectile*> mProjectiles;
+	std::set<Missile*> mMissiles;
 	std::set<Tank*> mAIPlayers;
 	AIManager *mAIManager;
 	SoundManager *mSoundManager;
