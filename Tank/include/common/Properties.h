@@ -9,7 +9,8 @@ public:
 		WALL,
 		OBSTACLE,
 		PROJECTILE,
-		TANK
+		TANK,
+		MISSILE
 	};
 
 private:
