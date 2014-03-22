@@ -10,6 +10,7 @@ class OgreTank;
 class PhysicsTank;
 class World;
 class Projectile;
+class Missile;
 class AbstractObject;
 
 class Tank : public AbstractObject {
@@ -19,7 +20,9 @@ public:
 	void move(float time);
 	void yaw(float degree);
 	Projectile* fire(World *world);
+	Missile* fire_missile(World *world);
 	bool isEnabled();
+	bool isEnabled_missile();
 	void reset();
 	bool isAlive() const;
 	void attacked();
