@@ -5,6 +5,7 @@
 #include "include\core\OgreWorld.h"
 #include "include\core\PhysicsWorld.h"
 #include "include\object\projectile\Projectile.h"
+#include "include\object\projectile\Missile.h"
 #include "include\factory\ObjectFactory.h"
 #include "include\object\AbstractObject.h"
 
@@ -48,6 +49,10 @@ bool Tank::isEnabled() {
 	return mTimer.getMilliseconds() > 2000;
 }
 
+bool Tank::isEnabled_missile() {
+	return mTimer.getMilliseconds() > 200;
+}
+
 Projectile* Tank::fire(World *world) {
 	//if (mTimer.getMilliseconds() > 2000) {
 	//	mEnabled = true;
@@ -64,6 +69,19 @@ Projectile* Tank::fire(World *world) {
 	projectile->setVelocity(velocity);
 	mTimer.reset();
 	return projectile;
+}
+
+Missile* Tank::fire_missile(World *world) {
+
+	Missile *missile = ObjectFactory::createMissile(0.5, btVector3(1, 1, 1));
+	btVector3 position = mPhysicsObject->getPosition();
+	Ogre::Vector3 direction = mOgreObject->getOrientation() * Ogre::Vector3(0, 0.05, -1);
+	direction.normalise();
+	missile->addToWorld(world, btQuaternion(0, 0, 0, 1), position + btVector3(direction.x*3, direction.y*3, direction.z*3));
+	btVector3 velocity = btVector3(direction.x, direction.y, direction.z) * 100;
+	missile->setVelocity(velocity);
+	mTimer.reset();
+	return missile;
 }
 
 void Tank::reset() {

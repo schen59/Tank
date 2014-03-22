@@ -168,6 +168,12 @@
     <ClInclude Include="include\manager\SoundManager.h">
       <Filter>Header Files\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="include\object\projectile\Missile.h">
+      <Filter>Header Files\Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="include\object\projectile\OgreMissile.h">
+      <Filter>Header Files\Object\Projectile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\core\main.cpp">
@@ -256,6 +262,12 @@
     </ClCompile>
     <ClCompile Include="source\manager\SoundManager.cpp">
       <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\projectile\Missile.cpp">
+      <Filter>Source Files\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\projectile\OgreMissile.cpp">
+      <Filter>Source Files\Object\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

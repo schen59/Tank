@@ -120,6 +120,8 @@ copy resources.cfg "$(OutDir)"</Command>
     <ClInclude Include="include\object\ground\PhysicsGround.h" />
     <ClInclude Include="include\object\OgreObject.h" />
     <ClInclude Include="include\object\PhysicsObject.h" />
+    <ClInclude Include="include\object\projectile\Missile.h" />
+    <ClInclude Include="include\object\projectile\OgreMissile.h" />
     <ClInclude Include="include\object\projectile\OgreProjectile.h" />
     <ClInclude Include="include\object\projectile\PhysicsProjectile.h" />
     <ClInclude Include="include\object\projectile\Projectile.h" />
@@ -151,6 +153,8 @@ copy resources.cfg "$(OutDir)"</Command>
     <ClCompile Include="source\object\ground\PhysicsGround.cpp" />
     <ClCompile Include="source\object\OgreObject.cpp" />
     <ClCompile Include="source\object\PhysicsObject.cpp" />
+    <ClCompile Include="source\object\projectile\Missile.cpp" />
+    <ClCompile Include="source\object\projectile\OgreMissile.cpp" />
     <ClCompile Include="source\object\projectile\OgreProjectile.cpp" />
     <ClCompile Include="source\object\projectile\PhysicsProjectile.cpp" />
     <ClCompile Include="source\object\projectile\Projectile.cpp" />
