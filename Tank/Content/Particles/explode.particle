@@ -19,6 +19,7 @@ particle_system Explosion
       affector ColourImage
 	{
 		image smokecolors.png
+		
 	}
  
 
@@ -66,4 +67,40 @@ particle_system Explosion/Tank
        	rate 8
    	}
 
+}
+particle_system Explosion_Missile
+{
+	material        	Smoke  
+	particle_width  	20                
+	particle_height 	20                 
+	cull_each       	true
+	quota           	100
+	billboard_type  	point
+	sorted			true
+ 
+	emitter Point
+	{
+	   angle           180
+	   duration	   3    
+    	   emission_rate   100    
+    	   time_to_live    3   	
+	}
+
+      affector ColourImage
+	{
+		//image smokecolors.png
+		image splashcolors.png
+	}
+ 
+
+   	affector ColourFader
+   	{
+   		alpha -2        
+   	}
+      affector Scaler
+   	{
+       	rate 5
+   	}
+
+}
 }
