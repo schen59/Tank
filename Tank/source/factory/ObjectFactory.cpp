@@ -3,6 +3,7 @@
 #include "include\object\ground\Ground.h"
 #include "include\object\wall\Wall.h"
 #include "include\object\projectile\Projectile.h"
+#include "include\object\projectile\Missile.h"
 #include "include\object\box\Box.h"
 
 #include "OgreSceneManager.h"
@@ -32,6 +33,11 @@ Wall* ObjectFactory::createWall(btScalar mass, btVector3 &size) {
 Projectile* ObjectFactory::createProjectile(btScalar mass, btVector3 &size) {
 	Projectile *projectile = new Projectile(mass, size);
 	return projectile;
+}
+
+Missile* ObjectFactory::createMissile(btScalar mass, btVector3 &size) {
+	Missile *missile = new Missile(mass, size);
+	return missile;
 }
 
 Box* ObjectFactory::createBox(btScalar mass, btVector3 &size) {
@@ -78,6 +84,12 @@ Ogre::Entity* ObjectFactory::createBoxEntity(Ogre::SceneManager *sceneManager) {
 Ogre::Entity* ObjectFactory::createProjectileEntity(Ogre::SceneManager *sceneManager) {
 	Ogre::String name = createUniqueObjectName("projectile");
 	Ogre::Entity *entity = sceneManager->createEntity(name, "Shell.mesh");
+	return entity;
+}
+
+Ogre::Entity* ObjectFactory::createMissileEntity(Ogre::SceneManager *sceneManager) {
+	Ogre::String name = createUniqueObjectName("missile");
+	Ogre::Entity *entity = sceneManager->createEntity(name, "Cube.001.mesh");
 	return entity;
 }
 

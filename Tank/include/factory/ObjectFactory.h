@@ -14,6 +14,7 @@ class Tank;
 class Ground;
 class Wall;
 class Projectile;
+class Missile;
 class Box;
 
 class ObjectFactory {
@@ -23,11 +24,13 @@ public:
 	static Wall* createWall(btScalar mass, btVector3 &size);
 	static Ground* createGround(btScalar mass, btVector3 &size);
 	static Projectile* createProjectile(btScalar mass, btVector3 &size);
+	static Missile* createMissile(btScalar mass, btVector3 &size);
 	static Box* createBox(btScalar mass, btVector3 &size);
 	static Ogre::Entity* createWallEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::Entity* createTankEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::Entity* createGroundEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::Entity* createProjectileEntity(Ogre::SceneManager *sceneManager);
+	static Ogre::Entity* createMissileEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::Entity* createBoxEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::ParticleSystem* createParticleSystem(Ogre::SceneManager *sceneManager, Ogre::String particleName);
 	
