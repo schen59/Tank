@@ -12,6 +12,7 @@
 #include "include\object\projectile\PhysicsProjectile.h"
 #include "include\object\AbstractObject.h"
 #include "include\manager\AIManager.h"
+#include "include\manager\SoundManager.h"
 
 #include "OgreSceneManager.h"
 #include "btBulletDynamicsCommon.h"
@@ -26,6 +27,7 @@ void World::setup(Ogre::SceneManager *sceneManager, btVector3 &gravity) {
 	mOgreWorld = new OgreWorld(sceneManager);
 	mPhysicsWorld = new PhysicsWorld(gravity);
 	mAIManager = new AIManager(this);
+	mSoundManager = new SoundManager();
 	mPhysicsWorld->setup();
 	createHumanPlayer();
 	createGround();
@@ -46,15 +48,15 @@ void World::createBoundaryWalls() {
 }
 
 btVector3 World::getRandomPoint() {
-	int x = -100 + rand() % 200;
+	int x = -50 + rand() % 100;
 	int y = rand() % 50;
-	int z = -100 + rand() % 200;
+	int z = -50 + rand() % 100;
 	return btVector3(x, y, z);
 }
 
 void World::createAIPlayers() {
 	for (int i=0; i<5; i++) {
-		Tank *tank = ObjectFactory::createTank(5, btVector3(2.0, 1.0, 2.0));
+		Tank *tank = ObjectFactory::createTank(5, btVector3(4.0, 2.0, 4.0));
 		tank->addToWorld(this, btQuaternion(0, 0, 0, 1), getRandomPoint());
 		mAIPlayers.insert(tank);
 	}
@@ -62,7 +64,7 @@ void World::createAIPlayers() {
 
 void World::createObstacles() {
 	for (int i=0; i<10; i++) {
-		Box *box = ObjectFactory::createBox(0.1, btVector3(4.0, 2.0, 4.0));
+		Box *box = ObjectFactory::createBox(0.1, btVector3(2.0, 2.0, 2.0));
 		box->addToWorld(this, btQuaternion(0, 0, 0, 1), getRandomPoint());
 		mObstacles.insert(box);
 	}
@@ -105,6 +107,7 @@ void World::updateHumanPlayer(float time) {
 
 void World::addProjectile(Projectile *projectile) {
 	mProjectiles.insert(projectile);
+	mSoundManager->playFireSound();
 }
 
 void World::updateProjectiles(float time) {
@@ -113,6 +116,7 @@ void World::updateProjectiles(float time) {
 		Projectile *projectile = *it;
 		if (projectile->isCollided()) {
 			projectile->explode(this);
+			mSoundManager->playExplosionSound();
 		}
 		projectile->update();
 		if (!projectile->isActive()) {
@@ -172,6 +176,7 @@ World::~World() {
 	delete mOgreWorld;
 	delete mPhysicsWorld;
 	delete mAIManager;
+	delete mSoundManager;
 	delete mHumanPlayer;
 	//delete mHumanPlayer;
 }

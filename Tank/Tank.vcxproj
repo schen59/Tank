@@ -43,14 +43,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(BULLET_HOME)/src;$(OGRE_HOME)/include/OGRE/Overlay;$(OGRE_HOME)/boost/;$(OGRE_HOME)/include/OIS;$(OGRE_HOME)/include/OGRE;$(OGRE_HOME)/include;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BULLET_HOME)/src;$(OGRE_HOME)/include/OGRE/Overlay;$(OGRE_HOME)/boost/;$(OGRE_HOME)/include/OIS;$(OGRE_HOME)/include/OGRE;$(OGRE_HOME)/include;.;$(OPENAL_SDK)/include;$(OGRE_OGG_SOUND_HOME)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OGRE_HOME)/boost/lib;$(OGRE_HOME)/lib/$(configuration);$(BULLET_HOME)/lib;$(BULLET_HOME)/Glut;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;glew32s.lib;glut32.lib;BulletDynamics_vs2010_debug.lib;BulletCollision_vs2010_debug.lib;LinearMath_vs2010_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OGRE_HOME)/boost/lib;$(OGRE_HOME)/lib/$(configuration);$(BULLET_HOME)/lib;$(BULLET_HOME)/Glut;$(OPENAL_SDK)/lib;$(OGRE_OGG_SOUND_HOME)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;glew32s.lib;glut32.lib;BulletDynamics_vs2010_debug.lib;BulletCollision_vs2010_debug.lib;LinearMath_vs2010_debug.lib;OgreOggSound_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(OGRE_HOME)\bin\$(Configuration)\OgreMain_d.dll" "$(OutDir)"
@@ -63,6 +63,7 @@ copy "$(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeZone_d.dll" "$(OutDir)"
 copy "$(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeSceneManager_d.dll" "$(OutDir)"
 copy "$(OGRE_HOME)\bin\$(Configuration)\Plugin_PCZSceneManager_d.dll" "$(OutDir)"
 copy "$(OGRE_HOME)\bin\$(Configuration)\Plugin_ParticleFX_d.dll" "$(OutDir)"
+copy "$(OGRE_OGG_SOUND_HOME)\lib\OgreOggSound_d.dll" "$(OutDir)"
 copy plugins_d.cfg "$(OutDir)"
 copy resources_d.cfg "$(OutDir)"</Command>
     </PostBuildEvent>
@@ -108,6 +109,7 @@ copy resources.cfg "$(OutDir)"</Command>
     <ClInclude Include="include\factory\ObjectFactory.h" />
     <ClInclude Include="include\handler\InputHandler.h" />
     <ClInclude Include="include\manager\AIManager.h" />
+    <ClInclude Include="include\manager\SoundManager.h" />
     <ClInclude Include="include\manager\TankManager.h" />
     <ClInclude Include="include\object\AbstractObject.h" />
     <ClInclude Include="include\object\box\Box.h" />
@@ -138,6 +140,7 @@ copy resources.cfg "$(OutDir)"</Command>
     <ClCompile Include="source\factory\ObjectFactory.cpp" />
     <ClCompile Include="source\handler\InputHandler.cpp" />
     <ClCompile Include="source\manager\AIManager.cpp" />
+    <ClCompile Include="source\manager\SoundManager.cpp" />
     <ClCompile Include="source\manager\TankManager.cpp" />
     <ClCompile Include="source\object\AbstractObject.cpp" />
     <ClCompile Include="source\object\box\Box.cpp" />

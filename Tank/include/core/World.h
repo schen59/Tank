@@ -20,6 +20,7 @@ class Wall;
 class Projectile;
 class AbstractObject;
 class AIManager;
+class SoundManager;
 
 class World {
 public:
@@ -53,6 +54,7 @@ private:
 	std::set<Projectile*> mProjectiles;
 	std::set<Tank*> mAIPlayers;
 	AIManager *mAIManager;
+	SoundManager *mSoundManager;
 	InputHandler *mInputHandler;
 };
 
