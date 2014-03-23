@@ -11,6 +11,7 @@
 #include "include\object\projectile\Missile.h"
 #include "include\object\tank\OgreTank.h"
 #include "include\object\projectile\PhysicsProjectile.h"
+#include "include\object\projectile\PhysicsMissile.h"
 #include "include\object\AbstractObject.h"
 #include "include\manager\AIManager.h"
 #include "include\manager\SoundManager.h"
@@ -57,7 +58,7 @@ btVector3 World::getRandomPoint() {
 
 void World::createAIPlayers() {
 	for (int i=0; i<5; i++) {
-		Tank *tank = ObjectFactory::createTank(5, btVector3(4.0, 2.0, 4.0));
+		Tank *tank = ObjectFactory::createTank(1, btVector3(4.0, 2.0, 4.0));
 		tank->addToWorld(this, btQuaternion(0, 0, 0, 1), getRandomPoint());
 		mAIPlayers.insert(tank);
 	}
@@ -72,7 +73,7 @@ void World::createObstacles() {
 }
 
 void World::createHumanPlayer() {
-	mHumanPlayer = ObjectFactory::createTank(5, btVector3(4.0, 2.0, 4.0));
+	mHumanPlayer = ObjectFactory::createTank(1, btVector3(4.0, 2.0, 4.0));
 	mHumanPlayer->addToWorld(this, btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0));
 }
 
@@ -105,8 +106,8 @@ void World::updateHumanPlayer(float time) {
 		}
 	}
 	if (mInputHandler->isKeyDown(OIS::KC_K) && !mInputHandler->wasKeyDown(OIS::KC_K)) {
-		if (mHumanPlayer->isEnabled_missile()) {
-		    addMissile(mHumanPlayer->fire_missile(this));
+		if (mHumanPlayer->isEnabledMissile()) {
+		    addMissile(mHumanPlayer->fireMissile(this));
 		}
 	}
 }

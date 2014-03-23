@@ -7,7 +7,7 @@
 
 class World;
 class OgreMissile;
-class PhysicsProjectile;
+class PhysicsMissile;
 class AbstractObject;
 
 class Missile : public AbstractObject {

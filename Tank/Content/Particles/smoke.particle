@@ -43,7 +43,7 @@ particle_system Smoke
 
 }
 
-particle_system Smoke_Missile
+particle_system SmokeMissile
 {
 	material        	Smoke
 	particle_width  	2

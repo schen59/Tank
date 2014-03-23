@@ -50,7 +50,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OGRE_HOME)/boost/lib;$(OGRE_HOME)/lib/$(configuration);$(BULLET_HOME)/lib;$(BULLET_HOME)/Glut;$(OPENAL_SDK)/lib;$(OGRE_OGG_SOUND_HOME)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;glew32s.lib;glut32.lib;BulletDynamics_vs2010_debug.lib;BulletCollision_vs2010_debug.lib;LinearMath_vs2010_debug.lib;OgreOggSound_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;glew32s.lib;glut32.lib;BulletDynamics_vs2010_debug.lib;BulletCollision_vs2010_debug.lib;LinearMath_vs2010_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(OGRE_HOME)\bin\$(Configuration)\OgreMain_d.dll" "$(OutDir)"
@@ -123,6 +123,7 @@ copy resources.cfg "$(OutDir)"</Command>
     <ClInclude Include="include\object\projectile\Missile.h" />
     <ClInclude Include="include\object\projectile\OgreMissile.h" />
     <ClInclude Include="include\object\projectile\OgreProjectile.h" />
+    <ClInclude Include="include\object\projectile\PhysicsMissile.h" />
     <ClInclude Include="include\object\projectile\PhysicsProjectile.h" />
     <ClInclude Include="include\object\projectile\Projectile.h" />
     <ClInclude Include="include\object\tank\OgreTank.h" />
@@ -156,6 +157,7 @@ copy resources.cfg "$(OutDir)"</Command>
     <ClCompile Include="source\object\projectile\Missile.cpp" />
     <ClCompile Include="source\object\projectile\OgreMissile.cpp" />
     <ClCompile Include="source\object\projectile\OgreProjectile.cpp" />
+    <ClCompile Include="source\object\projectile\PhysicsMissile.cpp" />
     <ClCompile Include="source\object\projectile\PhysicsProjectile.cpp" />
     <ClCompile Include="source\object\projectile\Projectile.cpp" />
     <ClCompile Include="source\object\tank\OgreTank.cpp" />

@@ -89,7 +89,7 @@ Ogre::Entity* ObjectFactory::createProjectileEntity(Ogre::SceneManager *sceneMan
 
 Ogre::Entity* ObjectFactory::createMissileEntity(Ogre::SceneManager *sceneManager) {
 	Ogre::String name = createUniqueObjectName("missile");
-	Ogre::Entity *entity = sceneManager->createEntity(name, "Cube.001.mesh");
+	Ogre::Entity *entity = sceneManager->createEntity(name, "missile.mesh");
 	return entity;
 }
 

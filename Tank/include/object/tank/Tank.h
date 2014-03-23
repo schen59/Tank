@@ -20,9 +20,9 @@ public:
 	void move(float time);
 	void yaw(float degree);
 	Projectile* fire(World *world);
-	Missile* fire_missile(World *world);
+	Missile* fireMissile(World *world);
 	bool isEnabled();
-	bool isEnabled_missile();
+	bool isEnabledMissile();
 	void reset();
 	bool isAlive() const;
 	void attacked();

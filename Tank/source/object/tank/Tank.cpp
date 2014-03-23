@@ -49,7 +49,7 @@ bool Tank::isEnabled() {
 	return mTimer.getMilliseconds() > 2000;
 }
 
-bool Tank::isEnabled_missile() {
+bool Tank::isEnabledMissile() {
 	return mTimer.getMilliseconds() > 200;
 }
 
@@ -71,7 +71,7 @@ Projectile* Tank::fire(World *world) {
 	return projectile;
 }
 
-Missile* Tank::fire_missile(World *world) {
+Missile* Tank::fireMissile(World *world) {
 
 	Missile *missile = ObjectFactory::createMissile(0.5, btVector3(1, 1, 1));
 	btVector3 position = mPhysicsObject->getPosition();

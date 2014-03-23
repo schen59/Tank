@@ -1,6 +1,6 @@
 #include "include\object\projectile\Missile.h"
 #include "include\object\projectile\OgreMissile.h"
-#include "include\object\projectile\PhysicsProjectile.h"
+#include "include\object\projectile\PhysicsMissile.h"
 #include "include\core\World.h"
 #include "include\core\OgreWorld.h"
 #include "include\core\PhysicsWorld.h"
@@ -20,7 +20,7 @@ Missile::~Missile() {
 }
 
 void Missile::createPhysicsObject(btQuaternion &orientation, btVector3 &position) {
-	mPhysicsObject = new PhysicsProjectile(orientation, position, mMass, mSize);
+	mPhysicsObject = new PhysicsMissile(orientation, position, mMass, mSize);
 }
 
 void Missile::createOgreObject() {

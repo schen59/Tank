@@ -68,7 +68,7 @@ particle_system Explosion/Tank
    	}
 
 }
-particle_system Explosion_Missile
+particle_system ExplosionMissile
 {
 	material        	Smoke  
 	particle_width  	20                
