@@ -1,19 +1,19 @@
-#ifndef __Missile_h_
-#define __Missile_h_
+#ifndef __Shell_h_
+#define __Shell_h_
 
 #include "include\object\projectile\Projectile.h"
 
 #include "btBulletDynamicsCommon.h"
 
 class World;
-class OgreMissile;
-class PhysicsMissile;
+class OgreShell;
+class PhysicsShell;
 class Projectile;
 
-class Missile : public Projectile {
+class Shell : public Projectile {
 public:
-	Missile(btScalar mass, btVector3 &size);
-	~Missile();
+	Shell(btScalar mass, btVector3 &size);
+	~Shell();
 	void explode(World *world);
 
 protected:

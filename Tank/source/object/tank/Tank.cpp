@@ -4,7 +4,7 @@
 #include "include\core\World.h"
 #include "include\core\OgreWorld.h"
 #include "include\core\PhysicsWorld.h"
-#include "include\object\projectile\Projectile.h"
+#include "include\object\projectile\Shell.h"
 #include "include\object\projectile\Missile.h"
 #include "include\factory\ObjectFactory.h"
 #include "include\object\AbstractObject.h"
@@ -45,34 +45,33 @@ void Tank::createPhysicsObject(btQuaternion &orientation, btVector3 &position) {
 	mPhysicsObject = new PhysicsTank(orientation, position, mMass, mSize);
 }
 
-bool Tank::isEnabled() {
+bool Tank::isShellEnabled() {
 	return mTimer.getMilliseconds() > 2000;
 }
 
-bool Tank::isEnabledMissile() {
+bool Tank::isMissileEnabled() {
 	return mTimer.getMilliseconds() > 200;
 }
 
-Projectile* Tank::fire(World *world) {
+Shell* Tank::fireShell(World *world) {
 	//if (mTimer.getMilliseconds() > 2000) {
 	//	mEnabled = true;
 	//}
-	Projectile *projectile = ObjectFactory::createProjectile(0.5, btVector3(1, 1, 1));
+	Shell *shell = ObjectFactory::createShell(0.5, btVector3(1, 1, 1));
 	btVector3 position = mPhysicsObject->getPosition();
 	Ogre::Vector3 direction = mOgreObject->getOrientation() * Ogre::Vector3(0, 0.05, -1);
 	//Ogre::Vector3 direction = mOgreObject->getDirection();
 	direction.normalise();
-	projectile->addToWorld(world, btQuaternion(0, 0, 0, 1), position + btVector3(direction.x*3, direction.y*3, direction.z*3));
+	shell->addToWorld(world, btQuaternion(0, 0, 0, 1), position + btVector3(direction.x*3, direction.y*3, direction.z*3));
 	//projectile->addToWorld(world, btQuaternion(0, 0, 0, 1), btVector3(0, 10, -10));
 	btVector3 velocity = btVector3(direction.x, direction.y, direction.z) * 100;
 	//btVector3 velocity = btVector3(1, 1, 0) * 20;
-	projectile->setVelocity(velocity);
+	shell->setVelocity(velocity);
 	mTimer.reset();
-	return projectile;
+	return shell;
 }
 
 Missile* Tank::fireMissile(World *world) {
-
 	Missile *missile = ObjectFactory::createMissile(0.5, btVector3(1, 1, 1));
 	btVector3 position = mPhysicsObject->getPosition();
 	Ogre::Vector3 direction = mOgreObject->getOrientation() * Ogre::Vector3(0, 0.05, -1);

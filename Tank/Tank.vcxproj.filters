@@ -132,15 +132,6 @@
     <ClInclude Include="include\object\tank\Tank.h">
       <Filter>Header Files\Object\Tank</Filter>
     </ClInclude>
-    <ClInclude Include="include\object\projectile\OgreProjectile.h">
-      <Filter>Header Files\Object\Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="include\object\projectile\PhysicsProjectile.h">
-      <Filter>Header Files\Object\Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="include\object\projectile\Projectile.h">
-      <Filter>Header Files\Object\Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="include\object\ground\Ground.h">
       <Filter>Header Files\Object\Ground</Filter>
     </ClInclude>
@@ -175,6 +166,18 @@
       <Filter>Header Files\Object\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="include\object\projectile\PhysicsMissile.h">
+      <Filter>Header Files\Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="include\object\projectile\OgreShell.h">
+      <Filter>Header Files\Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="include\object\projectile\PhysicsShell.h">
+      <Filter>Header Files\Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="include\object\projectile\Shell.h">
+      <Filter>Header Files\Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="include\object\projectile\Projectile.h">
       <Filter>Header Files\Object\Projectile</Filter>
     </ClInclude>
   </ItemGroup>
@@ -224,15 +227,6 @@
     <ClCompile Include="source\object\ground\PhysicsGround.cpp">
       <Filter>Source Files\Object\Ground</Filter>
     </ClCompile>
-    <ClCompile Include="source\object\projectile\OgreProjectile.cpp">
-      <Filter>Source Files\Object\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="source\object\projectile\PhysicsProjectile.cpp">
-      <Filter>Source Files\Object\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="source\object\projectile\Projectile.cpp">
-      <Filter>Source Files\Object\Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="source\object\tank\OgreTank.cpp">
       <Filter>Source Files\Object\Tank</Filter>
     </ClCompile>
@@ -273,6 +267,18 @@
       <Filter>Source Files\Object\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="source\object\projectile\PhysicsMissile.cpp">
+      <Filter>Source Files\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\projectile\OgreShell.cpp">
+      <Filter>Source Files\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\projectile\PhysicsShell.cpp">
+      <Filter>Source Files\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\projectile\Shell.cpp">
+      <Filter>Source Files\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\projectile\Projectile.cpp">
       <Filter>Source Files\Object\Projectile</Filter>
     </ClCompile>
   </ItemGroup>

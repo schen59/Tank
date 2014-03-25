@@ -34,6 +34,8 @@ void TankManager::setup() {
 	setupLight();
 	setupCamera();
 	setupViewPort();
+	setupHUDCamera();
+	setupHUDViewPort();
 }
 
 void TankManager::setupInputHandler() {
@@ -56,6 +58,12 @@ void TankManager::setupViewPort() {
 	camera->setAspectRatio(Ogre::Real(viewPort->getActualWidth()) / Ogre::Real(viewPort->getActualHeight()));
 }
 
+void TankManager::setupHUDViewPort() {
+	Ogre::Viewport* hudViewPort = mWindow->addViewport(mHUDCamera, 100, 0, 0.7, 0.3, 0.3);
+	hudViewPort->setBackgroundColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+	mHUDCamera->setAspectRatio(Ogre::Real(hudViewPort->getActualWidth()) / Ogre::Real(hudViewPort->getActualHeight()));
+}
+
 void TankManager::setupCamera() {
 	Ogre::Camera *camera = mSceneManager->createCamera("TankCamera");
 	camera->setNearClipDistance(5);
@@ -64,6 +72,14 @@ void TankManager::setupCamera() {
 	camera->setOrientation(Ogre::Quaternion(0.98, -0.17, 0, 0));
 	mTankCamera = new TankCamera(camera);
 	mTankCamera->follow(mWorld->getHumanPlayer());
+}
+
+void TankManager::setupHUDCamera() {
+	mHUDCamera = mSceneManager->createCamera("HUDCamera");
+	mHUDCamera->pitch(Ogre::Radian(-1.57));
+	mHUDCamera->setNearClipDistance(5);
+	mHUDCamera->setFarClipDistance(200);
+	mHUDCamera->setPosition(Ogre::Vector3(0, 200, 0));
 }
 
 void TankManager::setupSceneManager() {

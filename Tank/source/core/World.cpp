@@ -7,10 +7,11 @@
 #include "include\core\OgreWorld.h"
 #include "include\core\PhysicsWorld.h"
 #include "include\factory\ObjectFactory.h"
-#include "include\object\projectile\Projectile.h"
+#include "include\object\projectile\Shell.h"
 #include "include\object\projectile\Missile.h"
+#include "include\object\projectile\Projectile.h"
 #include "include\object\tank\OgreTank.h"
-#include "include\object\projectile\PhysicsProjectile.h"
+#include "include\object\projectile\PhysicsShell.h"
 #include "include\object\projectile\PhysicsMissile.h"
 #include "include\object\AbstractObject.h"
 #include "include\manager\AIManager.h"
@@ -87,9 +88,11 @@ void World::updateHumanPlayer(float time) {
 	mHumanPlayer->update();
 	if (mInputHandler->isKeyDown(OIS::KC_W)) {
 		mHumanPlayer->move(time);
+		mSoundManager->playMoveSound();
 	}
 	if (mInputHandler->isKeyDown(OIS::KC_S)) {
 		mHumanPlayer->move(-time);
+		mSoundManager->playMoveSound();
 	}
 	if (mInputHandler->isKeyDown(OIS::KC_A)) {
 		mHumanPlayer->yaw(time);
@@ -101,13 +104,13 @@ void World::updateHumanPlayer(float time) {
 		mHumanPlayer->reset();
 	}
 	if (mInputHandler->isKeyDown(OIS::KC_J) && !mInputHandler->wasKeyDown(OIS::KC_J)) {
-		if (mHumanPlayer->isEnabled()) {
-		    addProjectile(mHumanPlayer->fire(this));
+		if (mHumanPlayer->isShellEnabled()) {
+		    addProjectile(mHumanPlayer->fireShell(this));
 		}
 	}
 	if (mInputHandler->isKeyDown(OIS::KC_K) && !mInputHandler->wasKeyDown(OIS::KC_K)) {
-		if (mHumanPlayer->isEnabledMissile()) {
-		    addMissile(mHumanPlayer->fireMissile(this));
+		if (mHumanPlayer->isMissileEnabled()) {
+			addProjectile(mHumanPlayer->fireMissile(this));
 		}
 	}
 }
@@ -117,16 +120,11 @@ void World::addProjectile(Projectile *projectile) {
 	mSoundManager->playFireSound();
 }
 
-void World::addMissile(Missile *missile) {
-	mMissiles.insert(missile);
-	mSoundManager->playExplosionSound();
-}
-
 void World::updateProjectiles(float time) {
 	std::set<Projectile*>::iterator it=mProjectiles.begin(); 
 	while (it != mProjectiles.end()) {
 		Projectile *projectile = *it;
-		if (projectile->isCollided()) {
+		if (projectile->isCollided() && !projectile->isExploded()) {
 			projectile->explode(this);
 			mSoundManager->playExplosionSound();
 		}
@@ -134,24 +132,6 @@ void World::updateProjectiles(float time) {
 		if (!projectile->isActive()) {
 			it = mProjectiles.erase(it);
 			removeObject(projectile);
-		} else {
-			it++;
-		}
-	}
-}
-
-void World::updateMissiles(float time) {
-	std::set<Missile*>::iterator it=mMissiles.begin(); 
-	while (it != mMissiles.end()) {
-		Missile *missile = *it;
-		if (missile->isCollided()) {
-			missile->explode(this);
-			mSoundManager->playExplosionSound();
-		}
-		missile->update();
-		if (!missile->isActive()) {
-			it = mMissiles.erase(it);
-			removeObject(missile);
 		} else {
 			it++;
 		}
@@ -171,7 +151,6 @@ void World::think(float time) {
 	updateAIPlayers(time);
 	updateHumanPlayer(time);
 	updateProjectiles(time);
-	updateMissiles(time);
 }
 
 void World::updateObstacles() {

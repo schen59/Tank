@@ -1,5 +1,5 @@
-#ifndef __OgreProjectile_h_
-#define __OgreProjectile_h_
+#ifndef __OgreShell_h_
+#define __OgreShell_h_
 
 #include "include\object\OgreObject.h"
 
@@ -11,15 +11,13 @@ namespace Ogre {
 
 class OgreObject;
 
-class OgreProjectile : public OgreObject {
+class OgreShell : public OgreObject {
 public:
-	OgreProjectile();
-	~OgreProjectile();
+	OgreShell();
+	~OgreShell();
 	void load(Ogre::SceneManager *sceneManager);
 	void explode(OgreWorld *ogreWorld);
 
-private:
-	bool mIsExploded;
 };
 
 #endif

@@ -94,7 +94,7 @@ void PhysicsWorld::detectCollision() {
 		for (int j=0;j<numContacts;j++)
 		{
 			btManifoldPoint& pt = contactManifold->getContactPoint(j);
-			if (pt.getDistance()<0.f && ((objectA->getType()==Properties::PROJECTILE || objectB->getType()==Properties::PROJECTILE) || (objectA->getType()==Properties::MISSILE || objectB->getType()==Properties::MISSILE)) &&
+			if (pt.getDistance()<0.f && ((objectA->getType()==Properties::PROJECTILE || objectB->getType()==Properties::PROJECTILE)) &&
 				!(objectA->isCollided() && objectB->isCollided()))
 			{
 				objectA->setIsCollided(true);

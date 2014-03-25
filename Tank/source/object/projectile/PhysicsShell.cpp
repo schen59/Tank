@@ -1,18 +1,18 @@
-#include "include\object\projectile\PhysicsProjectile.h"
+#include "include\object\projectile\PhysicsShell.h"
 #include "include\object\PhysicsObject.h"
 
 #include "btBulletDynamicsCommon.h"
 
-PhysicsProjectile::PhysicsProjectile(btQuaternion &orientation, btVector3 &position, 
+PhysicsShell::PhysicsShell(btQuaternion &orientation, btVector3 &position, 
 									 btScalar mass, btVector3 &size) : PhysicsObject(mass, size) {
 	createCollisionShape();
 	createRigidBody(orientation, position);
 }
 
-PhysicsProjectile::~PhysicsProjectile() {
+PhysicsShell::~PhysicsShell() {
 }
 
-void PhysicsProjectile::createCollisionShape() {
+void PhysicsShell::createCollisionShape() {
 	btVector3 halfSize = getSize() / 2;
 	mCollisionShape = new btBoxShape(halfSize);
 }

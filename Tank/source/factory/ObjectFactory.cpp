@@ -2,7 +2,7 @@
 #include "include\object\tank\Tank.h"
 #include "include\object\ground\Ground.h"
 #include "include\object\wall\Wall.h"
-#include "include\object\projectile\Projectile.h"
+#include "include\object\projectile\Shell.h"
 #include "include\object\projectile\Missile.h"
 #include "include\object\box\Box.h"
 
@@ -30,9 +30,9 @@ Wall* ObjectFactory::createWall(btScalar mass, btVector3 &size) {
 	return wall;
 }
 
-Projectile* ObjectFactory::createProjectile(btScalar mass, btVector3 &size) {
-	Projectile *projectile = new Projectile(mass, size);
-	return projectile;
+Shell* ObjectFactory::createShell(btScalar mass, btVector3 &size) {
+	Shell *shell = new Shell(mass, size);
+	return shell;
 }
 
 Missile* ObjectFactory::createMissile(btScalar mass, btVector3 &size) {

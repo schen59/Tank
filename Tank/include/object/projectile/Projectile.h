@@ -6,8 +6,8 @@
 #include "btBulletDynamicsCommon.h"
 
 class World;
-class OgreProjectile;
-class PhysicsProjectile;
+class OgreShell;
+class PhysicsShell;
 class AbstractObject;
 
 class Projectile : public AbstractObject {
@@ -16,13 +16,11 @@ public:
 	~Projectile();
 	void setVelocity(btVector3 &velocity);
 	bool isActive() const;
-	void explode(World *world);
+	virtual void explode(World *world) = 0;
+	bool isExploded() const { return mIsExploded; }
 
 protected:
-	void createPhysicsObject(btQuaternion &orientation, btVector3 &position);
-	void createOgreObject();
-
-private:
+	bool mIsExploded;
 	btScalar mMass;
 	btVector3 mSize;
 };

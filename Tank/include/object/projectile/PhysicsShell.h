@@ -1,5 +1,5 @@
-#ifndef __PhysicsProjectile_h_
-#define __PhysicsProjectile_h_
+#ifndef __PhysicsShell_h_
+#define __PhysicsShell_h_
 
 #include "include\common\Properties.h"
 #include "include\object\PhysicsObject.h"
@@ -7,10 +7,10 @@
 
 class PhysicsObject;
 
-class PhysicsProjectile : public PhysicsObject {
+class PhysicsShell : public PhysicsObject {
 public:
-	PhysicsProjectile(btQuaternion &orientation, btVector3 &position, btScalar mass, btVector3 &size);
-	~PhysicsProjectile();
+	PhysicsShell(btQuaternion &orientation, btVector3 &position, btScalar mass, btVector3 &size);
+	~PhysicsShell();
 	Properties::ObjectType getType() const { return Properties::ObjectType::PROJECTILE; }
 
 protected:

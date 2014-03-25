@@ -13,7 +13,7 @@ namespace Ogre {
 class Tank;
 class Ground;
 class Wall;
-class Projectile;
+class Shell;
 class Missile;
 class Box;
 
@@ -23,7 +23,7 @@ public:
 	static Tank* createTank(btScalar mass, btVector3 &size);
 	static Wall* createWall(btScalar mass, btVector3 &size);
 	static Ground* createGround(btScalar mass, btVector3 &size);
-	static Projectile* createProjectile(btScalar mass, btVector3 &size);
+	static Shell* createShell(btScalar mass, btVector3 &size);
 	static Missile* createMissile(btScalar mass, btVector3 &size);
 	static Box* createBox(btScalar mass, btVector3 &size);
 	static Ogre::Entity* createWallEntity(Ogre::SceneManager *sceneManager);

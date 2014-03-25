@@ -3,6 +3,7 @@
 #include "include\object\tank\Tank.h"
 #include "include\object\OgreObject.h"
 #include "include\object\PhysicsObject.h"
+#include "include\object\projectile\Shell.h"
 
 #include "btBulletDynamicsCommon.h"
 #include "Ogre.h"
@@ -32,8 +33,8 @@ void AIManager::move(Tank *tank, float time) {
 	btScalar distance = aiPlayerPos.distance(humanPlayerPos);
 	btScalar angle = aiPlayerPos.angle(humanPlayerPos);
 	if (distance < 50) {
-	    if (tank->isEnabled()) {
-		    mWorld->addProjectile(tank->fire(mWorld));
+	    if (tank->isShellEnabled()) {
+		    mWorld->addProjectile(tank->fireShell(mWorld));
 		}
 	} 
 	tank->move(time);

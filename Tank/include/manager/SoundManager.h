@@ -11,10 +11,12 @@ public:
 	~SoundManager();
 	void playFireSound();
 	void playExplosionSound();
+	void playMoveSound();
 
 private:
 	void createFireSound();
 	void createExplosionSound();
+	void createMoveSound();
 
 	OgreOggSound::OgreOggSoundManager *mOggSoundManager;
 };

@@ -7,6 +7,7 @@ SoundManager::SoundManager() {
 	mOggSoundManager->init();
 	createFireSound();
 	createExplosionSound();
+	createMoveSound();
 }
 
 void SoundManager::createFireSound() {
@@ -17,14 +18,24 @@ void SoundManager::createExplosionSound() {
 	mOggSoundManager->createSound("explosion", "explosion.wav", false, false, false);
 }
 
+void SoundManager::createMoveSound() {
+	mOggSoundManager->createSound("move", "engine.wav", false, false, false);
+}
+
 void SoundManager::playFireSound() {
 	mOggSoundManager->getSound("fire")->stop();
 	mOggSoundManager->getSound("fire")->play();
 }
 
 void SoundManager::playExplosionSound() {
-	if (!mOggSoundManager->getSound("explosion")->isPlaying()) {
-	    mOggSoundManager->getSound("explosion")->play();
+	if (!mOggSoundManager->getSound("explosion")->isPlaying()) { 
+		mOggSoundManager->getSound("explosion")->play();
+	} 
+}
+
+void SoundManager::playMoveSound() {
+	if (!mOggSoundManager->getSound("move")->isPlaying()) {
+	    mOggSoundManager->getSound("move")->play();
 	}
 }
 

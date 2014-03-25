@@ -31,12 +31,15 @@ private:
 	void think(const Ogre::Real &time);
 	void setupLight();
 	void setupCamera();
+	void setupHUDCamera();
+	void setupHUDViewPort();
 	void setupViewPort();
 	void setupWorld();
 	void setupInputHandler();
 	
 	World *mWorld;
 	TankCamera *mTankCamera;
+	Ogre::Camera *mHUDCamera;
 	InputHandler *mInputHandler;
 	Ogre::Root *mRoot;
 	Ogre::RenderWindow *mWindow;
