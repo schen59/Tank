@@ -135,6 +135,7 @@ copy resources.cfg "$(OutDir)"</Command>
     <ClInclude Include="include\object\wall\Wall.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\common\Properties.cpp" />
     <ClCompile Include="source\core\main.cpp" />
     <ClCompile Include="source\core\OgreWorld.cpp" />
     <ClCompile Include="source\core\PhysicsWorld.cpp" />

@@ -37,6 +37,5 @@ void OgreWorld::removeObject(OgreObject *object) {
 	Ogre::Entity *entity = object->getEntity();
 	sceneNode->detachObject(entity);
 	mSceneManager->destroyEntity(entity);
-	//mSceneManager->destroySceneNode(sceneNode);
 	mObjects.erase(mObjects.find(object));
 }

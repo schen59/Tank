@@ -281,5 +281,8 @@
     <ClCompile Include="source\object\projectile\Projectile.cpp">
       <Filter>Source Files\Object\Projectile</Filter>
     </ClCompile>
+    <ClCompile Include="source\common\Properties.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

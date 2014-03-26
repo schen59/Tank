@@ -24,8 +24,6 @@ Tank::Tank(btScalar mass, btVector3 &size) {
 void Tank::move(float time) {
 	Ogre::Vector3 direction = mOgreObject->getDirection();
 	direction.normalise();
-	//btVector3 direction = mPhysicsObject->getDirection();
-	//direction = direction.normalize();
 	btVector3 velocity = btVector3(direction.x, direction.y, direction.z) * (time > 0 ? mMass*10 : -mMass*10);
 	mPhysicsObject->getRigidBody()->activate();
 	mPhysicsObject->getRigidBody()->applyCentralForce(velocity);
@@ -33,7 +31,6 @@ void Tank::move(float time) {
 
 void Tank::yaw(float degree) {
 	mPhysicsObject->getRigidBody()->activate();
-	//mPhysicsObject->setOrientation(btQuaternion(0, sin(degree), 0, cos(degree)));
 	mPhysicsObject->getRigidBody()->setAngularVelocity(btVector3(0, degree>0 ? 0.5 : -0.5, 0));
 }
 
@@ -54,18 +51,12 @@ bool Tank::isMissileEnabled() {
 }
 
 Shell* Tank::fireShell(World *world) {
-	//if (mTimer.getMilliseconds() > 2000) {
-	//	mEnabled = true;
-	//}
 	Shell *shell = ObjectFactory::createShell(0.5, btVector3(1, 1, 1));
 	btVector3 position = mPhysicsObject->getPosition();
 	Ogre::Vector3 direction = mOgreObject->getOrientation() * Ogre::Vector3(0, 0.05, -1);
-	//Ogre::Vector3 direction = mOgreObject->getDirection();
 	direction.normalise();
 	shell->addToWorld(world, btQuaternion(0, 0, 0, 1), position + btVector3(direction.x*3, direction.y*3, direction.z*3));
-	//projectile->addToWorld(world, btQuaternion(0, 0, 0, 1), btVector3(0, 10, -10));
 	btVector3 velocity = btVector3(direction.x, direction.y, direction.z) * 100;
-	//btVector3 velocity = btVector3(1, 1, 0) * 20;
 	shell->setVelocity(velocity);
 	mTimer.reset();
 	return shell;

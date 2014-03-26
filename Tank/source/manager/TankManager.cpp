@@ -96,7 +96,8 @@ void TankManager::setupResourceGroup() {
 
 TankManager::~TankManager() {
 	delete mTankCamera;
-	mSceneManager->destroyCamera("TankCamera");
+	//mSceneManager->destroyCamera("TankCamera");
+	mSceneManager->destroyAllCameras();
 	mSceneManager->destroyAllEntities();
 	mSceneManager->getRootSceneNode()->removeAndDestroyAllChildren();
 	mRoot->destroySceneManager(mSceneManager);

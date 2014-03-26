@@ -16,6 +16,7 @@
 #include "include\object\AbstractObject.h"
 #include "include\manager\AIManager.h"
 #include "include\manager\SoundManager.h"
+#include "include\common\Properties.h"
 
 #include "OgreSceneManager.h"
 #include "btBulletDynamicsCommon.h"
@@ -40,14 +41,14 @@ void World::setup(Ogre::SceneManager *sceneManager, btVector3 &gravity) {
 }
 
 void World::createBoundaryWalls() {
-	Wall *leftWall = ObjectFactory::createWall(0, btVector3(2, 20, 200));
-	leftWall->addToWorld(this, btQuaternion(0, 0, 0, 1), btVector3(-100, 0, 0));
-	Wall *rightWall = ObjectFactory::createWall(0, btVector3(2, 20, 200));
-	rightWall->addToWorld(this, btQuaternion(0, 1, 0, 0), btVector3(100, 0, 0));
-	Wall *topWall = ObjectFactory::createWall(0, btVector3(200, 20, 2));
-	topWall->addToWorld(this, btQuaternion(0, -sqrt(0.5), 0, sqrt(0.5)), btVector3(0, 0, -100));
-	Wall *bottomWall = ObjectFactory::createWall(0, btVector3(200, 20, 2));
-	bottomWall->addToWorld(this, btQuaternion(0, sqrt(0.5), 0, sqrt(0.5)), btVector3(0, 0, 100));
+	Wall *leftWall = ObjectFactory::createWall(Properties::WALL_MASS, Properties::LEFT_WALL_SIZE);
+	leftWall->addToWorld(this, Properties::LEFT_WALL_ORIENTATION, Properties::LEFT_WALL_POSITION);
+	Wall *rightWall = ObjectFactory::createWall(Properties::WALL_MASS, Properties::RIGHT_WALL_SIZE);
+	rightWall->addToWorld(this, Properties::RIGHT_WALL_ORIENTATION, Properties::RIGHT_WALL_POSITION);
+	Wall *topWall = ObjectFactory::createWall(Properties::WALL_MASS, Properties::TOP_WALL_SIZE);
+	topWall->addToWorld(this, Properties::TOP_WALL_ORIENTATION, Properties::TOP_WALL_POSITION);
+	Wall *bottomWall = ObjectFactory::createWall(Properties::WALL_MASS, Properties::BOTTOM_WALL_SIZE);
+	bottomWall->addToWorld(this, Properties::BOTTOM_WALL_ORIENTATION, Properties::BOTTOM_WALL_POSITION);
 }
 
 btVector3 World::getRandomPoint() {
@@ -59,29 +60,29 @@ btVector3 World::getRandomPoint() {
 
 void World::createAIPlayers() {
 	for (int i=0; i<5; i++) {
-		Tank *tank = ObjectFactory::createTank(1, btVector3(4.0, 2.0, 4.0));
-		tank->addToWorld(this, btQuaternion(0, 0, 0, 1), getRandomPoint());
+		Tank *tank = ObjectFactory::createTank(Properties::TANK_MASS, Properties::TANK_SIZE);
+		tank->addToWorld(this, Properties::TANK_ORIENTATION, getRandomPoint());
 		mAIPlayers.insert(tank);
 	}
 }
 
 void World::createObstacles() {
 	for (int i=0; i<10; i++) {
-		Box *box = ObjectFactory::createBox(0.1, btVector3(2.0, 2.0, 2.0));
-		box->addToWorld(this, btQuaternion(0, 0, 0, 1), getRandomPoint());
+		Box *box = ObjectFactory::createBox(Properties::BOX_MASS, Properties::BOX_SIZE);
+		box->addToWorld(this, Properties::BOX_ORIENTATION, getRandomPoint());
 		mObstacles.insert(box);
 	}
 }
 
 void World::createHumanPlayer() {
-	mHumanPlayer = ObjectFactory::createTank(1, btVector3(4.0, 2.0, 4.0));
-	mHumanPlayer->addToWorld(this, btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0));
+	mHumanPlayer = ObjectFactory::createTank(Properties::TANK_MASS, Properties::TANK_SIZE);
+	mHumanPlayer->addToWorld(this, Properties::TANK_ORIENTATION, Properties::HUMAN_PLAYER_POSITION);
 }
 
 void World::createGround() {
-	Ground *ground = ObjectFactory::createGround(0, btVector3(200, 2, 200));
-	ground->addToWorld(this, btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0));
-	ground->setFriction(1.5);
+	Ground *ground = ObjectFactory::createGround(Properties::GROUND_MASS, Properties::GROUND_SIZE);
+	ground->addToWorld(this, Properties::GROUND_ORIENTATION, Properties::GROUND_POSITION);
+	ground->setFriction(Properties::GROUND_FRICTION);
 }
 
 void World::updateHumanPlayer(float time) {
@@ -182,11 +183,9 @@ void World::updateAIPlayers(float time) {
 }
 
 World::~World() {
-	//destroyBoundaryWalls();
 	delete mOgreWorld;
 	delete mPhysicsWorld;
 	delete mAIManager;
 	delete mSoundManager;
 	delete mHumanPlayer;
-	//delete mHumanPlayer;
 }
