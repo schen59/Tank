@@ -1,113 +1,12 @@
-// White genrated by blender2ogre 0.6.0
-material Brown 
+// Tank genrated by blender2ogre 0.6.0
+
+material Tank 
 {
     receive_shadows on 
 
     technique
     {
-        pass Brown
-        {
-            ambient 0.19017726182937622 0.0653456524014473 0.043473053723573685 1.0
-            diffuse 0.1521418117305906 0.05227652270013872 0.03477844349709813 1.0
-            specular 0.0 0.0 0.0 1.0 12.5
-            emissive 0.0 0.0 0.0 1.0
-
-            alpha_to_coverage off
-            colour_write on
-            cull_hardware clockwise
-            depth_check on
-            depth_func less_equal
-            depth_write on
-            illumination_stage 
-            light_clip_planes off
-            light_scissor off
-            lighting on
-            normalise_normals off
-            polygon_mode solid
-            scene_blend one zero
-            scene_blend_op add
-            shading gouraud
-            transparent_sorting on
-
-        }
-    }
-}
-
-material CamoCyan 
-{
-    receive_shadows on 
-
-    technique
-    {
-        pass CamoCyan
-        {
-            ambient 0.3505557179450989 0.29153168201446533 0.16500018537044525 1.0
-            diffuse 0.2804445785350289 0.23322534908690074 0.1320001502633117 1.0
-            specular 0.0 0.0 0.0 1.0 12.5
-            emissive 0.0 0.0 0.0 1.0
-
-            alpha_to_coverage off
-            colour_write on
-            cull_hardware clockwise
-            depth_check on
-            depth_func less_equal
-            depth_write on
-            illumination_stage 
-            light_clip_planes off
-            light_scissor off
-            lighting on
-            normalise_normals off
-            polygon_mode solid
-            scene_blend one zero
-            scene_blend_op add
-            shading gouraud
-            transparent_sorting on
-
-        }
-    }
-}
-
-material CamoGreen 
-{
-    receive_shadows on 
-
-    technique
-    {
-        pass CamoGreen
-        {
-            ambient 0.10977697372436523 0.16264130175113678 0.09472030401229858 1.0
-            diffuse 0.08782158028813569 0.13011304333974483 0.07577624433899288 1.0
-            specular 0.0 0.0 0.0 1.0 12.5
-            emissive 0.0 0.0 0.0 1.0
-
-            alpha_to_coverage off
-            colour_write on
-            cull_hardware clockwise
-            depth_check on
-            depth_func less_equal
-            depth_write on
-            illumination_stage 
-            light_clip_planes off
-            light_scissor off
-            lighting on
-            normalise_normals off
-            polygon_mode solid
-            scene_blend one zero
-            scene_blend_op add
-            shading gouraud
-            transparent_sorting on
-
-        }
-    }
-}
-
-material Cyan 
-{
-    receive_shadows on 
-
-    technique
-    {
-        pass Cyan
+        pass Tank
         {
             ambient 0.6382702589035034 0.5347248911857605 0.24707543849945068 1.0
             diffuse 0.5106162147315771 0.42777991932302584 0.1976603537449293 1.0
@@ -131,180 +30,17 @@ material Cyan
             shading gouraud
             transparent_sorting on
 
+            texture_unit 
+            {
+                texture Tank.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
         }
     }
 }
-
-material DarkerGrey 
-{
-    receive_shadows on 
-
-    technique
-    {
-        pass DarkerGrey
-        {
-            ambient 0.02720971405506134 0.02720971405506134 0.02720971405506134 1.0
-            diffuse 0.02176777156841414 0.02176777156841414 0.02176777156841414 1.0
-            specular 0.0 0.0 0.0 1.0 12.5
-            emissive 0.0 0.0 0.0 1.0
-
-            alpha_to_coverage off
-            colour_write on
-            cull_hardware clockwise
-            depth_check on
-            depth_func less_equal
-            depth_write on
-            illumination_stage 
-            light_clip_planes off
-            light_scissor off
-            lighting on
-            normalise_normals off
-            polygon_mode solid
-            scene_blend one zero
-            scene_blend_op add
-            shading gouraud
-            transparent_sorting on
-
-        }
-    }
-}
-
-
-material White 
-{
-    receive_shadows on 
-
-    technique
-    {
-        pass White
-        {
-            ambient 0.949999988079071 0.949999988079071 0.949999988079071 1.0
-            diffuse 0.7600000017881392 0.7600000017881392 0.7600000017881392 1.0
-            specular 0.0 0.0 0.0 1.0 12.5
-            emissive 0.0 0.0 0.0 1.0
-
-            alpha_to_coverage off
-            colour_write on
-            cull_hardware clockwise
-            depth_check on
-            depth_func less_equal
-            depth_write on
-            illumination_stage 
-            light_clip_planes off
-            light_scissor off
-            lighting on
-            normalise_normals off
-            polygon_mode solid
-            scene_blend one zero
-            scene_blend_op add
-            shading gouraud
-            transparent_sorting on
-
-        }
-    }
-}
-
-material DarkGold 
-{
-    receive_shadows on 
-
-    technique
-    {
-        pass DarkGold
-        {
-            ambient 0.318538099527359 0.19668835401535034 0.07622295618057251 1.0
-            diffuse 0.25483048341915726 0.15735068555698817 0.06097836585310645 1.0
-            specular 0.5 0.5 0.5 1.0 12.5
-            emissive 0.0 0.0 0.0 1.0
-
-            alpha_to_coverage off
-            colour_write on
-            cull_hardware clockwise
-            depth_check on
-            depth_func less_equal
-            depth_write on
-            illumination_stage 
-            light_clip_planes off
-            light_scissor off
-            lighting on
-            normalise_normals off
-            polygon_mode solid
-            scene_blend one zero
-            scene_blend_op add
-            shading gouraud
-            transparent_sorting on
-
-        }
-    }
-}
-
-material DarkGrey 
-{
-    receive_shadows on 
-
-    technique
-    {
-        pass DarkGrey
-        {
-            ambient 0.06680640578269958 0.06680640578269958 0.06680640578269958 1.0
-            diffuse 0.053445125422554085 0.053445125422554085 0.053445125422554085 1.0
-            specular 0.0 0.0 0.0 1.0 12.5
-            emissive 0.0 0.0 0.0 1.0
-
-            alpha_to_coverage off
-            colour_write on
-            cull_hardware clockwise
-            depth_check on
-            depth_func less_equal
-            depth_write on
-            illumination_stage 
-            light_clip_planes off
-            light_scissor off
-            lighting on
-            normalise_normals off
-            polygon_mode solid
-            scene_blend one zero
-            scene_blend_op add
-            shading gouraud
-            transparent_sorting on
-
-        }
-    }
-}
-
-material LightGold 
-{
-    receive_shadows on 
-
-    technique
-    {
-        pass LightGold
-        {
-            ambient 0.6981909275054932 0.4778668284416199 0.12511137127876282 1.0
-            diffuse 0.558552750327479 0.3822934684499124 0.10008909851445402 1.0
-            specular 0.28333333134651184 0.28333333134651184 0.28333333134651184 1.0 12.5
-            emissive 0.0 0.0 0.0 1.0
-
-            alpha_to_coverage off
-            colour_write on
-            cull_hardware clockwise
-            depth_check on
-            depth_func less_equal
-            depth_write on
-            illumination_stage 
-            light_clip_planes off
-            light_scissor off
-            lighting on
-            normalise_normals off
-            polygon_mode solid
-            scene_blend one zero
-            scene_blend_op add
-            shading gouraud
-            transparent_sorting on
-
-        }
-    }
-}
+// LightSource genrated by blender2ogre 0.6.0
 
 material LightSource 
 {
@@ -339,4 +75,283 @@ material LightSource
         }
     }
 }
+// LightGold genrated by blender2ogre 0.6.0
 
+material LightGold 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass LightGold
+        {
+            ambient 0.6981909275054932 0.4778668284416199 0.12511137127876282 1.0
+            diffuse 0.558552750327479 0.3822934684499124 0.10008909851445402 1.0
+            specular 0.28333333134651184 0.28333333134651184 0.28333333134651184 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// Brown genrated by blender2ogre 0.6.0
+
+material Brown 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass Brown
+        {
+            ambient 0.19017726182937622 0.0653456524014473 0.043473053723573685 1.0
+            diffuse 0.1521418117305906 0.05227652270013872 0.03477844349709813 1.0
+            specular 0.0 0.0 0.0 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// CamoCyan genrated by blender2ogre 0.6.0
+
+material CamoCyan 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CamoCyan
+        {
+            ambient 0.3505557179450989 0.29153168201446533 0.16500018537044525 1.0
+            diffuse 0.2804445785350289 0.23322534908690074 0.1320001502633117 1.0
+            specular 0.0 0.0 0.0 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// CamoGreen genrated by blender2ogre 0.6.0
+
+material CamoGreen 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass CamoGreen
+        {
+            ambient 0.10977697372436523 0.16264130175113678 0.09472030401229858 1.0
+            diffuse 0.08782158028813569 0.13011304333974483 0.07577624433899288 1.0
+            specular 0.0 0.0 0.0 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// DarkerGrey genrated by blender2ogre 0.6.0
+
+material DarkerGrey 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass DarkerGrey
+        {
+            ambient 0.02720971405506134 0.02720971405506134 0.02720971405506134 1.0
+            diffuse 0.02176777156841414 0.02176777156841414 0.02176777156841414 1.0
+            specular 0.0 0.0 0.0 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// DarkGold genrated by blender2ogre 0.6.0
+
+material DarkGold 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass DarkGold
+        {
+            ambient 0.318538099527359 0.19668835401535034 0.07622295618057251 1.0
+            diffuse 0.25483048341915726 0.15735068555698817 0.06097836585310645 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// TankGun.001 genrated by blender2ogre 0.6.0
+
+material TankGun.001 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass TankGun.001
+        {
+            ambient 0.06680640578269958 0.06680640578269958 0.06680640578269958 1.0
+            diffuse 0.053445125422554085 0.053445125422554085 0.053445125422554085 1.0
+            specular 0.0 0.0 0.0 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+// White genrated by blender2ogre 0.6.0
+
+material White 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass White
+        {
+            ambient 0.949999988079071 0.949999988079071 0.949999988079071 1.0
+            diffuse 0.7600000017881392 0.7600000017881392 0.7600000017881392 1.0
+            specular 0.0 0.0 0.0 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}

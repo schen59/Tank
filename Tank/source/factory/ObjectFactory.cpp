@@ -70,9 +70,22 @@ Ogre::Entity* ObjectFactory::createGroundEntity(Ogre::SceneManager *sceneManager
 }
 
 Ogre::Entity* ObjectFactory::createTankEntity(Ogre::SceneManager *sceneManager) {
+	//Ogre::String name = createUniqueObjectName("tank");
+	//Ogre::Entity *entity = sceneManager->createEntity(name, "Tank.mesh");
+	//return entity;
 	Ogre::String name = createUniqueObjectName("tank");
 	Ogre::Entity *entity = sceneManager->createEntity(name, "Tank.mesh");
 	return entity;
+//Ogre::SceneNode *parentNode = sceneManager->getRootSceneNode()->createChildSceneNode("parent", Ogre::Vector3(20, 40, 50));
+//Ogre::SceneNode *childNode = parentNode->createChildSceneNode("child", Ogre::Vector3(50, 40, 50));
+//parentNode->translate(Ogre::Vector3(0, 100, 0));
+//childNode->setPosition(childNode->_getDerivedPosition());
+}
+
+Ogre::Entity* ObjectFactory::createTankGunEntity(Ogre::SceneManager *sceneManager) {
+	Ogre::String name = createUniqueObjectName("tankGun");
+	Ogre::Entity *entityGun = sceneManager->createEntity(name, "TankGun.mesh");
+	return entityGun;
 }
 
 Ogre::Entity* ObjectFactory::createBoxEntity(Ogre::SceneManager *sceneManager) {

@@ -28,6 +28,7 @@ public:
 	static Box* createBox(btScalar mass, btVector3 &size);
 	static Ogre::Entity* createWallEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::Entity* createTankEntity(Ogre::SceneManager *sceneManager);
+	static Ogre::Entity* createTankGunEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::Entity* createGroundEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::Entity* createProjectileEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::Entity* createMissileEntity(Ogre::SceneManager *sceneManager);

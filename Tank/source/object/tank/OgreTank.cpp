@@ -15,7 +15,9 @@ OgreTank::~OgreTank() {
 
 void OgreTank::load(Ogre::SceneManager *sceneManager) {
 	Ogre::Entity *entity = ObjectFactory::createTankEntity(sceneManager);
+	Ogre::Entity *entityGun = ObjectFactory::createTankGunEntity(sceneManager);
 	setEntity(entity);
+	setEntity(entityGun);
 }
 
 void OgreTank::explode(OgreWorld *ogreWorld) {
