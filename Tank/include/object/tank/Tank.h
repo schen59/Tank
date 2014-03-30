@@ -11,6 +11,7 @@ class PhysicsTank;
 class World;
 class Shell;
 class Missile;
+class Soccer;
 class AbstractObject;
 
 class Tank : public AbstractObject {
@@ -21,8 +22,10 @@ public:
 	void yaw(float degree);
 	Shell* fireShell(World *world);
 	Missile* fireMissile(World *world);
+	Soccer* fireSoccer(World *world);
 	bool isShellEnabled();
 	bool isMissileEnabled();
+	bool isSoccerEnabled();
 	void reset();
 	bool isAlive() const;
 	void attacked();

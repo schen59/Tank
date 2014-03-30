@@ -123,10 +123,13 @@ copy resources.cfg "$(OutDir)"</Command>
     <ClInclude Include="include\object\projectile\Missile.h" />
     <ClInclude Include="include\object\projectile\OgreMissile.h" />
     <ClInclude Include="include\object\projectile\OgreShell.h" />
+    <ClInclude Include="include\object\projectile\OgreSoccer.h" />
     <ClInclude Include="include\object\projectile\PhysicsMissile.h" />
     <ClInclude Include="include\object\projectile\PhysicsShell.h" />
+    <ClInclude Include="include\object\projectile\PhysicsSoccer.h" />
     <ClInclude Include="include\object\projectile\Projectile.h" />
     <ClInclude Include="include\object\projectile\Shell.h" />
+    <ClInclude Include="include\object\projectile\Soccer.h" />
     <ClInclude Include="include\object\tank\OgreTank.h" />
     <ClInclude Include="include\object\tank\PhysicsTank.h" />
     <ClInclude Include="include\object\tank\Tank.h" />
@@ -159,10 +162,13 @@ copy resources.cfg "$(OutDir)"</Command>
     <ClCompile Include="source\object\projectile\Missile.cpp" />
     <ClCompile Include="source\object\projectile\OgreMissile.cpp" />
     <ClCompile Include="source\object\projectile\OgreShell.cpp" />
+    <ClCompile Include="source\object\projectile\OgreSoccer.cpp" />
     <ClCompile Include="source\object\projectile\PhysicsMissile.cpp" />
     <ClCompile Include="source\object\projectile\PhysicsShell.cpp" />
+    <ClCompile Include="source\object\projectile\PhysicsSoccer.cpp" />
     <ClCompile Include="source\object\projectile\Projectile.cpp" />
     <ClCompile Include="source\object\projectile\Shell.cpp" />
+    <ClCompile Include="source\object\projectile\Soccer.cpp" />
     <ClCompile Include="source\object\tank\OgreTank.cpp" />
     <ClCompile Include="source\object\tank\PhysicsTank.cpp" />
     <ClCompile Include="source\object\tank\Tank.cpp" />

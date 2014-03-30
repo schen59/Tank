@@ -9,10 +9,12 @@
 #include "include\factory\ObjectFactory.h"
 #include "include\object\projectile\Shell.h"
 #include "include\object\projectile\Missile.h"
+#include "include\object\projectile\Soccer.h"
 #include "include\object\projectile\Projectile.h"
 #include "include\object\tank\OgreTank.h"
 #include "include\object\projectile\PhysicsShell.h"
 #include "include\object\projectile\PhysicsMissile.h"
+#include "include\object\projectile\PhysicsSoccer.h"
 #include "include\object\AbstractObject.h"
 #include "include\manager\AIManager.h"
 #include "include\manager\SoundManager.h"
@@ -87,6 +89,14 @@ void World::createGround() {
 
 void World::updateHumanPlayer(float time) {
 	mHumanPlayer->update();
+	if (mInputHandler->isKeyDown(OIS::KC_RIGHT)) {
+		mHumanPlayer->yaw(-time);
+		mSoundManager->playMoveSound();
+	}
+	if (mInputHandler->isKeyDown(OIS::KC_LEFT)) {
+		mHumanPlayer->yaw(time);
+		mSoundManager->playMoveSound();
+	}
 	if (mInputHandler->isKeyDown(OIS::KC_W)) {
 		mHumanPlayer->move(time);
 		mSoundManager->playMoveSound();
@@ -112,6 +122,11 @@ void World::updateHumanPlayer(float time) {
 	if (mInputHandler->isKeyDown(OIS::KC_K) && !mInputHandler->wasKeyDown(OIS::KC_K)) {
 		if (mHumanPlayer->isMissileEnabled()) {
 			addProjectile(mHumanPlayer->fireMissile(this));
+		}
+	}
+	if (mInputHandler->isKeyDown(OIS::KC_L) && !mInputHandler->wasKeyDown(OIS::KC_L)) {
+		if (mHumanPlayer->isSoccerEnabled()) {
+			addProjectile(mHumanPlayer->fireSoccer(this));
 		}
 	}
 }

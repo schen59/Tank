@@ -180,6 +180,15 @@
     <ClInclude Include="include\object\projectile\Projectile.h">
       <Filter>Header Files\Object\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="include\object\projectile\OgreSoccer.h">
+      <Filter>Header Files\Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="include\object\projectile\PhysicsSoccer.h">
+      <Filter>Header Files\Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="include\object\projectile\Soccer.h">
+      <Filter>Header Files\Object\Projectile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\core\main.cpp">
@@ -283,6 +292,15 @@
     </ClCompile>
     <ClCompile Include="source\common\Properties.cpp">
       <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\projectile\OgreSoccer.cpp">
+      <Filter>Source Files\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\projectile\PhysicsSoccer.cpp">
+      <Filter>Source Files\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\projectile\Soccer.cpp">
+      <Filter>Source Files\Object\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

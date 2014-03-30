@@ -4,6 +4,7 @@
 #include "include\object\wall\Wall.h"
 #include "include\object\projectile\Shell.h"
 #include "include\object\projectile\Missile.h"
+#include "include\object\projectile\Soccer.h"
 #include "include\object\box\Box.h"
 
 #include "OgreSceneManager.h"
@@ -18,6 +19,11 @@ int ObjectFactory::objectId = 1;
 Tank* ObjectFactory::createTank(btScalar mass, btVector3 &size) {
 	Tank *tank = new Tank(mass, size);
 	return tank;
+}
+
+Tank* ObjectFactory::createTankGun(btScalar mass, btVector3 &size) {
+	Tank *tankGun = new Tank(mass, size);
+	return tankGun;
 }
 
 Ground* ObjectFactory::createGround(btScalar mass, btVector3 &size) {
@@ -38,6 +44,11 @@ Shell* ObjectFactory::createShell(btScalar mass, btVector3 &size) {
 Missile* ObjectFactory::createMissile(btScalar mass, btVector3 &size) {
 	Missile *missile = new Missile(mass, size);
 	return missile;
+}
+
+Soccer* ObjectFactory::createSoccer(btScalar mass, btVector3 &size) {
+	Soccer *soccer= new Soccer(mass, size);
+	return soccer;
 }
 
 Box* ObjectFactory::createBox(btScalar mass, btVector3 &size) {
@@ -68,10 +79,21 @@ Ogre::Entity* ObjectFactory::createGroundEntity(Ogre::SceneManager *sceneManager
 	entity->setMaterialName("Rockwall");
 	return entity;
 }
-
+// example for adding a root node and child
+/*  
+Ogre::Entity *pBody = mSceneManager->createEntity("Body.mesh");mTankBodyNode = mSceneManager->getRootSceneNode()->createChildSceneNode();mTankBodyNode->attachObject(pBody);
+Ogre::Entity *pTurret = mSceneManager->createEntity("Turret.mesh");mTankTurretNode = mTankBodyNode->createChildSceneNode();mTankTurretNode->attachObject(pTurret);
+*/
 Ogre::Entity* ObjectFactory::createTankEntity(Ogre::SceneManager *sceneManager) {
 	Ogre::String name = createUniqueObjectName("tank");
 	Ogre::Entity *entity = sceneManager->createEntity(name, "Tank.mesh");
+	Ogre::SceneNode *headNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	return entity;
+}
+
+Ogre::Entity* ObjectFactory::createTankGunEntity(Ogre::SceneManager *sceneManager) {
+	Ogre::String name = createUniqueObjectName("tankGun");
+	Ogre::Entity *entity = sceneManager->createEntity(name, "TankGun.mesh");
 	return entity;
 }
 
@@ -80,6 +102,7 @@ Ogre::Entity* ObjectFactory::createBoxEntity(Ogre::SceneManager *sceneManager) {
 	Ogre::Entity *entity = sceneManager->createEntity(name, "Box.mesh");
 	return entity;
 }
+
 
 Ogre::Entity* ObjectFactory::createProjectileEntity(Ogre::SceneManager *sceneManager) {
 	Ogre::String name = createUniqueObjectName("projectile");
@@ -90,6 +113,12 @@ Ogre::Entity* ObjectFactory::createProjectileEntity(Ogre::SceneManager *sceneMan
 Ogre::Entity* ObjectFactory::createMissileEntity(Ogre::SceneManager *sceneManager) {
 	Ogre::String name = createUniqueObjectName("missile");
 	Ogre::Entity *entity = sceneManager->createEntity(name, "missile.mesh");
+	return entity;
+}
+
+Ogre::Entity* ObjectFactory::createSoccerEntity(Ogre::SceneManager *sceneManager) {
+	Ogre::String name = createUniqueObjectName("soccer");
+	Ogre::Entity *entity = sceneManager->createEntity(name, "soccer.mesh");
 	return entity;
 }
 

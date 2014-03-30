@@ -6,6 +6,7 @@
 #include "include\core\PhysicsWorld.h"
 #include "include\object\projectile\Shell.h"
 #include "include\object\projectile\Missile.h"
+#include "include\object\projectile\Soccer.h"
 #include "include\factory\ObjectFactory.h"
 #include "include\object\AbstractObject.h"
 
@@ -47,6 +48,10 @@ bool Tank::isShellEnabled() {
 }
 
 bool Tank::isMissileEnabled() {
+	return mTimer.getMilliseconds() > 1000;
+}
+
+bool Tank::isSoccerEnabled() {
 	return mTimer.getMilliseconds() > 200;
 }
 
@@ -74,6 +79,17 @@ Missile* Tank::fireMissile(World *world) {
 	return missile;
 }
 
+Soccer* Tank::fireSoccer(World *world) {
+	Soccer *soccer = ObjectFactory::createSoccer(0.5, btVector3(1, 1, 1));
+	btVector3 position = mPhysicsObject->getPosition();
+	Ogre::Vector3 direction = mOgreObject->getOrientation() * Ogre::Vector3(0, 0.05, -1);
+	direction.normalise();
+	soccer->addToWorld(world, btQuaternion(0, 0, 0, 1), position + btVector3(direction.x*3, direction.y*3, direction.z*3));
+	btVector3 velocity = btVector3(direction.x, direction.y, direction.z) * 100;
+	soccer->setVelocity(velocity);
+	mTimer.reset();
+	return soccer;
+}
 void Tank::reset() {
 	mPhysicsObject->setOrientation(btQuaternion(0, 0, 0, 1));
 	update();

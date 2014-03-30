@@ -12,7 +12,6 @@ public:
 		OBSTACLE,
 		PROJECTILE,
 		TANK,
-		MISSILE
 	};
 
 	static float GROUND_MASS;
