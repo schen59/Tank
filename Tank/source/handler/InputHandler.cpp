@@ -18,6 +18,7 @@ InputHandler::InputHandler(Ogre::RenderWindow *renderWindow) : mRenderWindow(ren
 	mInputManager = OIS::InputManager::createInputSystem( pl );
 
 	mCurrentKeyboard = static_cast<OIS::Keyboard*>(mInputManager->createInputObject( OIS::OISKeyboard, false /* not buffered */ ));
+	mCurrentMouse = static_cast<OIS::Mouse*>(mInputManager->createInputObject( OIS::OISMouse, false /* not buffered */ ));
 }
 
 bool InputHandler::isKeyDown(OIS::KeyCode key) const {
@@ -28,9 +29,14 @@ bool InputHandler::wasKeyDown(OIS::KeyCode key) const {
 	return mOldKeys[key] != '\0';
 }
 
+bool InputHandler::isMouseDown(OIS::MouseButtonID mouse) const {
+	return mCurrentMouse->getMouseState().buttonDown(mouse);
+}
+
 void InputHandler::think(Ogre::Real time) {
 	mCurrentKeyboard->copyKeyStates(mOldKeys);
 	mCurrentKeyboard->capture();
+	mCurrentMouse->capture();
 }
 
 InputHandler::~InputHandler() {

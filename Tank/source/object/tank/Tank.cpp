@@ -35,6 +35,10 @@ void Tank::yaw(float degree) {
 	mPhysicsObject->getRigidBody()->setAngularVelocity(btVector3(0, degree>0 ? 0.5 : -0.5, 0));
 }
 
+//void Tank::yawGun(float degree) {
+//	mOgreObject->getGunSceneNode()->yaw(degree);
+//}
+
 void Tank::createOgreObject() {
 	mOgreObject = new OgreTank();
 }

@@ -15,19 +15,14 @@ OgreTank::~OgreTank() {
 
 void OgreTank::load(Ogre::SceneManager *sceneManager) {
 	Ogre::Entity *entity = ObjectFactory::createTankEntity(sceneManager);
-	Ogre::SceneNode *headNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	setEntity(entity);
-	//headNode->attachObject(entity);
-	//Ogre::Entity *entityGun = ObjectFactory::createTankGunEntity(sceneManager);
-	//Ogre::SceneNode *headNodeGun = headNode->createChildSceneNode();
-	//headNodeGun->attachObject(entityGun);
-	
+
+	Ogre::Entity *entityGun = ObjectFactory::createTankGunEntity(sceneManager);
+	mGunSceneNode = mSceneNode->createChildSceneNode();
+	mGunSceneNode->attachObject(entityGun);
 	//setEntity(entityGun);
 }
-/*
-Ogre::Entity *pBody = mSceneManager->createEntity("Body.mesh");mTankBodyNode = mSceneManager->getRootSceneNode()->createChildSceneNode();mTankBodyNode->attachObject(pBody);
-Ogre::Entity *pTurret = mSceneManager->createEntity("Turret.mesh");mTankTurretNode = mTankBodyNode->createChildSceneNode();mTankTurretNode->attachObject(pTurret);
-*/
+
 void OgreTank::explode(OgreWorld *ogreWorld) {
 	if (!mIsExploded) {
 	    Ogre::SceneManager *sceneManager = ogreWorld->getSceneManager();

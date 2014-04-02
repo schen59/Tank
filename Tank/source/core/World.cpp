@@ -89,13 +89,23 @@ void World::createGround() {
 
 void World::updateHumanPlayer(float time) {
 	mHumanPlayer->update();
-	if (mInputHandler->isKeyDown(OIS::KC_RIGHT)) {
-		mHumanPlayer->yaw(-time);
+	
+	//Ogre::LogManager::getSingleton().logMessage("isMouseDown " + Ogre::StringConverter::toString(mInputHandler->isMouseDown(OIS::MB_Left)));
+	if (mInputHandler->isMouseDown(OIS::MB_Left)) {
+		mHumanPlayer->yaw(time);
+		//mHumanPlayer->yawGun(-time);
 		mSoundManager->playMoveSound();
 	}
-	if (mInputHandler->isKeyDown(OIS::KC_LEFT)) {
-		mHumanPlayer->yaw(time);
+	if (mInputHandler->isMouseDown(OIS::MB_Right)) {
+		mHumanPlayer->yaw(-time);
+		//mHumanPlayer->yawGun(time);
 		mSoundManager->playMoveSound();
+	}
+	if (mInputHandler->isMouseDown(OIS::MB_Middle)) {
+		if (mHumanPlayer->isSoccerEnabled()) {
+			addProjectile(mHumanPlayer->fireSoccer(this));
+			mSoundManager->playSpecialFireSound();
+		}
 	}
 	if (mInputHandler->isKeyDown(OIS::KC_W)) {
 		mHumanPlayer->move(time);
@@ -117,23 +127,26 @@ void World::updateHumanPlayer(float time) {
 	if (mInputHandler->isKeyDown(OIS::KC_J) && !mInputHandler->wasKeyDown(OIS::KC_J)) {
 		if (mHumanPlayer->isShellEnabled()) {
 		    addProjectile(mHumanPlayer->fireShell(this));
+			mSoundManager->playFireSound();
 		}
 	}
 	if (mInputHandler->isKeyDown(OIS::KC_K) && !mInputHandler->wasKeyDown(OIS::KC_K)) {
 		if (mHumanPlayer->isMissileEnabled()) {
 			addProjectile(mHumanPlayer->fireMissile(this));
+			mSoundManager->playFireSound();
 		}
 	}
 	if (mInputHandler->isKeyDown(OIS::KC_L) && !mInputHandler->wasKeyDown(OIS::KC_L)) {
 		if (mHumanPlayer->isSoccerEnabled()) {
 			addProjectile(mHumanPlayer->fireSoccer(this));
+			mSoundManager->playSpecialFireSound();
 		}
 	}
 }
 
 void World::addProjectile(Projectile *projectile) {
 	mProjectiles.insert(projectile);
-	mSoundManager->playFireSound();
+	//mSoundManager->playFireSound();
 }
 
 void World::updateProjectiles(float time) {

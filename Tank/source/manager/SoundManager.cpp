@@ -6,12 +6,17 @@ SoundManager::SoundManager() {
 	mOggSoundManager = OgreOggSound::OgreOggSoundManager::getSingletonPtr();
 	mOggSoundManager->init();
 	createFireSound();
+	createSpecialFireSound();
 	createExplosionSound();
 	createMoveSound();
 }
 
 void SoundManager::createFireSound() {
 	mOggSoundManager->createSound("fire", "fire.wav", false, false, false);
+}
+
+void SoundManager::createSpecialFireSound() {
+	mOggSoundManager->createSound("SpecialSound", "SpecialSound.wav", false, false, false);
 }
 
 void SoundManager::createExplosionSound() {
@@ -25,6 +30,11 @@ void SoundManager::createMoveSound() {
 void SoundManager::playFireSound() {
 	mOggSoundManager->getSound("fire")->stop();
 	mOggSoundManager->getSound("fire")->play();
+}
+
+void SoundManager::playSpecialFireSound() {
+	mOggSoundManager->getSound("SpecialSound")->stop();
+	mOggSoundManager->getSound("SpecialSound")->play();
 }
 
 void SoundManager::playExplosionSound() {

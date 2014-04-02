@@ -20,6 +20,7 @@ public:
 	~Tank();
 	void move(float time);
 	void yaw(float degree);
+	void yawGun(float degree);
 	Shell* fireShell(World *world);
 	Missile* fireMissile(World *world);
 	Soccer* fireSoccer(World *world);

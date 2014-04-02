@@ -81,8 +81,13 @@ Ogre::Entity* ObjectFactory::createGroundEntity(Ogre::SceneManager *sceneManager
 }
 // example for adding a root node and child
 /*  
-Ogre::Entity *pBody = mSceneManager->createEntity("Body.mesh");mTankBodyNode = mSceneManager->getRootSceneNode()->createChildSceneNode();mTankBodyNode->attachObject(pBody);
-Ogre::Entity *pTurret = mSceneManager->createEntity("Turret.mesh");mTankTurretNode = mTankBodyNode->createChildSceneNode();mTankTurretNode->attachObject(pTurret);
+Ogre::Entity *pBody = mSceneManager->createEntity("Body.mesh");
+mTankBodyNode = mSceneManager->getRootSceneNode()->createChildSceneNode();
+mTankBodyNode->attachObject(pBody);
+Ogre::Entity *pTurret = mSceneManager->createEntity("Turret.mesh");
+mTankTurretNode = mTankBodyNode->createChildSceneNode();
+mTankTurretNode->attachObject(pTurret);
+
 */
 Ogre::Entity* ObjectFactory::createTankEntity(Ogre::SceneManager *sceneManager) {
 	Ogre::String name = createUniqueObjectName("tank");

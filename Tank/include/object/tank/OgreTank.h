@@ -16,9 +16,11 @@ public:
 	~OgreTank();
 	void load(Ogre::SceneManager *sceneManager);
 	void explode(OgreWorld *ogreWorld);
+	//Ogre::SceneNode* getGunSceneNode()const { return mGunSceneNode; }
 
 private:
 	bool mIsExploded;
+	Ogre::SceneNode *mGunSceneNode;
 };
 
 #endif

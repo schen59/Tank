@@ -10,11 +10,13 @@ public:
 	SoundManager();
 	~SoundManager();
 	void playFireSound();
+	void playSpecialFireSound();
 	void playExplosionSound();
 	void playMoveSound();
 
 private:
 	void createFireSound();
+	void createSpecialFireSound();
 	void createExplosionSound();
 	void createMoveSound();
 
