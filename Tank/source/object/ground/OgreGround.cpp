@@ -13,5 +13,6 @@ OgreGround::~OgreGround() {
 
 void OgreGround::load(Ogre::SceneManager *sceneManager) {
 	Ogre::Entity *entity = ObjectFactory::createGroundEntity(sceneManager);
-	setEntity(entity);
+	//setEntity(entity);
+	mSceneNode->createChildSceneNode()->attachObject(entity);
 }

@@ -16,6 +16,8 @@ public:
 	bool isKeyDown(OIS::KeyCode key) const;
 	bool wasKeyDown(OIS::KeyCode key) const;
 	bool isMouseDown(OIS::MouseButtonID mouse) const;
+	bool isMouseMoveLeft() const;
+	bool isMouseMoveRight() const;
 	bool wasMouseDown(OIS::MouseButtonID mouse) const;
 
 protected:

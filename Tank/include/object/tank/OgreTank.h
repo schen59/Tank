@@ -16,11 +16,13 @@ public:
 	~OgreTank();
 	void load(Ogre::SceneManager *sceneManager);
 	void explode(OgreWorld *ogreWorld);
-	//Ogre::SceneNode* getGunSceneNode()const { return mGunSceneNode; }
+	Ogre::SceneNode* getBarrelSceneNode()const { return mBarrelSceneNode; }
+	void yawBarrel(float degree) const;
+	Ogre::Vector3 getBarrelWorldPosition();
 
 private:
 	bool mIsExploded;
-	Ogre::SceneNode *mGunSceneNode;
+	Ogre::SceneNode *mBarrelSceneNode;
 };
 
 #endif

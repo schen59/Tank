@@ -33,6 +33,14 @@ bool InputHandler::isMouseDown(OIS::MouseButtonID mouse) const {
 	return mCurrentMouse->getMouseState().buttonDown(mouse);
 }
 
+bool InputHandler::isMouseMoveLeft() const {
+	return mCurrentMouse->getMouseState().X.rel < 0;
+}
+
+bool InputHandler::isMouseMoveRight() const {
+	return mCurrentMouse->getMouseState().X.rel > 0;
+}
+
 void InputHandler::think(Ogre::Real time) {
 	mCurrentKeyboard->copyKeyStates(mOldKeys);
 	mCurrentKeyboard->capture();

@@ -68,7 +68,7 @@ void TankManager::setupCamera() {
 	Ogre::Camera *camera = mSceneManager->createCamera("TankCamera");
 	camera->setNearClipDistance(5);
 	camera->setFarClipDistance(5000);
-	camera->setPosition(Ogre::Vector3(0, 3, 3));
+	camera->setPosition(Ogre::Vector3(0, 5, 10));
 	camera->setOrientation(Ogre::Quaternion(0.98, -0.17, 0, 0));
 	mTankCamera = new TankCamera(camera);
 	mTankCamera->follow(mWorld->getHumanPlayer());

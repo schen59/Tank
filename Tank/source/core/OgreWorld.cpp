@@ -34,8 +34,9 @@ void OgreWorld::addObject(OgreObject *object, Ogre::Quaternion orientation, Ogre
 void OgreWorld::removeObject(OgreObject *object) {
 	Ogre::SceneNode *sceneNode = object->getSceneNode();
 	sceneNode->removeAndDestroyAllChildren();
-	Ogre::Entity *entity = object->getEntity();
-	sceneNode->detachObject(entity);
-	mSceneManager->destroyEntity(entity);
+	//Ogre::Entity *entity = object->getEntity();
+	//sceneNode->detachObject(entity);
+	//mSceneManager->destroyEntity(entity);
+	mSceneManager->destroySceneNode(sceneNode);
 	mObjects.erase(mObjects.find(object));
 }

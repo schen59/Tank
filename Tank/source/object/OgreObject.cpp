@@ -11,7 +11,7 @@ OgreObject::OgreObject() {
 void OgreObject::addToScene(Ogre::SceneManager *sceneManager, Ogre::Quaternion orientation, Ogre::Vector3 position) {
 	mSceneNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	load(sceneManager);
-	mSceneNode->createChildSceneNode()->attachObject(mEntity);
+	//mSceneNode->createChildSceneNode()->attachObject(mEntity);
 	//mSceneNode->attachObject(mEntity);
 	mSceneNode->setOrientation(orientation);
 	mSceneNode->setPosition(position);

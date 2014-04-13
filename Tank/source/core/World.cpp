@@ -92,13 +92,21 @@ void World::updateHumanPlayer(float time) {
 	
 	//Ogre::LogManager::getSingleton().logMessage("isMouseDown " + Ogre::StringConverter::toString(mInputHandler->isMouseDown(OIS::MB_Left)));
 	if (mInputHandler->isMouseDown(OIS::MB_Left)) {
-		mHumanPlayer->yaw(time);
-		//mHumanPlayer->yawGun(-time);
-		mSoundManager->playMoveSound();
+		if (mHumanPlayer->isShellEnabled()) {
+		    addProjectile(mHumanPlayer->fireShell(this));
+			mSoundManager->playFireSound();
+		}
 	}
 	if (mInputHandler->isMouseDown(OIS::MB_Right)) {
-		mHumanPlayer->yaw(-time);
-		//mHumanPlayer->yawGun(time);
+		mHumanPlayer->yawBarrel(time);
+		mSoundManager->playMoveSound();
+	}
+	if (mInputHandler->isMouseMoveLeft()) {
+		mHumanPlayer->yawBarrel(time);
+		mSoundManager->playMoveSound();
+	}
+	if (mInputHandler->isMouseMoveRight()) {
+		mHumanPlayer->yawBarrel(-time);
 		mSoundManager->playMoveSound();
 	}
 	if (mInputHandler->isMouseDown(OIS::MB_Middle)) {

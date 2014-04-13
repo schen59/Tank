@@ -35,9 +35,10 @@ void Tank::yaw(float degree) {
 	mPhysicsObject->getRigidBody()->setAngularVelocity(btVector3(0, degree>0 ? 0.5 : -0.5, 0));
 }
 
-//void Tank::yawGun(float degree) {
-//	mOgreObject->getGunSceneNode()->yaw(degree);
-//}
+void Tank::yawBarrel(float degree) {
+	OgreTank *ogreTank = static_cast<OgreTank*>(mOgreObject);
+	ogreTank->yawBarrel(degree);
+}
 
 void Tank::createOgreObject() {
 	mOgreObject = new OgreTank();
@@ -61,11 +62,12 @@ bool Tank::isSoccerEnabled() {
 
 Shell* Tank::fireShell(World *world) {
 	Shell *shell = ObjectFactory::createShell(0.5, btVector3(1, 1, 1));
-	btVector3 position = mPhysicsObject->getPosition();
-	Ogre::Vector3 direction = mOgreObject->getOrientation() * Ogre::Vector3(0, 0.05, -1);
-	direction.normalise();
-	shell->addToWorld(world, btQuaternion(0, 0, 0, 1), position + btVector3(direction.x*3, direction.y*3, direction.z*3));
-	btVector3 velocity = btVector3(direction.x, direction.y, direction.z) * 100;
+	OgreTank *ogreTank = static_cast<OgreTank*>(mOgreObject);
+	Ogre::Vector3 tankPosition = ogreTank->getPosition();
+	Ogre::Vector3 barrelWorldPosition = ogreTank->getBarrelWorldPosition();
+	shell->addToWorld(world, Ogre::Quaternion(1, 0, 0, 0), tankPosition + barrelWorldPosition);
+	barrelWorldPosition.normalise();
+	btVector3 velocity = btVector3(barrelWorldPosition.x, barrelWorldPosition.y, barrelWorldPosition.z) * 100;
 	shell->setVelocity(velocity);
 	mTimer.reset();
 	return shell;

@@ -14,7 +14,8 @@ OgreSoccer::~OgreSoccer() {
 
 void OgreSoccer::load(Ogre::SceneManager *sceneManager) {
 	Ogre::Entity *entity = ObjectFactory::createSoccerEntity(sceneManager);
-	setEntity(entity);
+	//setEntity(entity);
+	mSceneNode->createChildSceneNode()->attachObject(entity);
 	Ogre::ParticleSystem *particleSystem = ObjectFactory::createParticleSystem(sceneManager, "SmokeSoccer");
 	mSceneNode->createChildSceneNode()->attachObject(particleSystem);
 	mSceneNode->scale(.5, .5, .5);

@@ -12,5 +12,6 @@ OgreBox::~OgreBox() {
 
 void OgreBox::load(Ogre::SceneManager *sceneManager) {
 	Ogre::Entity *entity = ObjectFactory::createBoxEntity(sceneManager);
-	setEntity(entity);
+	//setEntity(entity);
+	mSceneNode->createChildSceneNode()->attachObject(entity);
 }

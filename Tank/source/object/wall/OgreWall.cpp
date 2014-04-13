@@ -12,5 +12,6 @@ OgreWall::~OgreWall() {
 
 void OgreWall::load(Ogre::SceneManager *sceneManager) {
 	Ogre::Entity *entity = ObjectFactory::createWallEntity(sceneManager);
-	setEntity(entity);
+	mSceneNode->createChildSceneNode()->attachObject(entity);
+	//setEntity(entity);
 }

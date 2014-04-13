@@ -1,6 +1,7 @@
 #ifndef __AbstractObject_h_
 #define __AbstractObject_h_
 
+#include "Ogre.h"
 #include "btBulletDynamicsCommon.h"
 
 class World;
@@ -12,6 +13,7 @@ public:
 	AbstractObject();
 	~AbstractObject();
 	void addToWorld(World *world, btQuaternion &orientation, btVector3 &position);
+	void addToWorld(World *world, Ogre::Quaternion &orientation, Ogre::Vector3 &position);
 	PhysicsObject* getPhysicsObject() const { return mPhysicsObject; }
 	OgreObject* getOgreObject() const { return mOgreObject; }
 	void update();

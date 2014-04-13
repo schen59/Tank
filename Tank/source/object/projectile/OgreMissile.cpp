@@ -14,7 +14,8 @@ OgreMissile::~OgreMissile() {
 
 void OgreMissile::load(Ogre::SceneManager *sceneManager) {
 	Ogre::Entity *entity = ObjectFactory::createMissileEntity(sceneManager);
-	setEntity(entity);
+	mSceneNode->createChildSceneNode()->attachObject(entity);
+	//setEntity(entity);
 	Ogre::ParticleSystem *particleSystem = ObjectFactory::createParticleSystem(sceneManager, "SmokeMissile");
 	mSceneNode->createChildSceneNode()->attachObject(particleSystem);
 }

@@ -14,7 +14,8 @@ OgreShell::~OgreShell() {
 
 void OgreShell::load(Ogre::SceneManager *sceneManager) {
 	Ogre::Entity *entity = ObjectFactory::createProjectileEntity(sceneManager);
-	setEntity(entity);
+	//setEntity(entity);
+	mSceneNode->createChildSceneNode()->attachObject(entity);
 	Ogre::ParticleSystem *particleSystem = ObjectFactory::createParticleSystem(sceneManager, "Smoke");
 	mSceneNode->createChildSceneNode()->attachObject(particleSystem);
 }
