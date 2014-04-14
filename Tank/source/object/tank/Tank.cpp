@@ -19,6 +19,7 @@ Tank::Tank(btScalar mass, btVector3 &size) {
 	mMass = mass;
 	mSize = size;
 	mIsAlive = true;
+	mHealth = 3.0;
 	mTimer.reset();
 }
 
@@ -38,6 +39,11 @@ void Tank::yaw(float degree) {
 void Tank::yawBarrel(float degree) {
 	OgreTank *ogreTank = static_cast<OgreTank*>(mOgreObject);
 	ogreTank->yawBarrel(degree);
+}
+
+void Tank::pitchBarrel(float degree) {
+	OgreTank *ogreTank = static_cast<OgreTank*>(mOgreObject);
+	ogreTank->pitchBarrel(degree);
 }
 
 void Tank::createOgreObject() {
@@ -105,7 +111,16 @@ Tank::~Tank() {
 }
 
 void Tank::attacked() {
-	mIsAlive = false;
+	updateHealth(mHealth - 0.25);
+}
+
+void Tank::updateHealth(float health) {
+	mHealth = health;
+	OgreTank *ogreTank = static_cast<OgreTank*>(mOgreObject);
+	ogreTank->updateHealthBar(mHealth);
+	if (mHealth == 0) {
+		mIsAlive = false;
+	}
 }
 
 bool Tank::isAlive() const {

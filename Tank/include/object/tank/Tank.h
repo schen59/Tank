@@ -21,6 +21,7 @@ public:
 	void move(float time);
 	void yaw(float degree);
 	void yawBarrel(float degree);
+	void pitchBarrel(float degree);
 	Shell* fireShell(World *world);
 	Missile* fireMissile(World *world);
 	Soccer* fireSoccer(World *world);
@@ -37,10 +38,13 @@ protected:
 	void createOgreObject();
 
 private:
+	void updateHealth(float health);
+
 	btScalar mMass;
 	btVector3 mSize;
 	Ogre::Timer mTimer;
 	bool mIsAlive;
+	float mHealth;
 };
 
 #endif

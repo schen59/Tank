@@ -132,3 +132,9 @@ Ogre::ParticleSystem* ObjectFactory::createParticleSystem(Ogre::SceneManager *sc
 	Ogre::ParticleSystem *particleSystem = sceneManager->createParticleSystem(name, particleName);
 	return particleSystem;
 }
+
+Ogre::BillboardSet* ObjectFactory::createBillboardSet(Ogre::SceneManager *sceneManager) {
+	Ogre::BillboardSet *billBoardSet = sceneManager->createBillboardSet();
+	billBoardSet->setMaterialName("HealthBar");
+	return billBoardSet;
+}

@@ -8,6 +8,7 @@ namespace Ogre {
 	class SceneManager;
 	class Entity;
 	class ParticleSystem;
+	class BillboardSet;
 }
 
 class Tank;
@@ -38,6 +39,7 @@ public:
 	static Ogre::Entity* createSoccerEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::Entity* createBoxEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::ParticleSystem* createParticleSystem(Ogre::SceneManager *sceneManager, Ogre::String particleName);
+	static Ogre::BillboardSet* createBillboardSet(Ogre::SceneManager* sceneManager);
 	
 private:
 	static Ogre::String createUniqueObjectName(Ogre::String name);

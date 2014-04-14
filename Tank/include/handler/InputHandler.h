@@ -18,6 +18,8 @@ public:
 	bool isMouseDown(OIS::MouseButtonID mouse) const;
 	bool isMouseMoveLeft() const;
 	bool isMouseMoveRight() const;
+	bool isMouseMoveUp() const;
+	bool isMouseMoveDown() const;
 	bool wasMouseDown(OIS::MouseButtonID mouse) const;
 
 protected:

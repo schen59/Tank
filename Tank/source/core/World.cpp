@@ -98,7 +98,7 @@ void World::updateHumanPlayer(float time) {
 		}
 	}
 	if (mInputHandler->isMouseDown(OIS::MB_Right)) {
-		mHumanPlayer->yawBarrel(time);
+		mHumanPlayer->pitchBarrel(time);
 		mSoundManager->playMoveSound();
 	}
 	if (mInputHandler->isMouseMoveLeft()) {
