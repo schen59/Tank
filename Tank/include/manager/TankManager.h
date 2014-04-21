@@ -16,6 +16,7 @@ namespace Ogre {
 class World;
 class TankCamera;
 class InputHandler;
+class MenuSystem;
 
 class TankManager : public Ogre::FrameListener {
 public:
@@ -36,11 +37,17 @@ private:
 	void setupViewPort();
 	void setupWorld();
 	void setupInputHandler();
+	void setupMenuSystem();
+	void setupCEGUI();
+	void toggleMenuSystem();
+	void destroyWorld();
+	void processMenuCommand();
 	
 	World *mWorld;
 	TankCamera *mTankCamera;
 	Ogre::Camera *mHUDCamera;
 	InputHandler *mInputHandler;
+	MenuSystem *mMenuSystem;
 	Ogre::Root *mRoot;
 	Ogre::RenderWindow *mWindow;
 	Ogre::SceneManager *mSceneManager;

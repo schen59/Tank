@@ -1,0 +1,16 @@
+BlueHighwayBig
+{
+    type truetype
+	source bluehigh.ttf
+	size 60
+}
+
+
+BlueHighway8
+{
+    type truetype
+	source bluehigh.ttf
+	size 8
+	resolution 72
+}
+

@@ -5,7 +5,10 @@
 #include "include\core\World.h"
 #include "include\handler\InputHandler.h"
 #include "include\object\tank\Tank.h"
+#include "include\core\MenuSystem.h"
 
+#include "CEGUI\RendererModules\Ogre\Renderer.h"
+#include "CEGUI\Scheme.h"
 #include "btBulletDynamicsCommon.h"
 #include "OgreSceneManager.h"
 #include "OgreRenderWindow.h"
@@ -17,6 +20,7 @@
 
 TankManager::TankManager(Ogre::Root *root, Ogre::RenderWindow *mainWindow) :mRoot(root), mWindow(mainWindow) {
 	mKeepGoing = true;
+	mWorld = NULL;
 }
 
 void TankManager::setupOverlaySystem() {
@@ -30,12 +34,18 @@ void TankManager::setup() {
 	setupOverlaySystem();
 	setupResourceGroup();
 	setupInputHandler();
+	setupCEGUI();
+	setupMenuSystem();
 	setupWorld();
-	setupLight();
-	setupCamera();
-	setupViewPort();
-	setupHUDCamera();
-	setupHUDViewPort();
+}
+
+void TankManager::setupCEGUI() {
+	CEGUI::OgreRenderer::bootstrapSystem();
+	CEGUI::Scheme::setDefaultResourceGroup("Schemes");
+}
+
+void TankManager::setupMenuSystem() {
+	mMenuSystem = new MenuSystem(mInputHandler);
 }
 
 void TankManager::setupInputHandler() {
@@ -45,6 +55,22 @@ void TankManager::setupInputHandler() {
 void TankManager::setupWorld() {
 	mWorld = new World(mInputHandler);
 	mWorld->setup(mSceneManager, btVector3(0, -10, 0));
+	setupLight();
+	setupCamera();
+	setupViewPort();
+	setupHUDCamera();
+	setupHUDViewPort();
+}
+
+void TankManager::destroyWorld() {
+	mSceneManager->destroyCamera("TankCamera");
+	mSceneManager->destroyCamera("HUDCamera");
+	mSceneManager->destroyAllBillboardSets();
+	mSceneManager->destroyAllEntities();
+	mSceneManager->getRootSceneNode()->removeAndDestroyAllChildren();
+	mWindow->removeAllViewports();
+	delete mWorld;
+	mWorld = NULL;
 }
 
 void TankManager::setupLight() {
@@ -61,6 +87,7 @@ void TankManager::setupViewPort() {
 void TankManager::setupHUDViewPort() {
 	Ogre::Viewport* hudViewPort = mWindow->addViewport(mHUDCamera, 100, 0, 0.7, 0.3, 0.3);
 	hudViewPort->setBackgroundColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+	hudViewPort->setOverlaysEnabled(false);
 	mHUDCamera->setAspectRatio(Ogre::Real(hudViewPort->getActualWidth()) / Ogre::Real(hudViewPort->getActualHeight()));
 }
 
@@ -78,8 +105,8 @@ void TankManager::setupHUDCamera() {
 	mHUDCamera = mSceneManager->createCamera("HUDCamera");
 	mHUDCamera->pitch(Ogre::Radian(-1.57));
 	mHUDCamera->setNearClipDistance(5);
-	mHUDCamera->setFarClipDistance(200);
-	mHUDCamera->setPosition(Ogre::Vector3(0, 200, 0));
+	mHUDCamera->setFarClipDistance(250);
+	mHUDCamera->setPosition(Ogre::Vector3(0, 250, 0));
 }
 
 void TankManager::setupSceneManager() {
@@ -96,12 +123,7 @@ void TankManager::setupResourceGroup() {
 
 TankManager::~TankManager() {
 	delete mTankCamera;
-	//mSceneManager->destroyCamera("TankCamera");
-	mSceneManager->destroyAllCameras();
-	mSceneManager->destroyAllEntities();
-	mSceneManager->getRootSceneNode()->removeAndDestroyAllChildren();
-	mRoot->destroySceneManager(mSceneManager);
-	delete mWorld;
+	destroyWorld();
 }
 
 bool TankManager::frameStarted(const Ogre::FrameEvent &event) {
@@ -115,10 +137,42 @@ bool TankManager::frameStarted(const Ogre::FrameEvent &event) {
 	return mKeepGoing;
 }
 
+void TankManager::toggleMenuSystem() {
+	if (mMenuSystem->isActive()) {
+		mMenuSystem->deactivate();
+	} else {
+		mMenuSystem->activate();
+	}
+}
+
+void TankManager::processMenuCommand() {
+	if (mMenuSystem->getCommand() == Properties::MenuCommand::QUIT) {
+		mKeepGoing = false;
+	}
+	if (mMenuSystem->getCommand() == Properties::MenuCommand::NEWGAME_EASY) {
+	    mMenuSystem->deactivate();
+		if (mWorld != NULL) {
+			destroyWorld();
+		}
+		if (mWorld == NULL) {
+		    setupWorld();
+		}
+	}
+}
+
 void TankManager::think(const Ogre::Real &time) {
 	mInputHandler->think(time);
-	mWorld->think(time);
+	mMenuSystem->think(time);
+	if (mMenuSystem->isActive()) {
+	    processMenuCommand();
+	}
+	if (!mMenuSystem->isActive() && mWorld != NULL) {
+	    mWorld->think(time);
+	}
 	if (mWindow->isClosed() || mInputHandler->isKeyDown(OIS::KC_ESCAPE)) {
 		mKeepGoing = false;
+	}
+	if (!mInputHandler->isKeyDown(OIS::KC_Q) && mInputHandler->wasKeyDown(OIS::KC_Q)) {
+		toggleMenuSystem();
 	}
 }

@@ -43,14 +43,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(BULLET_HOME)/src;$(OGRE_HOME)/include/OGRE/Overlay;$(OGRE_HOME)/boost/;$(OGRE_HOME)/include/OIS;$(OGRE_HOME)/include/OGRE;$(OGRE_HOME)/include;.;$(OPENAL_SDK)/include;$(OGRE_OGG_SOUND_HOME)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BULLET_HOME)/src;$(OGRE_HOME)/include/OGRE/Overlay;$(OGRE_HOME)/boost/;$(OGRE_HOME)/include/OIS;$(OGRE_HOME)/include/OGRE;$(OGRE_HOME)/include;.;$(OPENAL_SDK)/include;$(OGRE_OGG_SOUND_HOME)/include;$(CEGUI_ROOT)/cegui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OGRE_HOME)/boost/lib;$(OGRE_HOME)/lib/$(configuration);$(BULLET_HOME)/lib;$(BULLET_HOME)/Glut;$(OPENAL_SDK)/lib;$(OGRE_OGG_SOUND_HOME)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;glew32s.lib;glut32.lib;BulletDynamics_vs2010_debug.lib;BulletCollision_vs2010_debug.lib;LinearMath_vs2010_debug.lib;OgreOggSound_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OGRE_HOME)/boost/lib;$(OGRE_HOME)/lib/$(configuration);$(BULLET_HOME)/lib;$(BULLET_HOME)/Glut;$(OPENAL_SDK)/lib;$(OGRE_OGG_SOUND_HOME)/lib;$(CEGUI_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;OgreOverlay_d.lib;glew32s.lib;glut32.lib;BulletDynamics_vs2010_debug.lib;BulletCollision_vs2010_debug.lib;LinearMath_vs2010_debug.lib;OgreOggSound_d.lib;CEGUIBase-0_d.lib;CEGUIOgreRenderer-0_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(OGRE_HOME)\bin\$(Configuration)\OgreMain_d.dll" "$(OutDir)"
@@ -101,6 +101,7 @@ copy resources.cfg "$(OutDir)"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\common\Properties.h" />
+    <ClInclude Include="include\core\MenuSystem.h" />
     <ClInclude Include="include\core\OgreWorld.h" />
     <ClInclude Include="include\core\PhysicsWorld.h" />
     <ClInclude Include="include\core\TankApp.h" />
@@ -140,6 +141,7 @@ copy resources.cfg "$(OutDir)"</Command>
   <ItemGroup>
     <ClCompile Include="source\common\Properties.cpp" />
     <ClCompile Include="source\core\main.cpp" />
+    <ClCompile Include="source\core\MenuSystem.cpp" />
     <ClCompile Include="source\core\OgreWorld.cpp" />
     <ClCompile Include="source\core\PhysicsWorld.cpp" />
     <ClCompile Include="source\core\TankApp.cpp" />

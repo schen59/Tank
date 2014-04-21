@@ -1,10 +1,13 @@
 #include "include\core\TankApp.h"
 #include "include\manager\TankManager.h"
+#include "include\core\MenuSystem.h"
 
 #include "Ogre.h"
 
 TankApp::TankApp() {
 	mResourcePath = "";
+	mTankManager = NULL;
+	mRoot = NULL;
 }
 
 TankApp::~TankApp() {

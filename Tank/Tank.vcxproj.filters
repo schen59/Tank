@@ -189,6 +189,9 @@
     <ClInclude Include="include\object\projectile\Soccer.h">
       <Filter>Header Files\Object\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="include\core\MenuSystem.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\core\main.cpp">
@@ -301,6 +304,9 @@
     </ClCompile>
     <ClCompile Include="source\object\projectile\Soccer.cpp">
       <Filter>Source Files\Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\MenuSystem.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

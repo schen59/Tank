@@ -14,6 +14,13 @@ public:
 		TANK,
 	};
 
+	enum MenuCommand {
+		NEWGAME_EASY,
+		NEWGAME_HARD,
+		CANCLE,
+		QUIT,
+	};
+
 	static float GROUND_MASS;
 	static btVector3 GROUND_SIZE;
 	static btVector3 GROUND_POSITION;

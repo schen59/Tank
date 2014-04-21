@@ -1,0 +1,17 @@
+ShellOverlay
+{
+    zorder 200
+	
+    container Panel(ShellPanel)
+    {
+        metrics_mode relative
+
+        left 0.8
+        top 0.9
+        width 0.2
+        height 0.1
+	   material Weapons/Shell
+	  
+     }
+}
+

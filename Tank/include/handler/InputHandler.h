@@ -21,6 +21,7 @@ public:
 	bool isMouseMoveUp() const;
 	bool isMouseMoveDown() const;
 	bool wasMouseDown(OIS::MouseButtonID mouse) const;
+	const OIS::MouseState& getMouseState() const;
 
 protected:
 	OIS::InputManager* mInputManager;
@@ -28,6 +29,7 @@ protected:
 	OIS::Keyboard *mPreviousKeyboard;
 	OIS::Keyboard *mCurrentKeyboard;
 	OIS::Mouse *mCurrentMouse;
+	OIS::MouseState mPreviousMouseState;
 	char mOldKeys[256];
 };
 

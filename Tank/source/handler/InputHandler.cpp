@@ -14,6 +14,8 @@ InputHandler::InputHandler(Ogre::RenderWindow *renderWindow) : mRenderWindow(ren
 	renderWindow->getCustomAttribute("WINDOW", &windowHnd);
 	windowHndStr << windowHnd;
 	pl.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
+	//pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND")));
+    //pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_NONEXCLUSIVE")));
 
 	mInputManager = OIS::InputManager::createInputSystem( pl );
 
@@ -33,6 +35,10 @@ bool InputHandler::isMouseDown(OIS::MouseButtonID mouse) const {
 	return mCurrentMouse->getMouseState().buttonDown(mouse);
 }
 
+bool InputHandler::wasMouseDown(OIS::MouseButtonID mouse) const {
+	return mPreviousMouseState.buttonDown(mouse);
+}
+
 bool InputHandler::isMouseMoveLeft() const {
 	return mCurrentMouse->getMouseState().X.rel < 0;
 }
@@ -49,9 +55,14 @@ bool InputHandler::isMouseMoveDown() const {
 	return mCurrentMouse->getMouseState().Y.rel < 0;
 }
 
+const OIS::MouseState& InputHandler::getMouseState() const {
+	return mCurrentMouse->getMouseState();
+}
+
 void InputHandler::think(Ogre::Real time) {
 	mCurrentKeyboard->copyKeyStates(mOldKeys);
 	mCurrentKeyboard->capture();
+	mPreviousMouseState = mCurrentMouse->getMouseState();
 	mCurrentMouse->capture();
 }
 

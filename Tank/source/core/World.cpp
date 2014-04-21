@@ -21,6 +21,8 @@
 #include "include\common\Properties.h"
 
 #include "OgreSceneManager.h"
+#include "OgreOverlayManager.h"
+#include "OgreOverlay.h"
 #include "btBulletDynamicsCommon.h"
 #include "Ogre.h"
 #include <vector>
@@ -40,6 +42,9 @@ void World::setup(Ogre::SceneManager *sceneManager, btVector3 &gravity) {
 	createBoundaryWalls();
 	createObstacles();
 	createAIPlayers();
+	Ogre::OverlayManager& om = Ogre::OverlayManager::getSingleton();
+	mOverlay = om.getByName("ShellOverlay");
+	mOverlay->show();
 }
 
 void World::createBoundaryWalls() {
@@ -149,6 +154,9 @@ void World::updateHumanPlayer(float time) {
 			addProjectile(mHumanPlayer->fireSoccer(this));
 			mSoundManager->playSpecialFireSound();
 		}
+	}
+	if (mHumanPlayer->isCollided()) {
+		mHumanPlayer->attacked();
 	}
 }
 

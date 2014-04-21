@@ -9,6 +9,7 @@
 
 namespace Ogre {
 	class SceneManager;
+	class Overlay;
 }
 
 class Tank;
@@ -56,6 +57,7 @@ private:
 	AIManager *mAIManager;
 	SoundManager *mSoundManager;
 	InputHandler *mInputHandler;
+	Ogre::Overlay *mOverlay;
 };
 
 #endif
