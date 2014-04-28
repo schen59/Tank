@@ -1,0 +1,16 @@
+// Shell genrated by blender2ogre 0.6.0
+
+material Weapons/Shell 
+{
+    technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture shell.jpeg
+			}
+		}
+	}
+
+}
