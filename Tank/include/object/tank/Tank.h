@@ -32,6 +32,7 @@ public:
 	bool isAlive() const;
 	void attacked();
 	void explode(World *world);
+	void increaseHealth();
 
 protected:
 	void createPhysicsObject(btQuaternion &orientation, btVector3 &position);

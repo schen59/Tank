@@ -19,6 +19,7 @@
 #include "include\manager\AIManager.h"
 #include "include\manager\SoundManager.h"
 #include "include\common\Properties.h"
+#include "include\object\powerup\Health.h"
 
 #include "OgreSceneManager.h"
 #include "OgreOverlayManager.h"
@@ -42,9 +43,15 @@ void World::setup(Ogre::SceneManager *sceneManager, btVector3 &gravity) {
 	createBoundaryWalls();
 	createObstacles();
 	createAIPlayers();
+	createHealthPowerups();
 	Ogre::OverlayManager& om = Ogre::OverlayManager::getSingleton();
 	mOverlay = om.getByName("ShellOverlay");
 	mOverlay->show();
+}
+
+void World::createHealthPowerups() {
+	mHealthPowerup = ObjectFactory::createHealthPowerup();
+	mOgreWorld->addObject(mHealthPowerup, Ogre::Quaternion(0, 0, 0, 1), Ogre::Vector3(0, 0, 10));
 }
 
 void World::createBoundaryWalls() {
@@ -153,6 +160,13 @@ void World::updateHumanPlayer(float time) {
 		if (mHumanPlayer->isSoccerEnabled()) {
 			addProjectile(mHumanPlayer->fireSoccer(this));
 			mSoundManager->playSpecialFireSound();
+		}
+	}
+	if (mInputHandler->isKeyDown(OIS::KC_SPACE)) {
+		Ogre::Vector3 healthPowerupPos = mHealthPowerup->getPosition();
+		Ogre::Vector3 humanPlayerPos = mHumanPlayer->getOgreObject()->getPosition();
+		if (healthPowerupPos.distance(humanPlayerPos) < 10) {
+			mHumanPlayer->increaseHealth();
 		}
 	}
 	if (mHumanPlayer->isCollided()) {

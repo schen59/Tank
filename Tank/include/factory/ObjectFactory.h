@@ -11,6 +11,7 @@ namespace Ogre {
 	class BillboardSet;
 }
 
+class Health;
 class Tank;
 class Ground;
 class Wall;
@@ -30,6 +31,7 @@ public:
 	static Missile* createMissile(btScalar mass, btVector3 &size);
 	static Soccer* createSoccer(btScalar mass, btVector3 &size);
 	static Box* createBox(btScalar mass, btVector3 &size);
+	static Health* createHealthPowerup();
 	static Ogre::Entity* createWallEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::Entity* createTankEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::Entity* createTankGunEntity(Ogre::SceneManager *sceneManager);
@@ -38,6 +40,7 @@ public:
 	static Ogre::Entity* createMissileEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::Entity* createSoccerEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::Entity* createBoxEntity(Ogre::SceneManager *sceneManager);
+	static Ogre::Entity* createHealthPowerEntity(Ogre::SceneManager *sceneManager);
 	static Ogre::ParticleSystem* createParticleSystem(Ogre::SceneManager *sceneManager, Ogre::String particleName);
 	static Ogre::BillboardSet* createBillboardSet(Ogre::SceneManager* sceneManager);
 	

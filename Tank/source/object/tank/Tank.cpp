@@ -123,6 +123,12 @@ void Tank::updateHealth(float health) {
 	}
 }
 
+void Tank::increaseHealth() {
+	if (mHealth <= 3.0) {
+	    updateHealth(mHealth + 0.25);
+	}
+}
+
 bool Tank::isAlive() const {
 	return mIsAlive;
 }

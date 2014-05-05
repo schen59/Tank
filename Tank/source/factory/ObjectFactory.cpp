@@ -6,6 +6,7 @@
 #include "include\object\projectile\Missile.h"
 #include "include\object\projectile\Soccer.h"
 #include "include\object\box\Box.h"
+#include "include\object\powerup\Health.h"
 
 #include "OgreSceneManager.h"
 #include "OgreMeshManager.h"
@@ -34,6 +35,11 @@ Ground* ObjectFactory::createGround(btScalar mass, btVector3 &size) {
 Wall* ObjectFactory::createWall(btScalar mass, btVector3 &size) {
 	Wall *wall = new Wall(mass, size);
 	return wall;
+}
+
+Health* ObjectFactory::createHealthPowerup() {
+	Health *healthPowerup = new Health();
+	return healthPowerup;
 }
 
 Shell* ObjectFactory::createShell(btScalar mass, btVector3 &size) {
@@ -121,6 +127,12 @@ Ogre::Entity* ObjectFactory::createMissileEntity(Ogre::SceneManager *sceneManage
 	return entity;
 }
 
+Ogre::Entity* ObjectFactory::createHealthPowerEntity(Ogre::SceneManager *sceneManager) {
+	Ogre::String name = createUniqueObjectName("healthPower");
+	Ogre::Entity *entity = sceneManager->createEntity(name, "HealthPower.mesh");
+	return entity;
+}
+
 Ogre::Entity* ObjectFactory::createSoccerEntity(Ogre::SceneManager *sceneManager) {
 	Ogre::String name = createUniqueObjectName("soccer");
 	Ogre::Entity *entity = sceneManager->createEntity(name, "soccer.mesh");
@@ -138,3 +150,4 @@ Ogre::BillboardSet* ObjectFactory::createBillboardSet(Ogre::SceneManager *sceneM
 	billBoardSet->setMaterialName("HealthBar");
 	return billBoardSet;
 }
+

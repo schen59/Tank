@@ -22,6 +22,7 @@ class Projectile;
 class AbstractObject;
 class AIManager;
 class SoundManager;
+class Health;
 
 class World {
 public:
@@ -42,6 +43,7 @@ private:
 	void createGround();
 	void createBoundaryWalls();
 	void createObstacles();
+	void createHealthPowerups();
 	void updateHumanPlayer(float time);
 	void updateProjectiles(float time);
 	btVector3 getRandomPoint();
@@ -51,6 +53,7 @@ private:
 	OgreWorld *mOgreWorld;
 	PhysicsWorld *mPhysicsWorld;
 	Tank *mHumanPlayer;
+	Health *mHealthPowerup;
 	std::set<AbstractObject*> mObstacles;
 	std::set<Projectile*> mProjectiles;
 	std::set<Tank*> mAIPlayers;

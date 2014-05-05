@@ -79,6 +79,12 @@
     <Filter Include="Source Files\Object\Box">
       <UniqueIdentifier>{10d56d89-3bc7-41ba-a65c-efaf64b08a32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Object\Powerup">
+      <UniqueIdentifier>{3a95af8f-f3a9-48ed-b002-2fd449afbc49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object\Powerup">
+      <UniqueIdentifier>{f3ddc419-1c34-45c1-930a-0998b8a19538}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\manager\TankManager.h">
@@ -191,6 +197,9 @@
     </ClInclude>
     <ClInclude Include="include\core\MenuSystem.h">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\object\powerup\Health.h">
+      <Filter>Header Files\Object\Powerup</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +316,9 @@
     </ClCompile>
     <ClCompile Include="source\core\MenuSystem.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\powerup\Health.cpp">
+      <Filter>Source Files\Object\Powerup</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
