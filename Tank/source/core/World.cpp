@@ -20,7 +20,6 @@
 #include "include\manager\SoundManager.h"
 #include "include\common\Properties.h"
 #include "include\object\powerup\Health.h"
-#include "include\manager\TankManager.h"
 
 #include "OgreSceneManager.h"
 #include "OgreOverlayManager.h"
