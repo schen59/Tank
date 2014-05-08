@@ -122,7 +122,7 @@ void TankManager::setupResourceGroup() {
 }
 
 TankManager::~TankManager() {
-	delete mTankCamera;
+	delete mTankCamera; 
 	destroyWorld();
 }
 

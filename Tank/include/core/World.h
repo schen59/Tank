@@ -37,7 +37,8 @@ public:
 	void createAIPlayers();
 	void addProjectile(Projectile *projectile);
 	void removeObject(AbstractObject *object);
-
+	int score;
+	//int timer;
 private:
 	void createHumanPlayer();
 	void createGround();
@@ -61,6 +62,8 @@ private:
 	SoundManager *mSoundManager;
 	InputHandler *mInputHandler;
 	Ogre::Overlay *mOverlay;
+	Ogre::Overlay *mmOverlay;
+	float timer;
 };
 
 #endif

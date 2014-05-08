@@ -20,16 +20,21 @@
 #include "include\manager\SoundManager.h"
 #include "include\common\Properties.h"
 #include "include\object\powerup\Health.h"
+#include "include\manager\TankManager.h"
 
 #include "OgreSceneManager.h"
 #include "OgreOverlayManager.h"
 #include "OgreOverlay.h"
+#include "OgreFontManager.h"
+#include "OgreTextAreaOverlayElement.h"
 #include "btBulletDynamicsCommon.h"
 #include "Ogre.h"
 #include <vector>
 
 World::World(InputHandler *inputHandler) {
 	mInputHandler = inputHandler;
+	score = 0;
+	timer = 0;
 }
 
 void World::setup(Ogre::SceneManager *sceneManager, btVector3 &gravity) {
@@ -47,6 +52,9 @@ void World::setup(Ogre::SceneManager *sceneManager, btVector3 &gravity) {
 	Ogre::OverlayManager& om = Ogre::OverlayManager::getSingleton();
 	mOverlay = om.getByName("ShellOverlay");
 	mOverlay->show();
+	Ogre::OverlayManager& omm = Ogre::OverlayManager::getSingleton();
+	mmOverlay = omm.getByName("ScoreOverlay");
+	mmOverlay->show();
 }
 
 void World::createHealthPowerups() {
@@ -204,12 +212,22 @@ void World::removeObject(AbstractObject *object) {
 }
 
 void World::think(float time) {
+	timer += time;
 	mPhysicsWorld->think(time);
 	mAIManager->think(time);
 	updateObstacles();
 	updateAIPlayers(time);
 	updateHumanPlayer(time);
 	updateProjectiles(time);
+	mOgreWorld->setLight(timer);
+
+	Ogre::OverlayManager& omm = Ogre::OverlayManager::getSingleton();
+	Ogre::TextAreaOverlayElement *text = (Ogre::TextAreaOverlayElement *) omm.getOverlayElement("ScorePanel/Text");
+	text->setCaption("Score: " + Ogre::StringConverter::toString(score));
+
+	Ogre::OverlayManager& ommm = Ogre::OverlayManager::getSingleton();
+	Ogre::TextAreaOverlayElement *gameTime = (Ogre::TextAreaOverlayElement *) ommm.getOverlayElement("ScorePanel/Timer");
+	gameTime->setCaption("Time: " + Ogre::StringConverter::toString(timer));
 }
 
 void World::updateObstacles() {
@@ -236,6 +254,7 @@ void World::updateAIPlayers(float time) {
 			tank->explode(this);
 			it = mAIPlayers.erase(it);
 			removeObject(tank);
+			score++;
 		}
 	}
 }
