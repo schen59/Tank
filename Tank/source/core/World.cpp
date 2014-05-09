@@ -54,6 +54,9 @@ void World::setup(Ogre::SceneManager *sceneManager, btVector3 &gravity) {
 	Ogre::OverlayManager& omm = Ogre::OverlayManager::getSingleton();
 	mmOverlay = omm.getByName("ScoreOverlay");
 	mmOverlay->show();
+	Ogre::OverlayManager& ommm = Ogre::OverlayManager::getSingleton();
+	mmmOverlay = ommm.getByName("CrosshairOverlay");
+	mmmOverlay->show();
 }
 
 void World::createHealthPowerups() {

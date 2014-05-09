@@ -63,6 +63,7 @@ private:
 	InputHandler *mInputHandler;
 	Ogre::Overlay *mOverlay;
 	Ogre::Overlay *mmOverlay;
+	Ogre::Overlay *mmmOverlay;
 	float timer;
 };
 

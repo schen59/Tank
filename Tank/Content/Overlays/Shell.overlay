@@ -53,3 +53,19 @@ ScoreOverlay
 		
     }
 }
+
+CrosshairOverlay
+{
+    zorder 200
+	
+    container Panel(CrosshairPanel)
+    {
+        metrics_mode relative
+
+        left 0.45
+        top 0.42
+        width 0.1
+        height 0.1
+	   material Crosshair
+     }
+}
