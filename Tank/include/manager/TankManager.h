@@ -30,7 +30,7 @@ private:
 	void setupOverlaySystem();
 	void setupResourceGroup();
 	void think(const Ogre::Real &time);
-	void setupLight();
+	void setupLight(bool isHard);
 	void setupCamera();
 	void setupHUDCamera();
 	void setupHUDViewPort();

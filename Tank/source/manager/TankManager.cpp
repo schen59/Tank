@@ -55,7 +55,7 @@ void TankManager::setupInputHandler() {
 void TankManager::setupWorld(bool isHard) {
 	mWorld = new World(mInputHandler);
 	mWorld->setup(mSceneManager, btVector3(0, -10, 0), isHard);
-	setupLight();
+	setupLight(isHard);
 	setupCamera();
 	setupViewPort();
 	setupHUDCamera();
@@ -68,13 +68,18 @@ void TankManager::destroyWorld() {
 	mSceneManager->destroyAllBillboardSets();
 	mSceneManager->destroyAllEntities();
 	mSceneManager->getRootSceneNode()->removeAndDestroyAllChildren();
+	mSceneManager->destroyAllLights();
 	mWindow->removeAllViewports();
 	delete mWorld;
 	mWorld = NULL;
 }
 
-void TankManager::setupLight() {
-	mSceneManager->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
+void TankManager::setupLight(bool isHard) {
+	if (isHard == false) {
+	    mSceneManager->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
+	} else {
+		mSceneManager->setAmbientLight(Ogre::ColourValue(0, 0, 0));
+	}
 }
 
 void TankManager::setupViewPort() {
@@ -122,7 +127,7 @@ void TankManager::setupResourceGroup() {
 }
 
 TankManager::~TankManager() {
-	delete mTankCamera;
+	delete mTankCamera; 
 	destroyWorld();
 }
 

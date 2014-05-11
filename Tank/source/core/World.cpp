@@ -24,15 +24,21 @@
 #include "OgreSceneManager.h"
 #include "OgreOverlayManager.h"
 #include "OgreOverlay.h"
+#include "OgreFontManager.h"
+#include "OgreTextAreaOverlayElement.h"
 #include "btBulletDynamicsCommon.h"
 #include "Ogre.h"
 #include <vector>
 
 World::World(InputHandler *inputHandler) {
 	mInputHandler = inputHandler;
+	mScore = 0;
+	mGameTime = 0;
+	mIsHard = false;
 }
 
 void World::setup(Ogre::SceneManager *sceneManager, btVector3 &gravity, bool isHard) {
+	mIsHard = isHard;
 	mOgreWorld = new OgreWorld(sceneManager);
 	mPhysicsWorld = new PhysicsWorld(gravity);
 	mAIManager = new AIManager(this);
@@ -48,9 +54,19 @@ void World::setup(Ogre::SceneManager *sceneManager, btVector3 &gravity, bool isH
 		createAIPlayers(5);
 	}
 	createHealthPowerups();
+	createOverlay();
+}
+
+void World::createOverlay() {
 	Ogre::OverlayManager& om = Ogre::OverlayManager::getSingleton();
-	mOverlay = om.getByName("ShellOverlay");
-	mOverlay->show();
+	mWeaponOverlay = om.getByName("ShellOverlay");
+	mWeaponOverlay->show();
+	Ogre::OverlayManager& omm = Ogre::OverlayManager::getSingleton();
+	mScoreOverlay = omm.getByName("ScoreOverlay");
+	mScoreOverlay->show();
+	//Ogre::OverlayManager& ommm = Ogre::OverlayManager::getSingleton();
+	//mmmOverlay = ommm.getByName("CrosshairOverlay");
+	//mmmOverlay->show();
 }
 
 void World::createHealthPowerups() {
@@ -173,6 +189,9 @@ void World::updateHumanPlayer(float time) {
 			mHumanPlayer->increaseHealth();
 		}
 	}
+	if (mInputHandler->isKeyDown(OIS::KC_Y) && !mInputHandler->wasKeyDown(OIS::KC_Y)) {
+		mHumanPlayer->toggleLight(this);
+	}
 	if (mHumanPlayer->isCollided()) {
 		mHumanPlayer->attacked();
 	}
@@ -208,12 +227,25 @@ void World::removeObject(AbstractObject *object) {
 }
 
 void World::think(float time) {
+	mGameTime += time;
 	mPhysicsWorld->think(time);
 	mAIManager->think(time);
 	updateObstacles();
 	updateAIPlayers(time);
 	updateHumanPlayer(time);
 	updateProjectiles(time);
+	if (mIsHard == false) {
+	    mOgreWorld->setLight(mGameTime);
+	}
+	updateOverlay();
+}
+
+void World::updateOverlay() {
+	Ogre::OverlayManager& omm = Ogre::OverlayManager::getSingleton();
+	Ogre::TextAreaOverlayElement *text = (Ogre::TextAreaOverlayElement *) omm.getOverlayElement("ScorePanel/Text");
+	text->setCaption("Score: " + Ogre::StringConverter::toString(mScore));
+	Ogre::TextAreaOverlayElement *gameTime = (Ogre::TextAreaOverlayElement *) omm.getOverlayElement("ScorePanel/Timer");
+	gameTime->setCaption("Time: " + Ogre::StringConverter::toString(mGameTime));
 }
 
 void World::updateObstacles() {
@@ -240,6 +272,7 @@ void World::updateAIPlayers(float time) {
 			tank->explode(this);
 			it = mAIPlayers.erase(it);
 			removeObject(tank);
+			mScore++;
 		}
 	}
 }

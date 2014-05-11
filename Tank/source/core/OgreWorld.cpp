@@ -40,3 +40,10 @@ void OgreWorld::removeObject(OgreObject *object) {
 	mSceneManager->destroySceneNode(sceneNode);
 	mObjects.erase(mObjects.find(object));
 }
+
+void OgreWorld::setLight(float timer) {
+	float alpha = 0.0075;
+	int x = (int)timer % 200;
+	float y = abs(x - 100) * alpha;
+	mSceneManager->setAmbientLight(Ogre::ColourValue(y, y, y));
+}

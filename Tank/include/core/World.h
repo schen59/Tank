@@ -44,6 +44,8 @@ private:
 	void createBoundaryWalls();
 	void createObstacles();
 	void createHealthPowerups();
+	void createOverlay();
+	void updateOverlay();
 	void updateHumanPlayer(float time);
 	void updateProjectiles(float time);
 	btVector3 getRandomPoint();
@@ -60,7 +62,12 @@ private:
 	AIManager *mAIManager;
 	SoundManager *mSoundManager;
 	InputHandler *mInputHandler;
-	Ogre::Overlay *mOverlay;
+	Ogre::Overlay *mWeaponOverlay;
+	Ogre::Overlay *mScoreOverlay;
+	Ogre::Overlay *mmmOverlay;
+	float mGameTime;
+	int mScore;
+	bool mIsHard;
 };
 
 #endif

@@ -17,7 +17,7 @@ public:
 	Ogre::SceneManager* getSceneManager() const { return mSceneManager; }
 	void addObject(OgreObject *object, Ogre::Quaternion orientation, Ogre::Vector3 position);
 	void removeObject(OgreObject *object);
-
+	void setLight(float timer);
 private:
 	void destroyObjects();
 

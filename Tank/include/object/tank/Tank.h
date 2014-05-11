@@ -33,6 +33,7 @@ public:
 	void attacked();
 	void explode(World *world);
 	void increaseHealth();
+	void toggleLight(World *world);
 
 protected:
 	void createPhysicsObject(btQuaternion &orientation, btVector3 &position);
@@ -45,6 +46,7 @@ private:
 	btVector3 mSize;
 	Ogre::Timer mTimer;
 	bool mIsAlive;
+	bool mIsLightOn;
 	float mHealth;
 };
 

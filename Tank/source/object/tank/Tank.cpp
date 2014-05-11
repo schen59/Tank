@@ -19,6 +19,7 @@ Tank::Tank(btScalar mass, btVector3 &size) {
 	mMass = mass;
 	mSize = size;
 	mIsAlive = true;
+	mIsLightOn = false;
 	mHealth = 3.0;
 	mTimer.reset();
 }
@@ -81,11 +82,12 @@ Shell* Tank::fireShell(World *world) {
 
 Missile* Tank::fireMissile(World *world) {
 	Missile *missile = ObjectFactory::createMissile(0.5, btVector3(1, 1, 1));
-	btVector3 position = mPhysicsObject->getPosition();
-	Ogre::Vector3 direction = mOgreObject->getOrientation() * Ogre::Vector3(0, 0.05, -1);
-	direction.normalise();
-	missile->addToWorld(world, btQuaternion(0, 0, 0, 1), position + btVector3(direction.x*3, direction.y*3, direction.z*3));
-	btVector3 velocity = btVector3(direction.x, direction.y, direction.z) * 100;
+	OgreTank *ogreTank = static_cast<OgreTank*>(mOgreObject);
+	Ogre::Vector3 tankPosition = ogreTank->getPosition();
+	Ogre::Vector3 barrelWorldPosition = ogreTank->getBarrelWorldPosition();
+	missile->addToWorld(world, Ogre::Quaternion(1, 0, 0, 0), tankPosition + barrelWorldPosition);
+	barrelWorldPosition.normalise();
+	btVector3 velocity = btVector3(barrelWorldPosition.x, barrelWorldPosition.y, barrelWorldPosition.z) * 100;
 	missile->setVelocity(velocity);
 	mTimer.reset();
 	return missile;
@@ -93,11 +95,12 @@ Missile* Tank::fireMissile(World *world) {
 
 Soccer* Tank::fireSoccer(World *world) {
 	Soccer *soccer = ObjectFactory::createSoccer(0.5, btVector3(1, 1, 1));
-	btVector3 position = mPhysicsObject->getPosition();
-	Ogre::Vector3 direction = mOgreObject->getOrientation() * Ogre::Vector3(0, 0.05, -1);
-	direction.normalise();
-	soccer->addToWorld(world, btQuaternion(0, 0, 0, 1), position + btVector3(direction.x*3, direction.y*3, direction.z*3));
-	btVector3 velocity = btVector3(direction.x, direction.y, direction.z) * 100;
+	OgreTank *ogreTank = static_cast<OgreTank*>(mOgreObject);
+	Ogre::Vector3 tankPosition = ogreTank->getPosition();
+	Ogre::Vector3 barrelWorldPosition = ogreTank->getBarrelWorldPosition();
+	soccer->addToWorld(world, Ogre::Quaternion(1, 0, 0, 0), tankPosition + barrelWorldPosition);
+	barrelWorldPosition.normalise();
+	btVector3 velocity = btVector3(barrelWorldPosition.x, barrelWorldPosition.y, barrelWorldPosition.z) * 100;
 	soccer->setVelocity(velocity);
 	mTimer.reset();
 	return soccer;
@@ -136,4 +139,10 @@ bool Tank::isAlive() const {
 void Tank::explode(World *world) {
 	OgreTank *ogreTank = static_cast<OgreTank*>(mOgreObject);
 	ogreTank->explode(world->getOgreWorld());
+}
+
+void Tank::toggleLight(World *world) {
+	OgreTank *ogreTank = static_cast<OgreTank*>(mOgreObject);
+	ogreTank->toggleLight(world->getOgreWorld());
+	mIsLightOn = !mIsLightOn;
 }
