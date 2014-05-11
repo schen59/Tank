@@ -28,13 +28,13 @@ class World {
 public:
 	World(InputHandler *inputHandler);
 	~World();
-	void setup(Ogre::SceneManager *sceneManager, btVector3 &gravity);
+	void setup(Ogre::SceneManager *sceneManager, btVector3 &gravity, bool isHard);
 	Tank* getHumanPlayer() const { return mHumanPlayer; }
 	OgreWorld* getOgreWorld() const { return mOgreWorld; }
 	PhysicsWorld* getPhysicsWorld() const { return mPhysicsWorld; }
 	void think(float time);
     std::set<Tank*>& getAIPlayers() { return mAIPlayers; }
-	void createAIPlayers();
+	void createAIPlayers(int number);
 	void addProjectile(Projectile *projectile);
 	void removeObject(AbstractObject *object);
 

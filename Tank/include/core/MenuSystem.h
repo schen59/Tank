@@ -24,6 +24,7 @@ private:
 	void injectMouseClicked(OIS::MouseButtonID mouseButton);
 	bool onQuit(const CEGUI::EventArgs& eventArgs);
 	bool onNewEasyGame(const CEGUI::EventArgs& eventArgs);
+	bool onNewHardGame(const CEGUI::EventArgs& eventArgs);
 
 	InputHandler *mInputHandler;
 	CEGUI::OgreRenderer *mRenderer;

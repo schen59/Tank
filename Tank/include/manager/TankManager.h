@@ -35,7 +35,7 @@ private:
 	void setupHUDCamera();
 	void setupHUDViewPort();
 	void setupViewPort();
-	void setupWorld();
+	void setupWorld(bool isHard);
 	void setupInputHandler();
 	void setupMenuSystem();
 	void setupCEGUI();

@@ -32,7 +32,7 @@ World::World(InputHandler *inputHandler) {
 	mInputHandler = inputHandler;
 }
 
-void World::setup(Ogre::SceneManager *sceneManager, btVector3 &gravity) {
+void World::setup(Ogre::SceneManager *sceneManager, btVector3 &gravity, bool isHard) {
 	mOgreWorld = new OgreWorld(sceneManager);
 	mPhysicsWorld = new PhysicsWorld(gravity);
 	mAIManager = new AIManager(this);
@@ -42,7 +42,11 @@ void World::setup(Ogre::SceneManager *sceneManager, btVector3 &gravity) {
 	createGround();
 	createBoundaryWalls();
 	createObstacles();
-	createAIPlayers();
+	if (isHard == true) {
+	    createAIPlayers(7);
+	} else {
+		createAIPlayers(5);
+	}
 	createHealthPowerups();
 	Ogre::OverlayManager& om = Ogre::OverlayManager::getSingleton();
 	mOverlay = om.getByName("ShellOverlay");
@@ -72,8 +76,8 @@ btVector3 World::getRandomPoint() {
 	return btVector3(x, y, z);
 }
 
-void World::createAIPlayers() {
-	for (int i=0; i<5; i++) {
+void World::createAIPlayers(int number) {
+	for (int i=0; i<number; i++) {
 		Tank *tank = ObjectFactory::createTank(Properties::TANK_MASS, Properties::TANK_SIZE);
 		tank->addToWorld(this, Properties::TANK_ORIENTATION, getRandomPoint());
 		mAIPlayers.insert(tank);
@@ -221,7 +225,7 @@ void World::updateObstacles() {
 
 void World::updateAIPlayers(float time) {
 	if (mAIPlayers.size() == 0) {
-		createAIPlayers();
+		createAIPlayers(5);
 	}
 	std::set<Tank*>::iterator it = mAIPlayers.begin();
 	while (it != mAIPlayers.end()) {

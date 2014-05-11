@@ -31,14 +31,23 @@ void MenuSystem::initialize() {
 	mainWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0.25f, 0.0f), CEGUI::UDim(0.25f, 0.0f)));
 	mainWindow->setSize(CEGUI::USize(CEGUI::UDim(0.5f, 0.0f), CEGUI::UDim(0.5f, 0.0f)));
 	mainWindow->setText("Tank Battle");
+
 	CEGUI::Window *newEasyGameButton = windowManager.createWindow("TaharezLook/Button", "newEasyGame");
 	newEasyGameButton->setPosition(CEGUI::UVector2(CEGUI::UDim(0.25f, 0.0f), CEGUI::UDim(0.25f, 0.0f)));
 	newEasyGameButton->setSize(CEGUI::USize(CEGUI::UDim(0.5f, 0.0f), CEGUI::UDim(0.1f, 0.0f)));
 	newEasyGameButton->setText("New Game(Easy)");
 	newEasyGameButton->subscribeEvent(CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber(&MenuSystem::onNewEasyGame, this)); 
 	mainWindow->addChild(newEasyGameButton);
+
+	CEGUI::Window *newHardGameButton = windowManager.createWindow("TaharezLook/Button", "newHardGame");
+	newHardGameButton->setPosition(CEGUI::UVector2(CEGUI::UDim(0.25f, 0.0f), CEGUI::UDim(0.5f, 0.0f)));
+	newHardGameButton->setSize(CEGUI::USize(CEGUI::UDim(0.5f, 0.0f), CEGUI::UDim(0.1f, 0.0f)));
+	newHardGameButton->setText("New Game(Hard)");
+	newHardGameButton->subscribeEvent(CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber(&MenuSystem::onNewHardGame, this)); 
+	mainWindow->addChild(newHardGameButton);
+
 	CEGUI::Window *quitButton = windowManager.createWindow("TaharezLook/Button", "quitButton");
-	quitButton->setPosition(CEGUI::UVector2(CEGUI::UDim(0.25f, 0.0f), CEGUI::UDim(0.5f, 0.0f)));
+	quitButton->setPosition(CEGUI::UVector2(CEGUI::UDim(0.25f, 0.0f), CEGUI::UDim(0.75f, 0.0f)));
 	quitButton->setSize(CEGUI::USize(CEGUI::UDim(0.5f, 0.0f), CEGUI::UDim(0.1f, 0.0f)));
 	quitButton->setText("Quit");
 	quitButton->subscribeEvent(CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber(&MenuSystem::onQuit, this)); 
@@ -103,6 +112,11 @@ bool MenuSystem::onQuit(const CEGUI::EventArgs& eventArgs) {
 bool MenuSystem::onNewEasyGame(const CEGUI::EventArgs& eventArgs) {
 	//deactivate();
 	mCommand = Properties::MenuCommand::NEWGAME_EASY;
+	return true;
+}
+
+bool MenuSystem::onNewHardGame(const CEGUI::EventArgs& eventArgs) {
+	mCommand = Properties::MenuCommand::NEWGAME_HARD;
 	return true;
 }
 

@@ -36,7 +36,7 @@ void TankManager::setup() {
 	setupInputHandler();
 	setupCEGUI();
 	setupMenuSystem();
-	setupWorld();
+	setupWorld(false);
 }
 
 void TankManager::setupCEGUI() {
@@ -52,9 +52,9 @@ void TankManager::setupInputHandler() {
 	mInputHandler = new InputHandler(mWindow);
 }
 
-void TankManager::setupWorld() {
+void TankManager::setupWorld(bool isHard) {
 	mWorld = new World(mInputHandler);
-	mWorld->setup(mSceneManager, btVector3(0, -10, 0));
+	mWorld->setup(mSceneManager, btVector3(0, -10, 0), isHard);
 	setupLight();
 	setupCamera();
 	setupViewPort();
@@ -148,15 +148,17 @@ void TankManager::toggleMenuSystem() {
 void TankManager::processMenuCommand() {
 	if (mMenuSystem->getCommand() == Properties::MenuCommand::QUIT) {
 		mKeepGoing = false;
-	}
-	if (mMenuSystem->getCommand() == Properties::MenuCommand::NEWGAME_EASY) {
-	    mMenuSystem->deactivate();
+	} else if (mMenuSystem->getCommand() == Properties::MenuCommand::NEWGAME_EASY ||
+		mMenuSystem->getCommand() == Properties::MenuCommand::NEWGAME_HARD) {
 		if (mWorld != NULL) {
 			destroyWorld();
 		}
-		if (mWorld == NULL) {
-		    setupWorld();
+		if (mMenuSystem->getCommand() == Properties::MenuCommand::NEWGAME_EASY) {
+		    setupWorld(false);
+		} else if (mMenuSystem->getCommand() == Properties::MenuCommand::NEWGAME_HARD) {
+			setupWorld(true);
 		}
+		mMenuSystem->deactivate();
 	}
 }
 
