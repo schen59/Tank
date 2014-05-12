@@ -64,10 +64,11 @@ private:
 	InputHandler *mInputHandler;
 	Ogre::Overlay *mWeaponOverlay;
 	Ogre::Overlay *mScoreOverlay;
-	Ogre::Overlay *mmmOverlay;
+	Ogre::Overlay *mHelpOverlay;
 	float mGameTime;
 	int mScore;
 	bool mIsHard;
+	bool help;
 };
 
 #endif

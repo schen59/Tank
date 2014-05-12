@@ -35,6 +35,7 @@ World::World(InputHandler *inputHandler) {
 	mScore = 0;
 	mGameTime = 0;
 	mIsHard = false;
+	help = false;
 }
 
 void World::setup(Ogre::SceneManager *sceneManager, btVector3 &gravity, bool isHard) {
@@ -64,9 +65,9 @@ void World::createOverlay() {
 	Ogre::OverlayManager& omm = Ogre::OverlayManager::getSingleton();
 	mScoreOverlay = omm.getByName("ScoreOverlay");
 	mScoreOverlay->show();
-	//Ogre::OverlayManager& ommm = Ogre::OverlayManager::getSingleton();
-	//mmmOverlay = ommm.getByName("CrosshairOverlay");
-	//mmmOverlay->show();
+	Ogre::OverlayManager& ommm = Ogre::OverlayManager::getSingleton();
+	mHelpOverlay = ommm.getByName("HelpOverlay");
+	//mHelpOverlay->show();
 }
 
 void World::createHealthPowerups() {
@@ -191,6 +192,16 @@ void World::updateHumanPlayer(float time) {
 	}
 	if (mInputHandler->isKeyDown(OIS::KC_Y) && !mInputHandler->wasKeyDown(OIS::KC_Y)) {
 		mHumanPlayer->toggleLight(this);
+	}
+	if (mInputHandler->isKeyDown(OIS::KC_H) && !mInputHandler->wasKeyDown(OIS::KC_H)) {
+		if(help == false){
+			mHelpOverlay->show();
+			help = true;
+		}
+		else if (help == true) {
+			mHelpOverlay->hide();
+			help = false;
+		}
 	}
 	if (mHumanPlayer->isCollided()) {
 		mHumanPlayer->attacked();

@@ -54,18 +54,211 @@ ScoreOverlay
     }
 }
 
-CrosshairOverlay
+HelpOverlay
 {
     zorder 200
 	
-    container Panel(CrosshairPanel)
+    container Panel(HelpPanel)
     {
         metrics_mode relative
 
-        left 0.45
-        top 0.42
-        width 0.1
-        height 0.1
-	   material Crosshair
-     }
+        left 0.25
+        top 0.15
+        width 0.55
+        height 0.55
+	   material Help
+
+	element TextArea(HelpPanel/Text)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.01
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Press key 'w': Move ahead 
+		}
+	element TextArea(HelpPanel/Text1)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.04
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Press key 's': Move backward
+     		}
+	element TextArea(HelpPanel/Text2)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.07
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Press key 'a': Move left 
+		}
+	element TextArea(HelpPanel/Text3)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.1
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Press key 'd': Move right 
+		}
+	element TextArea(HelpPanel/Text4)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.13
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Press key 'j': Fire (2 secs per bomb) 
+		}
+	element TextArea(HelpPanel/Text5)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.16
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Press key 'k': Launch a missile (1 sec per missile) 
+		}
+	element TextArea(HelpPanel/Text6)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.19
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Press key 'l': Fire a soccer with special sound (0.2 sec per missile) 
+		}
+	element TextArea(HelpPanel/Text7)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.22
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Press key 'r': Reset the player's orientation. 
+		}
+	element TextArea(HelpPanel/Text8)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.25
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Press key 'q': Game menu/Game pause. 
+		}
+	element TextArea(HelpPanel/Text9)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.28
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Press key 'space': When player is arround the red box, press "space"  
+		}
+	element TextArea(HelpPanel/Text10)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.31
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption can add more HP. 
+		}
+	element TextArea(HelpPanel/Text11)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.34
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Press key 'y': Light on. 
+		}
+	element TextArea(HelpPanel/Text12)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.37
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Press key 'h': User manual. 
+		}
+	element TextArea(HelpPanel/Text13)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.40
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Player can move mouse to control the barrel to left or right
+ 
+		}
+	element TextArea(HelpPanel/Text14)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.43
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Click "left mouse button": Fire
+ 
+		}
+	element TextArea(HelpPanel/Text15)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.46
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Click "Right mouse button": Lift the barrel up
+ 
+		}
+	element TextArea(HelpPanel/Text16)
+		{
+		metrics_mode relative
+		
+         left 0.01
+	 top 0.49
+         font_name BlueHighwayBig
+         char_height 0.03
+         colour 1 1 1
+         caption Click "Middle mouse button": Fire a soccer with special sound
+		}
+
+}
+
 }

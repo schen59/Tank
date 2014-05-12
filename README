@@ -17,30 +17,46 @@ LinearMath_vs2010_debug.lib into addtional dependencies.
 4. OpenAL.
    Add $(OPENAL_SDK)/include into include path.
    Add $(OPENAL_SDK)/lib into addtional library path.
+5. CEGUI.
+   Add $(CEGUI_ROOT)/include into include path.
+   Add $(CEGUI_ROOT)/lib into addtional library path.
+
+   Open the Tank.sln solution file. Build this solUtion.
 
 User Manual:
 
-Open the Tank.sln solution file. Build this solUtion.
-
+Player can select new easy game or new hard game in game menu.
 Press key 'w': Move ahead
 Press key 's': Move backward
 Press key 'a': Move left
 Press key 'd': Move right
-Press key 'j': Fire (2 secs per bomb)
-Press key 'k': Launch a missile (1 sec per missile)
-Press key 'l': Fire a soccer with special sound (0.2 sec per missile)
+Press key 'J': Fire (2 secs per bomb)
+Press key 'K': Launch a missile (1 sec per missile)
+Press key 'L': Fire a soccer with special sound (0.2 sec per missile)
 Press key 'r': Reset the player's orientation.
+Press key 'q': Game menu/Game pause.
+Press key 'space': When player is arround the red box, press "space" can
+add more HP.
+Press key 'y': Light on.
+Press key 'h': User manual.
 
-Click "left mouse button": Move the gun to left
-Click "Right mouse button": Move the gun to right
+Player can move mouse to control the barrel to left or right
+Click "Left mouse button": Fire 
+Click "Right mouse button": Lift the barrel up
 Click "Middle mouse button": Fire a soccer with special sound
 
-User can fire at an enemy or box with original bomb by pressing key "J"(2 sec per bomb). 
-If player wants to launch a missile, please press key "K". 
-Note that the explosion of a missile looks like a rainbow.   
+User can fire at an enemy or box with original bomb by pressing key "J" or left mouse button (2 sec per bomb). 
+If player wants to launch a missile, please press key "K". Note that the explosion of a missile looks like a rainbow.   
 Player can fire a "soccer" with a special sound when pressing key "L".
 
-Radar system:
-User can see all enemies with this radar system (at the lower left corner in the screen).
-
-
+Game Features:
+-2 different levels: Easy and hard
+-HP bar
+-Radar system:
+User can see all enemies with this radar system (at the lower left corner on the screen).
+-Day and night system: 
+The lighting changes from day and night (view changes per 10 seconds)
+-Crosshair(Press key 'Y' to turn on the light)
+-The picture of weapon(at the lower right corner on the screen)
+-Game sound
+-User manual(Press key 'H')
